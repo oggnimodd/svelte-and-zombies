@@ -11,7 +11,7 @@
     "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
     "prepare": "husky",
     "pre-commit": "lint-staged",
-    "aider:commit": "aider --commit --model groq/llama-3.2-90b-vision-preview"
+    "aider:commit": "aider --commit --model mistral/mistral-large-latest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
