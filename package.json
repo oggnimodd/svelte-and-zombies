@@ -7,13 +7,19 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
+    "format": "prettier --write .",
+    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+    "prepare": "husky",
+    "pre-commit": "lint-staged"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
     "@tsconfig/svelte": "^5.0.4",
     "autoprefixer": "^10.4.20",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "postcss": "^8.4.47",
+    "prettier": "^3.3.3",
     "svelte": "^5.1.3",
     "svelte-check": "^4.0.5",
     "tailwindcss": "^3.4.14",
@@ -23,5 +29,10 @@
   },
   "dependencies": {
     "short-uuid": "^5.2.0"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx,json,svelte}": [
+      "prettier --write"
+    ]
   }
 }
