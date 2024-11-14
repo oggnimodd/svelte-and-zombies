@@ -22,9 +22,6 @@
     "vite": "^5.4.10"
   },
   "dependencies": {
-    "konva": "^9.3.16",
-    "short-uuid": "^5.2.0",
-    "svelte-canvas": "^1.2.1",
-    "svelte-konva": "^1.0.0-next.0"
+    "short-uuid": "^5.2.0"
   }
 }
