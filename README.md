@@ -1,4 +1,3 @@
 # Todo
 
 - Freeze pea
-- Watermelon
