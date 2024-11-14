@@ -3,6 +3,7 @@ import { YARD_WIDTH, CELL_WIDTH, YARD_HEIGHT } from "../../../constants/sizes";
 import QuadTree from "../../algo/QuadTree";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { PlantedPlant } from "./PlantManager.svelte";
+import WatermelonProjectile from "../projectiles/WatermelonProjectile";
 
 export default class ProjectileManager {
   projectiles: Projectile[] = $state([]);
@@ -43,27 +44,24 @@ export default class ProjectileManager {
     this.updateQuadTree();
     const collisions: { projectileId: string; zombieId: string }[] = [];
 
-    for (const zombie of zombies) {
-      // Center the search area around the exact center of the zombie
-      const searchArea = {
-        x: zombie.x + zombie.width / 2 - CELL_WIDTH / 4, // Half of CELL_WIDTH for tighter center
-        y: zombie.y + zombie.height / 2 - CELL_WIDTH / 4,
-        width: CELL_WIDTH / 2, // Narrower hit width for central hit detection
-        height: CELL_WIDTH / 2, // Narrower hit height
-      };
+    // Only process zombies that have projectiles in their row
+    const activeRows = new Set(this.projectiles.map((p) => p.row));
+    const relevantZombies = zombies.filter((z) => activeRows.has(z.row));
 
-      const potentialCollisions = this.quadTree.query(searchArea);
+    for (const zombie of relevantZombies) {
+      // Get projectiles in this row
+      const rowProjectiles = this.projectiles.filter(
+        (p) =>
+          p.row === zombie.row &&
+          (!(p instanceof WatermelonProjectile) || p.isReadyForCollision())
+      );
 
-      for (const collision of potentialCollisions) {
-        const projectile = this.projectiles.find((p) => p.id === collision.id);
-        if (projectile && projectile.row === zombie.row) {
-          // Ensure we are checking collision precisely around the center
-          if (this.checkDetailedCollision(projectile, zombie)) {
-            collisions.push({
-              projectileId: projectile.id,
-              zombieId: zombie.name + "_" + zombie.row + "_" + zombie.x,
-            });
-          }
+      for (const projectile of rowProjectiles) {
+        if (this.checkDetailedCollision(projectile, zombie)) {
+          collisions.push({
+            projectileId: projectile.id,
+            zombieId: zombie.name + "_" + zombie.row + "_" + zombie.x,
+          });
         }
       }
     }
@@ -86,11 +84,20 @@ export default class ProjectileManager {
       projectile.y + projectile.height > zombieCenterY - CELL_WIDTH / 4
     );
   }
+
   update(deltaTime: number, zombies: Zombie[], plants: PlantedPlant[]) {
     // Update projectile positions first
     this.projectiles = this.projectiles.filter((projectile) => {
       projectile.move(deltaTime);
       this.checkTorchwoodInteraction(projectile, plants);
+
+      // Remove if outside bounds and if it's a landed watermelon
+      if (
+        projectile instanceof WatermelonProjectile &&
+        (projectile as any).hasLanded
+      ) {
+        return false;
+      }
       return projectile.x < YARD_WIDTH + 200;
     });
 
@@ -110,6 +117,12 @@ export default class ProjectileManager {
 
       if (projectile && zombie) {
         zombie.health -= projectile.damage;
+
+        // Handle splash damage for melon projectiles
+        if (projectile instanceof WatermelonProjectile) {
+          this.handleMelonSplash(projectile, zombie, zombies);
+        }
+
         projectilesToRemove.add(projectile.id);
       }
     }
@@ -141,6 +154,29 @@ export default class ProjectileManager {
       ) {
         projectile.transformToFirePea();
         break;
+      }
+    }
+  }
+
+  private handleMelonSplash(
+    projectile: WatermelonProjectile,
+    hitZombie: Zombie,
+    zombies: Zombie[]
+  ) {
+    const impactX = hitZombie.x + hitZombie.width / 2;
+
+    // Only check zombies in the same row
+    const rowZombies = zombies.filter((z) => z.row === hitZombie.row);
+
+    for (const zombie of rowZombies) {
+      if (zombie === hitZombie) continue;
+
+      const zombieX = zombie.x + zombie.width / 2;
+      const distance = Math.abs(zombieX - impactX); // Only care about horizontal distance
+
+      const splashDamage = projectile.getSplashDamage(distance);
+      if (splashDamage > 0) {
+        zombie.health -= splashDamage;
       }
     }
   }

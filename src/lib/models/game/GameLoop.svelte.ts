@@ -6,6 +6,7 @@ import type Projectile from "../projectiles/Projectile.svelte";
 import Repeater from "../plants/Repeater";
 import GatlingPea from "../plants/GatlingPea";
 import FirePea from "../plants/FirePea";
+import Watermelon from "../plants/Watermelon";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -128,6 +129,18 @@ export class GameLoop {
           firePea.canShoot(plantedPlant.plantedId, gameTime)
         ) {
           projectiles = firePea.shoot(plantedPlant, gameTime);
+        }
+      } else if (plantedPlant.plant instanceof Watermelon) {
+        const watermelon = plantedPlant.plant as Watermelon;
+        if (watermelon.canShoot(plantedPlant.plantedId, gameTime)) {
+          const projectile = watermelon.shoot(
+            plantedPlant,
+            gameTime,
+            this.zombieManager.zombies
+          );
+          if (projectile) {
+            this.projectileManager.addProjectile(projectile);
+          }
         }
       }
 

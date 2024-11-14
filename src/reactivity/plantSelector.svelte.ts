@@ -7,6 +7,7 @@ import Tallnut from "../lib/models/plants/Tallnut";
 import Wallnut from "../lib/models/plants/Wallnut";
 import FirePea from "../lib/models/plants/FirePea";
 import Torchwood from "../lib/models/plants/Torchwood";
+import Watermelon from "../lib/models/plants/Watermelon";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -17,4 +18,5 @@ export const plantSelector = new PlantSelector([
   new GatlingPea(),
   new FirePea(),
   new Torchwood(),
+  new Watermelon(),
 ]);

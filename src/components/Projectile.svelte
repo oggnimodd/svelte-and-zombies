@@ -14,7 +14,7 @@
 
 <div
   bind:this={element}
-  class="projectile z-50"
+  class="projectile z-50 {projectile.type === 'watermelon' ? 'rotating' : ''}"
   style="z-index: {getProjectileZIndex(
     projectile.row
   )};width: {projectile.width}px; height: {projectile.height}px;"
@@ -33,5 +33,20 @@
     contain: layout size;
     will-change: transform;
     backface-visibility: hidden;
+  }
+
+  /* Add rotation animation */
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Only apply rotation if 'rotating' class is active */
+  .rotating img {
+    animation: rotate 1s linear infinite;
   }
 </style>

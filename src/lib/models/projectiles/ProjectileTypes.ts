@@ -21,6 +21,13 @@ export const ProjectileTypes = {
     height: 30,
     image: "/projectiles/firepea.png",
   },
+  WATERMELON: {
+    type: "watermelon",
+    speed: 1.5,
+    width: 50,
+    height: 50,
+    image: "/projectiles/watermelon.png",
+  },
 } as const;
 
 export type ProjectileType = keyof typeof ProjectileTypes;
