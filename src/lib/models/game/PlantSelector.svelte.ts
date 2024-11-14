@@ -16,27 +16,34 @@ export default class PlantSelector {
 
   constructor(plants: Plant[]) {
     this.plants = plants;
+    // Add event listener for escape key
+    window.addEventListener("keydown", this.handleKeyPress.bind(this));
+  }
+
+  private handleKeyPress(event: KeyboardEvent) {
+    if (event.key === "Escape") {
+      this.cancelAll();
+    }
+  }
+
+  private cancelAll() {
+    this.selectedPlant = null;
+    this.isShoveling = false;
   }
 
   toggleShovel() {
-    // Cancel selection if any
     this.cancelSelection();
-
     this.isShoveling = !this.isShoveling;
   }
 
   selectPlant(plantId: string) {
-    // Cancel shoveling if any
     if (this.isShoveling) {
       this.toggleShovel();
     }
 
-    // If we're selecting a different plant than the currently selected one,
-    // switch to the new plant instead of canceling
     if (this.selectedPlant !== plantId) {
       this.selectedPlant = plantId;
     } else {
-      // Only cancel if clicking the same plant again
       this.cancelSelection();
     }
   }
@@ -47,5 +54,9 @@ export default class PlantSelector {
 
   cancelSelection() {
     this.selectedPlant = null;
+  }
+
+  destroy() {
+    window.removeEventListener("keydown", this.handleKeyPress.bind(this));
   }
 }

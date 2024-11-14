@@ -1,7 +1,7 @@
 <script lang="ts">
   import Cell from "../components/Cell.svelte";
   import Row from "../components/Row.svelte";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import {
     CELL_WIDTH,
     YARD_HEIGHT,
@@ -12,10 +12,15 @@
   import Zombie from "./Zombie.svelte";
   import Projectile from "./Projectile.svelte";
   import { gameLoop } from "../reactivity/gameLoop.svelte";
+  import { plantSelector } from "../reactivity/plantSelector.svelte";
 
   onMount(() => {
     gameLoop.start();
     return () => gameLoop.stop();
+  });
+
+  onDestroy(() => {
+    plantSelector.destroy();
   });
 </script>
 
