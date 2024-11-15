@@ -1,5 +1,6 @@
 <script lang="ts">
   import type Projectile from "../lib/models/projectiles/Projectile.svelte";
+  import { ProjectileTypes } from "../lib/models/projectiles/ProjectileTypes";
   import { getProjectileZIndex } from "../utils/getZIndex";
 
   const { projectile }: { projectile: Projectile } = $props();
@@ -10,11 +11,16 @@
     if (!element) return;
     element.style.transform = `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${projectile.x},${projectile.y},0,1)`;
   });
+
+  // Helper to determine if projectile should rotate
+  const shouldRotate = (type: string) =>
+    type === ProjectileTypes.WATERMELON.type ||
+    type === ProjectileTypes.ICE_WATERMELON.type;
 </script>
 
 <div
   bind:this={element}
-  class="projectile z-50 {projectile.type === 'watermelon' ? 'rotating' : ''}"
+  class="projectile z-50 {shouldRotate(projectile.type) ? 'rotating' : ''}"
   style="z-index: {getProjectileZIndex(
     projectile.row
   )};width: {projectile.width}px; height: {projectile.height}px;"
