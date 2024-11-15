@@ -4,6 +4,7 @@ export interface ProjectileStats {
   width: number;
   height: number;
   image: string;
+  freezeDuration?: number;
 }
 
 export const ProjectileTypes = {
@@ -21,6 +22,14 @@ export const ProjectileTypes = {
     height: 30,
     image: "/projectiles/firepea.png",
   },
+  ICE_PEA: {
+    type: "ice_pea",
+    speed: 5,
+    width: 20,
+    height: 20,
+    image: "/projectiles/icepea.png",
+    freezeDuration: 2000,
+  },
   WATERMELON: {
     type: "watermelon",
     speed: 1.5,
@@ -28,6 +37,12 @@ export const ProjectileTypes = {
     height: 50,
     image: "/projectiles/watermelon.png",
   },
+  ICE_WATERMELON: {
+    type: "ice_watermelon",
+    speed: 1.5,
+    width: 50,
+    height: 50,
+    image: "/projectiles/icewatermelon.png",
+    freezeDuration: 3000,
+  },
 } as const;
-
-export type ProjectileType = keyof typeof ProjectileTypes;

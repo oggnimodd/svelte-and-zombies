@@ -8,6 +8,8 @@ import Wallnut from "../lib/models/plants/Wallnut";
 import FirePea from "../lib/models/plants/FirePea";
 import Torchwood from "../lib/models/plants/Torchwood";
 import Watermelon from "../lib/models/plants/Watermelon";
+import IcePea from "../lib/models/plants/IcePea";
+import WinterMelon from "../lib/models/plants/WinterMelon";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -19,4 +21,6 @@ export const plantSelector = new PlantSelector([
   new FirePea(),
   new Torchwood(),
   new Watermelon(),
+  new IcePea(),
+  new WinterMelon(),
 ]);

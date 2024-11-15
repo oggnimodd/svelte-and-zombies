@@ -20,6 +20,7 @@
 <div
   bind:this={element}
   class="zombie"
+  class:frozen={zombie.isFrozen}
   style="width: {CELL_WIDTH / 1.5}px; height: {CELL_WIDTH /
     1.5}px; z-index: {getZombieZIndex(zombie.row)}"
 >
@@ -36,5 +37,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+
+  .frozen {
+    filter: brightness(150%) saturate(50%) hue-rotate(180deg);
   }
 </style>

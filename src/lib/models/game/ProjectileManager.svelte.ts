@@ -118,6 +118,10 @@ export default class ProjectileManager {
       if (projectile && zombie) {
         zombie.health -= projectile.damage;
 
+        if (projectile.stats.freezeDuration) {
+          zombie.freeze(projectile.stats.freezeDuration);
+        }
+
         // Handle splash damage for melon projectiles
         if (projectile instanceof WatermelonProjectile) {
           this.handleMelonSplash(projectile, zombie, zombies);
@@ -177,6 +181,10 @@ export default class ProjectileManager {
       const splashDamage = projectile.getSplashDamage(distance);
       if (splashDamage > 0) {
         zombie.health -= splashDamage;
+
+        if (projectile.stats.freezeDuration) {
+          zombie.freeze(projectile.stats.freezeDuration);
+        }
       }
     }
   }

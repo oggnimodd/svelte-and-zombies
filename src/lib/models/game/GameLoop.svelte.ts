@@ -7,6 +7,8 @@ import Repeater from "../plants/Repeater";
 import GatlingPea from "../plants/GatlingPea";
 import FirePea from "../plants/FirePea";
 import Watermelon from "../plants/Watermelon";
+import IcePea from "../plants/IcePea";
+import WinterMelon from "../plants/WinterMelon";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -138,6 +140,34 @@ export class GameLoop {
             gameTime,
             this.zombieManager.zombies
           );
+          if (projectile) {
+            this.projectileManager.addProjectile(projectile);
+          }
+        }
+      } else if (plantedPlant.plant instanceof WinterMelon) {
+        const wintermelon = plantedPlant.plant as WinterMelon;
+        if (wintermelon.canShoot(plantedPlant.plantedId, gameTime)) {
+          const projectile = wintermelon.shoot(
+            plantedPlant,
+            gameTime,
+            this.zombieManager.zombies
+          );
+          if (projectile) {
+            this.projectileManager.addProjectile(projectile);
+          }
+        }
+      } else if (plantedPlant.plant instanceof IcePea) {
+        const peashooter = plantedPlant.plant as IcePea;
+        const zombiesInRow = this.zombieManager.zombies.filter(
+          (zombie) =>
+            zombie.row === plantedPlant.cell.row &&
+            zombie.x > plantedPlant.coordinates.x
+        );
+        if (
+          zombiesInRow.length > 0 &&
+          peashooter.canShoot(plantedPlant.plantedId, gameTime)
+        ) {
+          const projectile = peashooter.shoot(plantedPlant, gameTime);
           if (projectile) {
             this.projectileManager.addProjectile(projectile);
           }

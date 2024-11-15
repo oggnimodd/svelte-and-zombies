@@ -13,6 +13,7 @@ export default class Projectile {
   height: number;
   image: string;
   sourcePlant: BasePlant;
+  stats: ProjectileStats;
 
   constructor(
     id: string,
@@ -23,6 +24,7 @@ export default class Projectile {
     sourcePlant: BasePlant
   ) {
     this.id = id;
+    this.stats = stats;
     this.type = stats.type;
     this.damage = sourcePlant.damage;
     this.speed = stats.speed;
