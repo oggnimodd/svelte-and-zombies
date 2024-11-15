@@ -3,6 +3,7 @@ import type BasePlant from "../plants/Plant";
 import Plant from "../plants/Plant";
 import { generate } from "short-uuid";
 import EventEmitter from "../EventEmitter";
+import { gameTime } from "./GameTime.svelte";
 
 interface PlantedPlantCell {
   row: number;
@@ -15,6 +16,7 @@ export interface PlantedPlant {
   currentHealth: number;
   cell: PlantedPlantCell;
   coordinates: { x: number; y: number };
+  plantedTime: number;
 }
 
 type PlantedPlants = PlantedPlant[];
@@ -26,6 +28,8 @@ export default class PlantManager {
 
   constructor(availablePlants: AvailablePlants) {
     this.availablePlants = availablePlants;
+
+    EventEmitter.on("chilliExploded", this.remove.bind(this));
   }
 
   plant(plant: Plant, cell: { row: number; col: number }) {
@@ -39,7 +43,9 @@ export default class PlantManager {
       currentHealth: plant.health,
       cell,
       coordinates,
+      plantedTime: gameTime.get(),
     };
+
     this.plantedPlants = [...this.plantedPlants, plantedPlant];
 
     // console.log("After planting:", [...this.plantedPlants]);

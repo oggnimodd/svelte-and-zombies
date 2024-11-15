@@ -9,6 +9,8 @@ import FirePea from "../plants/FirePea";
 import Watermelon from "../plants/Watermelon";
 import IcePea from "../plants/IcePea";
 import WinterMelon from "../plants/WinterMelon";
+import { gameTime } from "./GameTime.svelte";
+import Chilli from "../plants/Chilli";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -16,7 +18,6 @@ export class GameLoop {
   isPaused: boolean = $state(false);
   deltaTime: number = 0;
   fps: number = $state(0);
-  gameTime: number = 0; // Add game clock
   private readonly MAX_DELTA = 1000 / 60; // Cap at ~60fps for smoother performance
 
   zombieManager: ZombieManager;
@@ -36,6 +37,7 @@ export class GameLoop {
   }
 
   stop() {
+    gameTime.set(0);
     this.isRunning = false;
   }
 
@@ -57,10 +59,10 @@ export class GameLoop {
     this.lastFrameTime = currentTime;
 
     // Update game clock
-    this.gameTime += this.deltaTime;
+    gameTime.set(gameTime.get() + this.deltaTime);
 
     // Update game state
-    this.update(this.deltaTime, this.gameTime);
+    this.update(this.deltaTime, gameTime.get());
 
     // Calculate FPS
     this.fps = Math.round(1000 / this.deltaTime);
@@ -172,6 +174,10 @@ export class GameLoop {
             this.projectileManager.addProjectile(projectile);
           }
         }
+      } else if (plantedPlant.plant instanceof Chilli) {
+        const chilli = plantedPlant.plant as Chilli;
+        // Explode immediately without checking for zombies
+        chilli.explode(plantedPlant, gameTime, this.zombieManager.zombies);
       }
 
       if (projectiles) {
