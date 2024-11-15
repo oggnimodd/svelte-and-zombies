@@ -23,7 +23,7 @@
   class="w-full h-full relative flex items-center justify-center"
   style="z-index: {getPlantZIndex(plantedPlant.cell.row)}"
 >
-  {#if plantedPlant.plant.id === "chilli"}
+  {#if plantedPlant.plant.id === "chilli" || plantedPlant.plant.id === "cherry"}
     <img
       src={getPlantImage(plantedPlant.plant.id)}
       alt={plantedPlant.plant.name}

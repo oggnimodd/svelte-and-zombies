@@ -11,6 +11,7 @@ import IcePea from "../plants/IcePea";
 import WinterMelon from "../plants/WinterMelon";
 import { gameTime } from "./GameTime.svelte";
 import Chilli from "../plants/Chilli";
+import Cherry from "../plants/Cherry";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -178,6 +179,10 @@ export class GameLoop {
         const chilli = plantedPlant.plant as Chilli;
         // Explode immediately without checking for zombies
         chilli.explode(plantedPlant, gameTime, this.zombieManager.zombies);
+      } else if (plantedPlant.plant instanceof Cherry) {
+        const cherry = plantedPlant.plant as Cherry;
+        // Explode immediately without checking for zombies
+        cherry.explode(plantedPlant, gameTime, this.zombieManager.zombies);
       }
 
       if (projectiles) {

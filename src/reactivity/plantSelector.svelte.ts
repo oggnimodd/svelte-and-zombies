@@ -11,6 +11,7 @@ import Watermelon from "../lib/models/plants/Watermelon";
 import IcePea from "../lib/models/plants/IcePea";
 import WinterMelon from "../lib/models/plants/WinterMelon";
 import Chilli from "../lib/models/plants/Chilli";
+import Cherry from "../lib/models/plants/Cherry";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -25,4 +26,5 @@ export const plantSelector = new PlantSelector([
   new IcePea(),
   new WinterMelon(),
   new Chilli(),
+  new Cherry(),
 ]);

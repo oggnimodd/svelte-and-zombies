@@ -30,6 +30,7 @@ export default class PlantManager {
     this.availablePlants = availablePlants;
 
     EventEmitter.on("chilliExploded", this.remove.bind(this));
+    EventEmitter.on("cherryExploded", this.remove.bind(this));
   }
 
   plant(plant: Plant, cell: { row: number; col: number }) {
