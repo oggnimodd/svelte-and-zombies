@@ -12,7 +12,8 @@
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "aider:commit": "aider --commit --model mistral/mistral-large-latest",
-    "aider:mistral": "aider --model mistral/mistral-large-latest"
+    "aider:mistral": "aider --model mistral/mistral-large-latest",
+    "aider:gemini": "aider --model gemini/gemini-1.5-pro-latest"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
