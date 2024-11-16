@@ -1,6 +1,5 @@
 # Todo
 
-- Threepeater
 - Spikeweed
 - Kernel-pult
 - Squash

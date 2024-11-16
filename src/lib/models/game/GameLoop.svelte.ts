@@ -14,6 +14,8 @@ import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry";
 import Cabbage from "../plants/Cabbage";
 import Potato from "../plants/Potato";
+import Threepeater from "../plants/Threepeater"; // Added Threepeater import
+import { NUM_ROWS } from "../../../constants/sizes";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -200,6 +202,25 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Potato) {
         const potato = plantedPlant.plant as Potato;
         potato.update(plantedPlant, gameTime, this.zombieManager.zombies);
+      } else if (plantedPlant.plant instanceof Threepeater) {
+        const threepeater = plantedPlant.plant as Threepeater;
+        // Check adjacent rows for zombies
+        const adjacentRows = [-1, 0, 1]
+          .map((offset) => plantedPlant.cell.row + offset)
+          .filter((row) => row >= 0 && row < NUM_ROWS);
+
+        const zombiesInRange = this.zombieManager.zombies.filter(
+          (zombie) =>
+            adjacentRows.includes(zombie.row) &&
+            zombie.x > plantedPlant.coordinates.x
+        );
+
+        if (
+          zombiesInRange.length > 0 &&
+          threepeater.canShoot(plantedPlant.plantedId, gameTime)
+        ) {
+          projectiles = threepeater.shoot(plantedPlant, gameTime);
+        }
       }
 
       if (projectiles) {
