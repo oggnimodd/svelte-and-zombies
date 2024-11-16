@@ -13,6 +13,7 @@ import WinterMelon from "../lib/models/plants/WinterMelon";
 import Chilli from "../lib/models/plants/Chilli";
 import Cherry from "../lib/models/plants/Cherry";
 import Cabbage from "../lib/models/plants/Cabbage";
+import Potato from "../lib/models/plants/Potato";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -29,4 +30,5 @@ export const plantSelector = new PlantSelector([
   new Chilli(),
   new Cherry(),
   new Cabbage(),
+  new Potato(),
 ]);
