@@ -1,6 +1,5 @@
 # Todo
 
-- Potato
 - Threepeater
 - Spikeweed
 - Kernel-pult
