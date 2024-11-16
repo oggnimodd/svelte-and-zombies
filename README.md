@@ -1,6 +1,5 @@
 # Todo
 
-- Cabbage
 - Potato
 - Threepeater
 - Spikeweed
