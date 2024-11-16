@@ -45,4 +45,11 @@ export const ProjectileTypes = {
     image: "/projectiles/icewatermelon.png",
     freezeDuration: 3000,
   },
+  CABBAGE: {
+    type: "cabbage",
+    speed: 2.5,
+    width: 35,
+    height: 35,
+    image: "/projectiles/cabbage.png",
+  },
 } as const;

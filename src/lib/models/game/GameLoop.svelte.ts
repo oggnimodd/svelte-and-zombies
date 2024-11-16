@@ -12,6 +12,7 @@ import WinterMelon from "../plants/WinterMelon";
 import { gameTime } from "./GameTime.svelte";
 import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry";
+import Cabbage from "../plants/Cabbage";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -151,6 +152,18 @@ export class GameLoop {
         const wintermelon = plantedPlant.plant as WinterMelon;
         if (wintermelon.canShoot(plantedPlant.plantedId, gameTime)) {
           const projectile = wintermelon.shoot(
+            plantedPlant,
+            gameTime,
+            this.zombieManager.zombies
+          );
+          if (projectile) {
+            this.projectileManager.addProjectile(projectile);
+          }
+        }
+      } else if (plantedPlant.plant instanceof Cabbage) {
+        const cabbage = plantedPlant.plant as Cabbage;
+        if (cabbage.canShoot(plantedPlant.plantedId, gameTime)) {
+          const projectile = cabbage.shoot(
             plantedPlant,
             gameTime,
             this.zombieManager.zombies
