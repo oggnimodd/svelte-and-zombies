@@ -4,7 +4,6 @@ import QuadTree from "../../algo/QuadTree";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { PlantedPlant } from "./PlantManager.svelte";
 import WatermelonProjectile from "../projectiles/WatermelonProjectile";
-import KernelProjectile from "../projectiles/KernelProjectile";
 
 export default class ProjectileManager {
   projectiles: Projectile[] = $state([]);
