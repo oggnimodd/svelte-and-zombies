@@ -14,6 +14,7 @@ export default class Projectile {
   image: string;
   sourcePlant: BasePlant;
   stats: ProjectileStats;
+  direction: number = 1; // Default to right (positive direction)
 
   constructor(
     id: string,
@@ -21,7 +22,8 @@ export default class Projectile {
     x: number,
     y: number,
     row: number,
-    sourcePlant: BasePlant
+    sourcePlant: BasePlant,
+    direction: number = 1
   ) {
     this.id = id;
     this.stats = stats;
@@ -35,10 +37,12 @@ export default class Projectile {
     this.y = y;
     this.row = row;
     this.sourcePlant = sourcePlant;
+    this.direction = direction;
   }
 
   move(deltaTime: number) {
-    this.x += this.speed * (deltaTime / 16);
+    const speedAdjustment = this.speed * (deltaTime / 16);
+    this.x += this.direction * speedAdjustment;
   }
 
   transformToFirePea() {

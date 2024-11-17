@@ -98,7 +98,7 @@ export default class ProjectileManager {
       ) {
         return false;
       }
-      return projectile.x < YARD_WIDTH + 200;
+      return projectile.x < YARD_WIDTH + 200 && projectile.x > 0;
     });
 
     // Check collisions and apply damage

@@ -19,6 +19,7 @@ import Spikeweed from "../lib/models/plants/Spikeweed";
 import Kernelpult from "../lib/models/plants/Kernelpult";
 import Squash from "../lib/models/plants/Squash";
 import Chomper from "../lib/models/plants/Chomper";
+import SplitPea from "../lib/models/plants/SplitPea";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -41,4 +42,5 @@ export const plantSelector = new PlantSelector([
   new Kernelpult(),
   new Squash(),
   new Chomper(),
+  new SplitPea(),
 ]);

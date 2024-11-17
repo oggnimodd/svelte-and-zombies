@@ -20,6 +20,7 @@ import { NUM_ROWS } from "../../../constants/sizes";
 import Kernelpult from "../plants/Kernelpult";
 import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
+import SplitPea from "../plants/SplitPea";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -254,6 +255,20 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Chomper) {
         const chomper = plantedPlant.plant as Chomper;
         chomper.chomp(plantedPlant, gameTime, this.zombieManager.zombies);
+      } else if (plantedPlant.plant instanceof SplitPea) {
+        const splitPea = plantedPlant.plant as SplitPea;
+
+        const zombiesInRow = this.zombieManager.zombies.filter(
+          (zombie) => zombie.row === plantedPlant.cell.row
+        );
+
+        // Here we don't need to check if zombies are on the right side since split pea will shoot on both sides
+        if (
+          zombiesInRow.length > 0 &&
+          splitPea.canShoot(plantedPlant.plantedId, gameTime)
+        ) {
+          projectiles = splitPea.shoot(plantedPlant, gameTime);
+        }
       }
 
       if (projectiles) {
