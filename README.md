@@ -1,6 +1,5 @@
 # Todo
 
-- Kernel-pult
 - Squash
 - Chomper
 - Twin Sunflower
