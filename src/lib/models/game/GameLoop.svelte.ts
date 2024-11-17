@@ -14,7 +14,8 @@ import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry";
 import Cabbage from "../plants/Cabbage";
 import Potato from "../plants/Potato";
-import Threepeater from "../plants/Threepeater"; // Added Threepeater import
+import Threepeater from "../plants/Threepeater";
+import Spikeweed from "../plants/Spikeweed";
 import { NUM_ROWS } from "../../../constants/sizes";
 
 export class GameLoop {
@@ -221,6 +222,9 @@ export class GameLoop {
         ) {
           projectiles = threepeater.shoot(plantedPlant, gameTime);
         }
+      } else if (plantedPlant.plant instanceof Spikeweed) {
+        const spikeweed = plantedPlant.plant as Spikeweed;
+        spikeweed.update(plantedPlant, gameTime, this.zombieManager.zombies);
       }
 
       if (projectiles) {

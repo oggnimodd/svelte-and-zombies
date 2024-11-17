@@ -67,7 +67,11 @@ export default class ZombieManager {
       return (
         plant &&
         plant.cell.row === zombie.row &&
-        this.checkDetailedCollision(zombieBounds, entity)
+        this.checkDetailedCollision(zombieBounds, entity) &&
+        // There are spesific plants we want to ignore
+        // For example in the original pvz the zombies can't attack spikeweed
+        // TODO: Separate this check into a different method
+        plant.plant.id !== "spikeweed"
       );
     });
 

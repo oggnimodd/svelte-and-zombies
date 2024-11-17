@@ -15,6 +15,7 @@ import Cherry from "../lib/models/plants/Cherry";
 import Cabbage from "../lib/models/plants/Cabbage";
 import Potato from "../lib/models/plants/Potato";
 import Threepeater from "../lib/models/plants/Threepeater";
+import Spikeweed from "../lib/models/plants/Spikeweed";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -33,4 +34,5 @@ export const plantSelector = new PlantSelector([
   new Cabbage(),
   new Potato(),
   new Threepeater(),
+  new Spikeweed(),
 ]);
