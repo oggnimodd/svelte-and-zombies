@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PlantedPlant } from "../lib/models/game/PlantManager.svelte";
+  import type Squash from "../lib/models/plants/Squash";
   import { getPlantImage } from "../utils/getPlantImage";
   import { getPlantZIndex } from "../utils/getZIndex";
 
@@ -17,6 +18,18 @@
   const plantImage = $derived.by(() => {
     return getPlantImage(plantedPlant.plant.id);
   });
+
+  // TODO: fix animation not working
+  const isJumping = $derived(
+    plantedPlant.plant.id === "squash" &&
+      (plantedPlant.plant as Squash).isJumping?.(plantedPlant.plantedId)
+  );
+
+  // TODO: fix animation not working
+  const hasLanded = $derived(
+    plantedPlant.plant.id === "squash" &&
+      (plantedPlant.plant as Squash).hasLanded?.(plantedPlant.plantedId)
+  );
 </script>
 
 <div
@@ -28,6 +41,14 @@
       src={getPlantImage(plantedPlant.plant.id)}
       alt={plantedPlant.plant.name}
       class="inflating w-full pointer-events-none cursor-none absolute bottom-0"
+    />
+  {:else if plantedPlant.plant.id === "squash"}
+    <img
+      src={plantImage}
+      alt={plantedPlant.plant.id}
+      class="{isJumping ? 'squash-jumping' : ''} 
+               {hasLanded ? 'squash-landed' : ''} 
+               w-full pointer-events-none cursor-none absolute bottom-0 subtle-animation"
     />
   {:else}
     <img
@@ -68,5 +89,37 @@
     100% {
       transform: scale(2);
     }
+  }
+
+  @keyframes squashJump {
+    0% {
+      transform: scale(1) translateY(0);
+    }
+    50% {
+      transform: scale(0.8) translateY(-40px);
+    }
+    100% {
+      transform: scale(1.2) translateY(0);
+    }
+  }
+
+  @keyframes squashLand {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+
+  .squash-jumping {
+    animation: squashJump 1s ease-in-out;
+  }
+
+  .squash-landed {
+    animation: squashLand 0.5s ease-in forwards;
   }
 </style>

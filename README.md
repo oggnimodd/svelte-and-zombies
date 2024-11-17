@@ -1,6 +1,5 @@
 # Todo
 
-- Squash
 - Chomper
 - Twin Sunflower
 - Split Pea

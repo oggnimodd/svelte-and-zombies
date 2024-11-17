@@ -17,6 +17,7 @@ import Potato from "../lib/models/plants/Potato";
 import Threepeater from "../lib/models/plants/Threepeater";
 import Spikeweed from "../lib/models/plants/Spikeweed";
 import Kernelpult from "../lib/models/plants/Kernelpult";
+import Squash from "../lib/models/plants/Squash";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -37,4 +38,5 @@ export const plantSelector = new PlantSelector([
   new Threepeater(),
   new Spikeweed(),
   new Kernelpult(),
+  new Squash(),
 ]);
