@@ -24,7 +24,13 @@
   style="width: {CELL_WIDTH / 1.5}px; height: {CELL_WIDTH /
     1.5}px; z-index: {getZombieZIndex(zombie.row)}"
 >
-  <div class="w-full h-full flex items-center justify-center text-6xl">🧛🏻‍♀️</div>
+  <div class="w-full h-full flex items-center justify-center text-6xl relative">
+    {#if zombie.isStunned}
+      <div class="absolute top-0 left-0 w-full h-full">😴</div>
+    {/if}
+
+    <span> 🧛🏻‍♀️ </span>
+  </div>
 </div>
 
 <style>

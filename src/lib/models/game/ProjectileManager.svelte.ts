@@ -4,6 +4,7 @@ import QuadTree from "../../algo/QuadTree";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { PlantedPlant } from "./PlantManager.svelte";
 import WatermelonProjectile from "../projectiles/WatermelonProjectile";
+import KernelProjectile from "../projectiles/KernelProjectile";
 
 export default class ProjectileManager {
   projectiles: Projectile[] = $state([]);
@@ -118,11 +119,17 @@ export default class ProjectileManager {
       if (projectile && zombie) {
         zombie.health -= projectile.damage;
 
+        // Handle freeze effect
         if (projectile.stats.freezeDuration) {
           zombie.freeze(projectile.stats.freezeDuration);
         }
 
-        // Handle splash damage for melon projectiles
+        // Handle stun effect
+        if (projectile.stats.stunDuration) {
+          zombie.stun(projectile.stats.stunDuration);
+        }
+
+        // Handle splash damage for special projectiles
         if (projectile instanceof WatermelonProjectile) {
           this.handleMelonSplash(projectile, zombie, zombies);
         }

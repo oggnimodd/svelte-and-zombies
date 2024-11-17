@@ -17,6 +17,7 @@ import Potato from "../plants/Potato";
 import Threepeater from "../plants/Threepeater";
 import Spikeweed from "../plants/Spikeweed";
 import { NUM_ROWS } from "../../../constants/sizes";
+import Kernelpult from "../plants/Kernelpult";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -225,6 +226,26 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Spikeweed) {
         const spikeweed = plantedPlant.plant as Spikeweed;
         spikeweed.update(plantedPlant, gameTime, this.zombieManager.zombies);
+      } else if (plantedPlant.plant instanceof Kernelpult) {
+        const kernelpult = plantedPlant.plant as Kernelpult;
+        const zombiesInRow = this.zombieManager.zombies.filter(
+          (zombie) =>
+            zombie.row === plantedPlant.cell.row &&
+            zombie.x > plantedPlant.coordinates.x
+        );
+        if (
+          zombiesInRow.length > 0 &&
+          kernelpult.canShoot(plantedPlant.plantedId, gameTime)
+        ) {
+          const projectile = kernelpult.shoot(
+            plantedPlant,
+            gameTime,
+            this.zombieManager.zombies
+          );
+          if (projectile) {
+            this.projectileManager.addProjectile(projectile);
+          }
+        }
       }
 
       if (projectiles) {

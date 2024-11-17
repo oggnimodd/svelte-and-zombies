@@ -5,6 +5,7 @@ export interface ProjectileStats {
   height: number;
   image: string;
   freezeDuration?: number;
+  stunDuration?: number;
 }
 
 export const ProjectileTypes = {
@@ -51,5 +52,13 @@ export const ProjectileTypes = {
     width: 35,
     height: 35,
     image: "/projectiles/cabbage.png",
+  },
+  KERNEL: {
+    type: "kernelpult",
+    speed: 2.5,
+    width: 30,
+    height: 30,
+    image: "/projectiles/kernelpult.png",
+    stunDuration: 1500, // 1.5 seconds stun
   },
 } as const;
