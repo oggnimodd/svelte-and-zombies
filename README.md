@@ -1,6 +1,5 @@
 # Todo
 
-- Spikeweed
 - Kernel-pult
 - Squash
 - Chomper
