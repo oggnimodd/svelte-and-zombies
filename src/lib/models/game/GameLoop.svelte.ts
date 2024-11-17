@@ -19,6 +19,7 @@ import Spikeweed from "../plants/Spikeweed";
 import { NUM_ROWS } from "../../../constants/sizes";
 import Kernelpult from "../plants/Kernelpult";
 import Squash from "../plants/Squash";
+import Chomper from "../plants/Chomper";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -250,6 +251,9 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Squash) {
         const squash = plantedPlant.plant as Squash;
         squash.update(plantedPlant, gameTime, this.zombieManager.zombies);
+      } else if (plantedPlant.plant instanceof Chomper) {
+        const chomper = plantedPlant.plant as Chomper;
+        chomper.chomp(plantedPlant, gameTime, this.zombieManager.zombies);
       }
 
       if (projectiles) {

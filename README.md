@@ -1,6 +1,5 @@
 # Todo
 
-- Chomper
 - Twin Sunflower
 - Split Pea
 - Imitater
