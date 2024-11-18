@@ -16,7 +16,8 @@
   const shouldRotate = (type: string) =>
     type === ProjectileTypes.WATERMELON.type ||
     type === ProjectileTypes.ICE_WATERMELON.type ||
-    type === ProjectileTypes.CABBAGE.type;
+    type === ProjectileTypes.CABBAGE.type ||
+    type === ProjectileTypes.KERNEL.type;
 </script>
 
 <div
