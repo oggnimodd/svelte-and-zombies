@@ -41,6 +41,7 @@
     contain: layout size;
     will-change: transform;
     backface-visibility: hidden;
+    transform-style: preserve-3d;
   }
 
   /* Add rotation animation */
