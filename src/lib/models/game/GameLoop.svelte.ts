@@ -21,6 +21,7 @@ import Kernelpult from "../plants/Kernelpult";
 import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
 import SplitPea from "../plants/SplitPea";
+import Starfruit from "../plants/Starfruit";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -268,6 +269,16 @@ export class GameLoop {
           splitPea.canShoot(plantedPlant.plantedId, gameTime)
         ) {
           projectiles = splitPea.shoot(plantedPlant, gameTime);
+        }
+      } else if (plantedPlant.plant instanceof Starfruit) {
+        const starfruit = plantedPlant.plant as Starfruit;
+
+        if (
+          starfruit.canShoot(plantedPlant.plantedId, gameTime) &&
+          // Shoot when there are zombies on any row
+          this.zombieManager.zombies.length > 0
+        ) {
+          projectiles = starfruit.shoot(plantedPlant, gameTime);
         }
       }
 

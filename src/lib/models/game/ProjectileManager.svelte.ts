@@ -98,7 +98,12 @@ export default class ProjectileManager {
       ) {
         return false;
       }
-      return projectile.x < YARD_WIDTH + 200 && projectile.x > -50;
+      return (
+        projectile.x < YARD_WIDTH + 200 &&
+        projectile.x > -50 &&
+        projectile.y < YARD_HEIGHT &&
+        projectile.y > -30
+      );
     });
 
     // Check collisions and apply damage

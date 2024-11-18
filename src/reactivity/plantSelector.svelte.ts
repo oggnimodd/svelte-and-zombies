@@ -20,6 +20,7 @@ import Kernelpult from "../lib/models/plants/Kernelpult";
 import Squash from "../lib/models/plants/Squash";
 import Chomper from "../lib/models/plants/Chomper";
 import SplitPea from "../lib/models/plants/SplitPea";
+import Starfruit from "../lib/models/plants/Starfruit";
 
 export const plantSelector = new PlantSelector([
   new Sunflower(),
@@ -43,4 +44,5 @@ export const plantSelector = new PlantSelector([
   new Squash(),
   new Chomper(),
   new SplitPea(),
+  new Starfruit(),
 ]);

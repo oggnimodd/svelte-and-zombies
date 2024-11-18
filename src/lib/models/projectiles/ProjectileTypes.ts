@@ -61,4 +61,11 @@ export const ProjectileTypes = {
     image: "/projectiles/kernelpult.png",
     stunDuration: 1500, // 1.5 seconds stun
   },
+  STAR: {
+    type: "star",
+    speed: 4,
+    width: 25,
+    height: 25,
+    image: "/projectiles/star.png",
+  },
 } as const;
