@@ -102,7 +102,7 @@ export default class ProjectileManager {
         projectile.x < YARD_WIDTH + 200 &&
         projectile.x > -50 &&
         projectile.y < YARD_HEIGHT &&
-        projectile.y > -30
+        projectile.y > -200
       );
     });
 
