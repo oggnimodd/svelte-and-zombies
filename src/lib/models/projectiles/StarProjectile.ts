@@ -10,7 +10,7 @@ interface StarProjectileProps {
   row: number;
   sourcePlant: BasePlant;
   angle: number;
-  direction: number;
+  direction?: number;
 }
 
 export default class StarProjectile extends Projectile {

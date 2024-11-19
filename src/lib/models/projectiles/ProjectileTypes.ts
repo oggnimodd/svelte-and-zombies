@@ -69,3 +69,5 @@ export const ProjectileTypes = {
     image: "/projectiles/star.png",
   },
 } as const;
+
+export type ProjectileType = keyof typeof ProjectileTypes;
