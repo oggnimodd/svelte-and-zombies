@@ -70,16 +70,16 @@ export default class Cabbage extends BasePlant {
 
     const targetX = targetZombie.x + targetZombie.width / 2;
 
-    const projectile = new CabbageProjectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
+    const projectile = new CabbageProjectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      startX: plantedPlant.coordinates.x + projectileXOffset,
+      startY: rowYPosition + projectileYOffset,
       targetX,
-      plantedPlant.cell.row,
-      this,
-      this.SPLASH_RADIUS
-    );
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+      splashRadius: this.SPLASH_RADIUS,
+    });
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;
     return projectile;

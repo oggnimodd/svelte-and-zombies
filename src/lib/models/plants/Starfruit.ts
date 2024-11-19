@@ -58,16 +58,16 @@ export default class Starfruit extends BasePlant {
 
     const projectiles = this.DIRECTIONS.map(
       ({ angle, direction }) =>
-        new StarProjectile(
-          generate(),
-          this.getProjectileStats(),
-          startX,
-          startY,
-          plantedPlant.cell.row,
-          this,
+        new StarProjectile({
+          id: generate(),
+          stats: this.getProjectileStats(),
+          x: startX,
+          y: startY,
+          row: plantedPlant.cell.row,
+          sourcePlant: this,
           angle,
-          direction
-        )
+          direction,
+        })
     );
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;

@@ -51,26 +51,26 @@ export default class SplitPea extends BasePlant {
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
     // Shoot the first pea to the right
-    const rightProjectile = new Projectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
-      plantedPlant.cell.row,
-      this
-    );
+    const rightProjectile = new Projectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      x: plantedPlant.coordinates.x + projectileXOffset,
+      y: rowYPosition + projectileYOffset,
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+    });
     projectiles.push(rightProjectile);
 
     // Shoot the second pea to the left
-    const leftProjectile = new Projectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
-      plantedPlant.cell.row,
-      this,
-      -1 // Negative direction for left movement
-    );
+    const leftProjectile = new Projectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      x: plantedPlant.coordinates.x + projectileXOffset,
+      y: rowYPosition + projectileYOffset,
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+      direction: -1, // Negative direction for left movement
+    });
     projectiles.push(leftProjectile);
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;

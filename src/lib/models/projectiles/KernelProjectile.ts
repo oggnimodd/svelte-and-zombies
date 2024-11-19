@@ -1,7 +1,12 @@
 import Projectile from "./Projectile.svelte";
-import type BasePlant from "../plants/Plant";
-import type { ProjectileStats } from "./ProjectileTypes";
 import { YARD_WIDTH } from "../../../constants/sizes";
+import type { ProjectileProps } from "./Projectile.svelte.ts";
+
+interface KernelProjectileProps extends ProjectileProps {
+  startX: number;
+  startY: number;
+  targetX: number;
+}
 
 export default class KernelProjectile extends Projectile {
   private startX: number;
@@ -13,16 +18,16 @@ export default class KernelProjectile extends Projectile {
   private canCollide: boolean = false;
   private hasLanded: boolean = false;
 
-  constructor(
-    id: string,
-    stats: ProjectileStats,
-    startX: number,
-    startY: number,
-    targetX: number,
-    row: number,
-    sourcePlant: BasePlant
-  ) {
-    super(id, stats, startX, startY, row, sourcePlant);
+  constructor({
+    id,
+    stats,
+    startX,
+    startY,
+    targetX,
+    row,
+    sourcePlant,
+  }: KernelProjectileProps) {
+    super({ id, stats, x: startX, y: startY, row, sourcePlant });
     this.startX = startX;
     this.startY = startY;
     this.targetX = targetX;

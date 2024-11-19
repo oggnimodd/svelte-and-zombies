@@ -58,14 +58,14 @@ export default class GatlingPea extends BasePlant {
     // Shoot four peas
     for (let i = 0; i < 4; i++) {
       const offset = offsets[i];
-      const projectile = new Projectile(
-        generate(),
-        this.getProjectileStats(),
-        plantedPlant.coordinates.x + projectileXOffset + offset,
-        rowYPosition + projectileYOffset,
-        plantedPlant.cell.row,
-        this
-      );
+      const projectile = new Projectile({
+        id: generate(),
+        stats: this.getProjectileStats(),
+        x: plantedPlant.coordinates.x + projectileXOffset + offset,
+        y: rowYPosition + projectileYOffset,
+        row: plantedPlant.cell.row,
+        sourcePlant: this,
+      });
       projectiles.push(projectile);
     }
 

@@ -1,7 +1,11 @@
 import Projectile from "./Projectile.svelte";
-import type BasePlant from "../plants/Plant";
-import type { ProjectileStats } from "./ProjectileTypes";
 import { CELL_WIDTH } from "../../../constants/sizes";
+import type { ProjectileProps } from "./Projectile.svelte.ts";
+
+interface ThreepeaterProjectileProps extends ProjectileProps {
+  sourceRow: number;
+  targetRow: number;
+}
 
 class ThreepeaterProjectile extends Projectile {
   private readonly targetRow: number;
@@ -9,16 +13,16 @@ class ThreepeaterProjectile extends Projectile {
   private readonly verticalDistance: number;
   private hasReachedRow: boolean = false;
 
-  constructor(
-    id: string,
-    stats: ProjectileStats,
-    x: number,
-    y: number,
-    sourceRow: number,
-    targetRow: number,
-    sourcePlant: BasePlant
-  ) {
-    super(id, stats, x, y, sourceRow, sourcePlant);
+  constructor({
+    id,
+    stats,
+    x,
+    y,
+    sourceRow,
+    targetRow,
+    sourcePlant,
+  }: ThreepeaterProjectileProps) {
+    super({ id, stats, x, y, row: sourceRow, sourcePlant });
     this.targetRow = targetRow;
     this.verticalDistance = (targetRow - sourceRow) * CELL_WIDTH;
   }

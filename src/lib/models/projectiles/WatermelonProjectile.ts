@@ -1,7 +1,13 @@
 import Projectile from "./Projectile.svelte";
-import type BasePlant from "../plants/Plant";
-import type { ProjectileStats } from "./ProjectileTypes";
 import { YARD_WIDTH } from "../../../constants/sizes";
+import type { ProjectileProps } from "./Projectile.svelte.ts";
+
+interface WatermelonProjectileProps extends ProjectileProps {
+  startX: number;
+  startY: number;
+  targetX: number;
+  splashRadius: number;
+}
 
 export default class WatermelonProjectile extends Projectile {
   private startX: number;
@@ -14,17 +20,17 @@ export default class WatermelonProjectile extends Projectile {
   private canCollide: boolean = false;
   private hasLanded: boolean = false;
 
-  constructor(
-    id: string,
-    stats: ProjectileStats,
-    startX: number,
-    startY: number,
-    targetX: number,
-    row: number,
-    sourcePlant: BasePlant,
-    splashRadius: number
-  ) {
-    super(id, stats, startX, startY, row, sourcePlant);
+  constructor({
+    id,
+    stats,
+    startX,
+    startY,
+    targetX,
+    row,
+    sourcePlant,
+    splashRadius,
+  }: WatermelonProjectileProps) {
+    super({ id, stats, x: startX, y: startY, row, sourcePlant });
     this.startX = startX;
     this.startY = startY;
     this.targetX = targetX;

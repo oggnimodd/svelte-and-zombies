@@ -63,23 +63,25 @@ export default class Threepeater extends BasePlant {
     targetRows.forEach((targetRow) => {
       const projectile =
         targetRow === sourceRow
-          ? new Projectile( // Middle pea uses normal projectile
-              generate(),
-              this.getProjectileStats(),
-              plantedPlant.coordinates.x + projectileXOffset,
-              startY,
-              sourceRow,
-              this
-            )
-          : new ThreepeaterProjectile( // Top and bottom peas use special diagonal projectile
-              generate(),
-              this.getProjectileStats(),
-              plantedPlant.coordinates.x + projectileXOffset,
-              startY,
+          ? new Projectile({
+              // Middle pea uses normal projectile
+              id: generate(),
+              stats: this.getProjectileStats(),
+              x: plantedPlant.coordinates.x + projectileXOffset,
+              y: startY,
+              row: sourceRow,
+              sourcePlant: this,
+            })
+          : new ThreepeaterProjectile({
+              // Top and bottom peas use special diagonal projectile
+              id: generate(),
+              stats: this.getProjectileStats(),
+              x: plantedPlant.coordinates.x + projectileXOffset,
+              y: startY,
               sourceRow,
               targetRow,
-              this
-            );
+              sourcePlant: this,
+            });
 
       projectiles.push(projectile);
     });

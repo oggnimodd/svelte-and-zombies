@@ -1,22 +1,25 @@
 import Projectile from "./Projectile.svelte";
-import type BasePlant from "../plants/Plant";
-import type { ProjectileStats } from "./ProjectileTypes";
+import type { ProjectileProps } from "./Projectile.svelte.ts";
+
+interface StarProjectileProps extends ProjectileProps {
+  angle: number;
+}
 
 export default class StarProjectile extends Projectile {
   private angle: number;
   private readonly baseSpeed: number;
 
-  constructor(
-    id: string,
-    stats: ProjectileStats,
-    x: number,
-    y: number,
-    row: number,
-    sourcePlant: BasePlant,
-    angle: number,
-    direction: number
-  ) {
-    super(id, stats, x, y, row, sourcePlant, direction);
+  constructor({
+    id,
+    stats,
+    x,
+    y,
+    row,
+    sourcePlant,
+    angle,
+    direction,
+  }: StarProjectileProps) {
+    super({ id, stats, x, y, row, sourcePlant, direction });
     this.angle = angle;
     this.baseSpeed = stats.speed;
   }

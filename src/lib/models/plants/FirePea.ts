@@ -51,25 +51,25 @@ export default class FirePea extends BasePlant {
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
     // Shoot the first pea
-    const firstProjectile = new Projectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset - 30, // Slightly offset
-      rowYPosition + projectileYOffset,
-      plantedPlant.cell.row,
-      this
-    );
+    const firstProjectile = new Projectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      x: plantedPlant.coordinates.x + projectileXOffset - 30, // Slightly offset
+      y: rowYPosition + projectileYOffset,
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+    });
     projectiles.push(firstProjectile);
 
     // Shoot the second pea
-    const secondProjectile = new Projectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset + 5, // Slightly offset
-      rowYPosition + projectileYOffset,
-      plantedPlant.cell.row,
-      this
-    );
+    const secondProjectile = new Projectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      x: plantedPlant.coordinates.x + projectileXOffset + 5, // Slightly offset
+      y: rowYPosition + projectileYOffset,
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+    });
     projectiles.push(secondProjectile);
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;

@@ -75,16 +75,16 @@ export default class Watermelon extends BasePlant {
     // Target slightly ahead of the zombie
     const targetX = targetZombie.x + targetZombie.width / 2;
 
-    const projectile = new WatermelonProjectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
+    const projectile = new WatermelonProjectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      startX: plantedPlant.coordinates.x + projectileXOffset,
+      startY: rowYPosition + projectileYOffset,
       targetX,
-      plantedPlant.cell.row,
-      this,
-      this.SPLASH_RADIUS
-    );
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+      splashRadius: this.SPLASH_RADIUS,
+    });
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;
     return projectile;

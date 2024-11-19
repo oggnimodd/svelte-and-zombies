@@ -1,6 +1,16 @@
 import { ProjectileTypes, type ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 
+export interface ProjectileProps {
+  id: string;
+  stats: ProjectileStats;
+  x: number;
+  y: number;
+  row: number;
+  sourcePlant: BasePlant;
+  direction?: number;
+}
+
 export default class Projectile {
   id: string;
   type: string;
@@ -14,17 +24,17 @@ export default class Projectile {
   image: string;
   sourcePlant: BasePlant;
   stats: ProjectileStats;
-  direction: number = 1; // Default to right (positive direction)
+  direction: number;
 
-  constructor(
-    id: string,
-    stats: ProjectileStats,
-    x: number,
-    y: number,
-    row: number,
-    sourcePlant: BasePlant,
-    direction: number = 1
-  ) {
+  constructor({
+    id,
+    stats,
+    x,
+    y,
+    row,
+    sourcePlant,
+    direction = 1,
+  }: ProjectileProps) {
     this.id = id;
     this.stats = stats;
     this.type = stats.type;

@@ -71,15 +71,15 @@ export default class Kernelpult extends BasePlant {
 
     const targetX = targetZombie.x + targetZombie.width / 2;
 
-    const projectile = new KernelProjectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
+    const projectile = new KernelProjectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      startX: plantedPlant.coordinates.x + projectileXOffset,
+      startY: rowYPosition + projectileYOffset,
       targetX,
-      plantedPlant.cell.row,
-      this
-    );
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+    });
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;
     return projectile;

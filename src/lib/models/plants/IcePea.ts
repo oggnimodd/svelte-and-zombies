@@ -48,14 +48,14 @@ export default class IcePea extends BasePlant {
     const projectileYOffset =
       (CELL_WIDTH - this.getProjectileStats().height) / 2;
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
-    const projectile = new Projectile(
-      generate(),
-      this.getProjectileStats(),
-      plantedPlant.coordinates.x + projectileXOffset,
-      rowYPosition + projectileYOffset,
-      plantedPlant.cell.row,
-      this
-    );
+    const projectile = new Projectile({
+      id: generate(),
+      stats: this.getProjectileStats(),
+      x: plantedPlant.coordinates.x + projectileXOffset,
+      y: rowYPosition + projectileYOffset,
+      row: plantedPlant.cell.row,
+      sourcePlant: this,
+    });
 
     this.lastShotTime[plantedPlant.plantedId] = gameTime;
     return projectile;
