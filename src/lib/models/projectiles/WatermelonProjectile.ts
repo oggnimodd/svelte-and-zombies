@@ -1,14 +1,18 @@
 import Projectile from "./Projectile.svelte";
 import { YARD_WIDTH } from "../../../constants/sizes";
-import type { ProjectileProps } from "./Projectile.svelte.ts";
+import type BasePlant from "../plants/Plant";
+import type { ProjectileStats } from "./ProjectileTypes";
 
-interface WatermelonProjectileProps extends ProjectileProps {
+interface WatermelonProjectileProps {
+  id: string;
+  stats: ProjectileStats;
   startX: number;
   startY: number;
   targetX: number;
+  row: number;
+  sourcePlant: BasePlant;
   splashRadius: number;
 }
-
 export default class WatermelonProjectile extends Projectile {
   private startX: number;
   private startY: number;

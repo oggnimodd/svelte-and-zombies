@@ -1,11 +1,16 @@
 import Projectile from "./Projectile.svelte";
 import { YARD_WIDTH } from "../../../constants/sizes";
-import type { ProjectileProps } from "./Projectile.svelte.ts";
+import type { ProjectileStats } from "./ProjectileTypes";
+import type BasePlant from "../plants/Plant";
 
-interface CabbageProjectileProps extends ProjectileProps {
+interface CabbageProjectileProps {
+  id: string;
+  stats: ProjectileStats;
   startX: number;
   startY: number;
   targetX: number;
+  row: number;
+  sourcePlant: BasePlant;
   splashRadius: number;
 }
 

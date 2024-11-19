@@ -1,10 +1,16 @@
 import Projectile from "./Projectile.svelte";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import type { ProjectileProps } from "./Projectile.svelte.ts";
+import type { ProjectileStats } from "./ProjectileTypes";
+import type BasePlant from "../plants/Plant";
 
-interface ThreepeaterProjectileProps extends ProjectileProps {
+interface ThreepeaterProjectileProps {
+  id: string;
+  stats: ProjectileStats;
+  x: number;
+  y: number;
   sourceRow: number;
   targetRow: number;
+  sourcePlant: BasePlant;
 }
 
 class ThreepeaterProjectile extends Projectile {

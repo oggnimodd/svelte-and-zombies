@@ -1,8 +1,16 @@
+import type BasePlant from "../plants/Plant";
 import Projectile from "./Projectile.svelte";
-import type { ProjectileProps } from "./Projectile.svelte.ts";
+import type { ProjectileStats } from "./ProjectileTypes";
 
-interface StarProjectileProps extends ProjectileProps {
+interface StarProjectileProps {
+  id: string;
+  stats: ProjectileStats;
+  x: number;
+  y: number;
+  row: number;
+  sourcePlant: BasePlant;
   angle: number;
+  direction: number;
 }
 
 export default class StarProjectile extends Projectile {

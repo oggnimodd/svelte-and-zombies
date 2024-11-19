@@ -1,13 +1,17 @@
 import Projectile from "./Projectile.svelte";
 import { YARD_WIDTH } from "../../../constants/sizes";
-import type { ProjectileProps } from "./Projectile.svelte.ts";
+import type { ProjectileStats } from "./ProjectileTypes";
+import type BasePlant from "../plants/Plant";
 
-interface KernelProjectileProps extends ProjectileProps {
+interface KernelProjectileProps {
+  id: string;
+  stats: ProjectileStats;
   startX: number;
   startY: number;
   targetX: number;
+  row: number;
+  sourcePlant: BasePlant;
 }
-
 export default class KernelProjectile extends Projectile {
   private startX: number;
   private startY: number;
