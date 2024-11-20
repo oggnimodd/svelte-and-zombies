@@ -22,6 +22,9 @@ import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
 import SplitPea from "../plants/SplitPea";
 import Starfruit from "../plants/Starfruit";
+import SunManager from "./SunManager.svelte";
+import EventEmitter from "../EventEmitter";
+import Sunflower from "../plants/Sunflower";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -34,11 +37,18 @@ export class GameLoop {
   zombieManager: ZombieManager;
   plantManager: PlantManager;
   projectileManager: ProjectileManager;
+  sunManager: SunManager;
 
   constructor(plantManager: PlantManager) {
     this.plantManager = plantManager;
     this.zombieManager = new ZombieManager(plantManager);
     this.projectileManager = new ProjectileManager();
+    this.sunManager = new SunManager(100);
+
+    // TODO: make sunmanager available globally
+    EventEmitter.on("produceSun", ({ x, y }) => {
+      this.sunManager.spawnSunFromFlower(x, y);
+    });
   }
 
   start() {
@@ -256,6 +266,9 @@ export class GameLoop {
         ) {
           projectiles = starfruit.shoot(plantedPlant, gameTime);
         }
+      } else if (plantedPlant.plant instanceof Sunflower) {
+        const sunflower = plantedPlant.plant as Sunflower;
+        sunflower.update(plantedPlant, gameTime);
       }
 
       if (projectiles) {
@@ -274,6 +287,20 @@ export class GameLoop {
     this.zombieManager.zombies = this.zombieManager.zombies.filter(
       (zombie) => zombie.health > 0
     );
+
+    this.sunManager.suns = this.sunManager.suns.map((sun) => {
+      if (sun.y < sun.targetY) {
+        const fallSpeed = 0.1;
+        sun.y += deltaTime * fallSpeed;
+
+        if (sun.y > sun.targetY) {
+          sun.y = sun.targetY;
+        }
+      }
+      return sun;
+    });
+
+    this.sunManager.update(gameTime);
   }
 
   private checkGameState(): boolean {

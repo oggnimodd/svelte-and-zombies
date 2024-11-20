@@ -50,7 +50,7 @@
 
 {#if isVisible && gameLoop.isRunning}
   <div
-    class="fixed inset-0 bg-black bg-opacity-50 z-[500] flex items-center justify-center"
+    class="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center"
   >
     <div
       class="bg-gradient-to-br from-green-800 to-green-900 p-8 rounded-lg shadow-xl border-2 border-green-600 transform transition-all"
