@@ -4,6 +4,7 @@ import Projectile from "../projectiles/Projectile.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
+import PeaProjectile from "../projectiles/PeaProjectile";
 
 export const PeashooterStats: PlantStats = {
   id: "peashooter",
@@ -28,7 +29,7 @@ export default class Peashooter extends BasePlant {
       (CELL_WIDTH - this.getProjectileStats().height) / 2;
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
-    const projectile = new Projectile({
+    const projectile = new PeaProjectile({
       id: generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
