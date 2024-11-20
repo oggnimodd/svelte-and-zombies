@@ -1,7 +1,7 @@
-import Projectile from "./Projectile.svelte";
 import { CELL_WIDTH } from "../../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
+import PeaProjectile from "./PeaProjectile";
 
 interface ThreepeaterProjectileProps {
   id: string;
@@ -13,7 +13,7 @@ interface ThreepeaterProjectileProps {
   sourcePlant: BasePlant;
 }
 
-class ThreepeaterProjectile extends Projectile {
+class ThreepeaterProjectile extends PeaProjectile {
   private readonly targetRow: number;
   private readonly diagonalSpeed: number = 6; // Speed for diagonal movement
   private readonly verticalDistance: number;

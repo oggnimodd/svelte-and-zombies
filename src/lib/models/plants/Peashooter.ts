@@ -1,14 +1,17 @@
 import { generate } from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
-import Projectile from "../projectiles/Projectile.svelte";
-import type { ProjectileStats } from "../projectiles/ProjectileTypes";
-import { ProjectileTypes } from "../projectiles/ProjectileTypes";
+import PeaProjectile from "../projectiles/PeaProjectile";
+import {
+  ProjectileTypes,
+  type ProjectileStats,
+} from "../projectiles/ProjectileTypes";
 import BasePlant from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
 import EventEmitter from "../EventEmitter";
+import type Projectile from "../projectiles/Projectile.svelte";
 
 export default class Peashooter extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {}; // Track lastShotTime per planted instance
+  private lastShotTime: { [key: string]: number } = {};
 
   constructor() {
     super({
@@ -20,8 +23,6 @@ export default class Peashooter extends BasePlant {
       cooldown: 3000,
       range: Infinity,
     });
-
-    // Subscribe to plant removal events to clean up lastShotTime
     EventEmitter.on("plantRemoved", (plantedId: string) => {
       this.cleanupLastShotTime(plantedId);
     });
@@ -48,7 +49,7 @@ export default class Peashooter extends BasePlant {
     const projectileYOffset =
       (CELL_WIDTH - this.getProjectileStats().height) / 2;
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
-    const projectile = new Projectile({
+    const projectile = new PeaProjectile({
       id: generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
@@ -56,7 +57,6 @@ export default class Peashooter extends BasePlant {
       row: plantedPlant.cell.row,
       sourcePlant: this,
     });
-
     this.lastShotTime[plantedPlant.plantedId] = gameTime;
     return projectile;
   }

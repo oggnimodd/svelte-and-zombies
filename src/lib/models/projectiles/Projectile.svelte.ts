@@ -1,4 +1,4 @@
-import { ProjectileTypes, type ProjectileStats } from "./ProjectileTypes";
+import { type ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 
 export interface ProjectileProps {
@@ -55,21 +55,13 @@ export default class Projectile {
     this.x += this.direction * speedAdjustment;
   }
 
-  transformToFirePea() {
-    const originalWidth = this.width;
-    const originalHeight = this.height;
+  // Override this method in subclasses if needed
+  isReadyForCollision(): boolean {
+    return true;
+  }
 
-    this.type = ProjectileTypes.FIRE_PEA.type;
-    this.damage *= 2;
-    this.image = ProjectileTypes.FIRE_PEA.image;
-    this.width = ProjectileTypes.FIRE_PEA.width;
-    this.height = ProjectileTypes.FIRE_PEA.height;
-
-    // Calculate the center offset and adjust the position
-    const widthOffset = (this.width - originalWidth) / 2;
-    const heightOffset = (this.height - originalHeight) / 2;
-
-    this.x -= widthOffset;
-    this.y -= heightOffset;
+  // Override this method in subclasses if needed
+  getSplashDamage(distance: number): number {
+    return 0;
   }
 }

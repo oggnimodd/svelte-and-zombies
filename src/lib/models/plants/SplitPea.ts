@@ -6,6 +6,7 @@ import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
 import EventEmitter from "../EventEmitter";
+import PeaProjectile from "../projectiles/PeaProjectile";
 
 export default class SplitPea extends BasePlant {
   private lastShotTime: { [key: string]: number } = {};
@@ -51,7 +52,7 @@ export default class SplitPea extends BasePlant {
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
     // Shoot the first pea to the right
-    const rightProjectile = new Projectile({
+    const rightProjectile = new PeaProjectile({
       id: generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
@@ -62,7 +63,7 @@ export default class SplitPea extends BasePlant {
     projectiles.push(rightProjectile);
 
     // Shoot the second pea to the left
-    const leftProjectile = new Projectile({
+    const leftProjectile = new PeaProjectile({
       id: generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,

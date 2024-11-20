@@ -1,11 +1,12 @@
 import { generate } from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
-import Projectile from "../projectiles/Projectile.svelte";
+import PeaProjectile from "../projectiles/PeaProjectile";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
 import EventEmitter from "../EventEmitter";
+import type Projectile from "../projectiles/Projectile.svelte";
 
 export default class GatlingPea extends BasePlant {
   private lastShotTime: { [key: string]: number } = {};
@@ -58,7 +59,7 @@ export default class GatlingPea extends BasePlant {
     // Shoot four peas
     for (let i = 0; i < 4; i++) {
       const offset = offsets[i];
-      const projectile = new Projectile({
+      const projectile = new PeaProjectile({
         id: generate(),
         stats: this.getProjectileStats(),
         x: plantedPlant.coordinates.x + projectileXOffset + offset,

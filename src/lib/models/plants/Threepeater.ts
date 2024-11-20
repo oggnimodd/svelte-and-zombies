@@ -1,14 +1,12 @@
 import { generate } from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
-import {
-  ProjectileTypes,
-  type ProjectileStats,
-} from "../projectiles/ProjectileTypes";
+import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant from "./Plant";
 import { CELL_WIDTH, NUM_ROWS } from "../../../constants/sizes";
 import EventEmitter from "../EventEmitter";
 import ThreepeaterProjectile from "../projectiles/ThreepeaterProjectile";
+import PeaProjectile from "../projectiles/PeaProjectile";
 
 export default class Threepeater extends BasePlant {
   private lastShotTime: { [key: string]: number } = {};
@@ -63,7 +61,7 @@ export default class Threepeater extends BasePlant {
     targetRows.forEach((targetRow) => {
       const projectile =
         targetRow === sourceRow
-          ? new Projectile({
+          ? new PeaProjectile({
               // Middle pea uses normal projectile
               id: generate(),
               stats: this.getProjectileStats(),
