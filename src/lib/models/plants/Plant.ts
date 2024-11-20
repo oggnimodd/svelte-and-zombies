@@ -1,4 +1,3 @@
-// Plant.ts
 export interface PlantStats {
   id: string;
   name: string;
@@ -17,6 +16,7 @@ export default class BasePlant {
   damage: number;
   cooldown: number;
   range: number;
+  lastShotTime: number = 0;
 
   constructor(stats: PlantStats) {
     this.id = stats.id;
@@ -26,5 +26,13 @@ export default class BasePlant {
     this.damage = stats.damage ?? 0;
     this.cooldown = stats.cooldown ?? 0;
     this.range = stats.range ?? 0;
+  }
+
+  canShoot(gameTime: number) {
+    return gameTime - this.lastShotTime >= this.cooldown;
+  }
+
+  resetLastShotTime(gameTime: number) {
+    this.lastShotTime = gameTime;
   }
 }

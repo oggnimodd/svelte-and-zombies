@@ -22,13 +22,13 @@
   // TODO: fix animation not working
   const isJumping = $derived(
     plantedPlant.plant.id === "squash" &&
-      (plantedPlant.plant as Squash).isJumping?.(plantedPlant.plantedId)
+      (plantedPlant.plant as Squash).isJumping
   );
 
   // TODO: fix animation not working
   const hasLanded = $derived(
     plantedPlant.plant.id === "squash" &&
-      (plantedPlant.plant as Squash).hasLanded?.(plantedPlant.plantedId)
+      (plantedPlant.plant as Squash).isLanded
   );
 </script>
 

@@ -3,39 +3,23 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import PeaProjectile from "../projectiles/PeaProjectile";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
 import type Projectile from "../projectiles/Projectile.svelte";
 
+export const RepeaterStats: PlantStats = {
+  id: "repeater",
+  name: "Repeater",
+  price: 200,
+  health: 100,
+  damage: 20,
+  cooldown: 2000, // Reduced cooldown compared to Peashooter
+  range: Infinity,
+};
+
 export default class Repeater extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {};
-
   constructor() {
-    super({
-      id: "repeater",
-      name: "Repeater",
-      price: 200,
-      health: 100,
-      damage: 20,
-      cooldown: 2000, // Reduced cooldown compared to Peashooter
-      range: Infinity,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupLastShotTime(plantedId);
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
-    }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
-  }
-
-  private cleanupLastShotTime(plantedId: string) {
-    delete this.lastShotTime[plantedId];
+    super(RepeaterStats);
   }
 
   getProjectileStats(): ProjectileStats {
@@ -73,7 +57,7 @@ export default class Repeater extends BasePlant {
     });
     projectiles.push(secondProjectile);
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectiles;
   }
 }

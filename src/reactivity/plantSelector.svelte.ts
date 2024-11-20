@@ -1,48 +1,48 @@
 import PlantSelector from "../lib/models/game/PlantSelector.svelte";
-import GatlingPea from "../lib/models/plants/GatlingPea";
-import Peashooter from "../lib/models/plants/Peashooter";
-import Repeater from "../lib/models/plants/Repeater";
-import Sunflower from "../lib/models/plants/Sunflower";
-import Tallnut from "../lib/models/plants/Tallnut";
-import Wallnut from "../lib/models/plants/Wallnut";
-import FirePea from "../lib/models/plants/FirePea";
-import Torchwood from "../lib/models/plants/Torchwood";
-import Watermelon from "../lib/models/plants/Watermelon";
-import IcePea from "../lib/models/plants/IcePea";
-import WinterMelon from "../lib/models/plants/WinterMelon";
-import Chilli from "../lib/models/plants/Chilli";
-import Cherry from "../lib/models/plants/Cherry";
-import Cabbage from "../lib/models/plants/Cabbage";
-import Potato from "../lib/models/plants/Potato";
-import Threepeater from "../lib/models/plants/Threepeater";
-import Spikeweed from "../lib/models/plants/Spikeweed";
-import Kernelpult from "../lib/models/plants/Kernelpult";
-import Squash from "../lib/models/plants/Squash";
-import Chomper from "../lib/models/plants/Chomper";
-import SplitPea from "../lib/models/plants/SplitPea";
-import Starfruit from "../lib/models/plants/Starfruit";
+import { CabbageStats } from "../lib/models/plants/Cabbage";
+import { CherryStats } from "../lib/models/plants/Cherry";
+import { ChilliStats } from "../lib/models/plants/Chilli";
+import { ChomperStats } from "../lib/models/plants/Chomper";
+import { FirePeaStats } from "../lib/models/plants/FirePea";
+import { GatlingPeaStats } from "../lib/models/plants/GatlingPea";
+import { IcePeaStats } from "../lib/models/plants/IcePea";
+import { KernelpultStats } from "../lib/models/plants/Kernelpult";
+import { PeashooterStats } from "../lib/models/plants/Peashooter";
+import { PotatoStats } from "../lib/models/plants/Potato";
+import { RepeaterStats } from "../lib/models/plants/Repeater";
+import { SpikeweedStats } from "../lib/models/plants/Spikeweed";
+import { SplitPeaStats } from "../lib/models/plants/SplitPea";
+import { SquashStats } from "../lib/models/plants/Squash";
+import { StarfruitStats } from "../lib/models/plants/Starfruit";
+import { SunflowerStats } from "../lib/models/plants/Sunflower";
+import { TallnutStats } from "../lib/models/plants/Tallnut";
+import { ThreepeaterStats } from "../lib/models/plants/Threepeater";
+import { TorchwoodStats } from "../lib/models/plants/Torchwood";
+import { WallnutStats } from "../lib/models/plants/Wallnut";
+import { WatermelonStats } from "../lib/models/plants/Watermelon";
+import { WinterMelonStats } from "../lib/models/plants/WinterMelon";
 
 export const plantSelector = new PlantSelector([
-  new Sunflower(),
-  new Peashooter(),
-  new Wallnut(),
-  new Tallnut(),
-  new Repeater(),
-  new GatlingPea(),
-  new FirePea(),
-  new Torchwood(),
-  new Watermelon(),
-  new IcePea(),
-  new WinterMelon(),
-  new Chilli(),
-  new Cherry(),
-  new Cabbage(),
-  new Potato(),
-  new Threepeater(),
-  new Spikeweed(),
-  new Kernelpult(),
-  new Squash(),
-  new Chomper(),
-  new SplitPea(),
-  new Starfruit(),
+  SunflowerStats,
+  PeashooterStats,
+  WallnutStats,
+  TallnutStats,
+  RepeaterStats,
+  GatlingPeaStats,
+  FirePeaStats,
+  TorchwoodStats,
+  WatermelonStats,
+  IcePeaStats,
+  WinterMelonStats,
+  ChilliStats,
+  CherryStats,
+  CabbageStats,
+  PotatoStats,
+  ThreepeaterStats,
+  SpikeweedStats,
+  KernelpultStats,
+  SquashStats,
+  ChomperStats,
+  SplitPeaStats,
+  StarfruitStats,
 ]);

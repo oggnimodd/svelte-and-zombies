@@ -97,10 +97,7 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          peashooter.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && peashooter.canShoot(gameTime)) {
           const projectile = peashooter.shoot(plantedPlant, gameTime);
           if (projectile) {
             this.projectileManager.addProjectile(projectile);
@@ -113,10 +110,7 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          repeater.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && repeater.canShoot(gameTime)) {
           projectiles = repeater.shoot(plantedPlant, gameTime);
         }
       } else if (plantedPlant.plant instanceof GatlingPea) {
@@ -126,10 +120,7 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          gatlingPea.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && gatlingPea.canShoot(gameTime)) {
           projectiles = gatlingPea.shoot(plantedPlant, gameTime);
         }
       } else if (plantedPlant.plant instanceof FirePea) {
@@ -139,15 +130,12 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          firePea.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && firePea.canShoot(gameTime)) {
           projectiles = firePea.shoot(plantedPlant, gameTime);
         }
       } else if (plantedPlant.plant instanceof Watermelon) {
         const watermelon = plantedPlant.plant as Watermelon;
-        if (watermelon.canShoot(plantedPlant.plantedId, gameTime)) {
+        if (watermelon.canShoot(gameTime)) {
           const projectile = watermelon.shoot(
             plantedPlant,
             gameTime,
@@ -159,7 +147,7 @@ export class GameLoop {
         }
       } else if (plantedPlant.plant instanceof WinterMelon) {
         const wintermelon = plantedPlant.plant as WinterMelon;
-        if (wintermelon.canShoot(plantedPlant.plantedId, gameTime)) {
+        if (wintermelon.canShoot(gameTime)) {
           const projectile = wintermelon.shoot(
             plantedPlant,
             gameTime,
@@ -171,7 +159,7 @@ export class GameLoop {
         }
       } else if (plantedPlant.plant instanceof Cabbage) {
         const cabbage = plantedPlant.plant as Cabbage;
-        if (cabbage.canShoot(plantedPlant.plantedId, gameTime)) {
+        if (cabbage.canShoot(gameTime)) {
           const projectile = cabbage.shoot(
             plantedPlant,
             gameTime,
@@ -188,10 +176,7 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          peashooter.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && peashooter.canShoot(gameTime)) {
           const projectile = peashooter.shoot(plantedPlant, gameTime);
           if (projectile) {
             this.projectileManager.addProjectile(projectile);
@@ -221,10 +206,7 @@ export class GameLoop {
             zombie.x > plantedPlant.coordinates.x
         );
 
-        if (
-          zombiesInRange.length > 0 &&
-          threepeater.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRange.length > 0 && threepeater.canShoot(gameTime)) {
           projectiles = threepeater.shoot(plantedPlant, gameTime);
         }
       } else if (plantedPlant.plant instanceof Spikeweed) {
@@ -237,10 +219,7 @@ export class GameLoop {
             zombie.row === plantedPlant.cell.row &&
             zombie.x > plantedPlant.coordinates.x
         );
-        if (
-          zombiesInRow.length > 0 &&
-          kernelpult.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && kernelpult.canShoot(gameTime)) {
           const projectile = kernelpult.shoot(
             plantedPlant,
             gameTime,
@@ -255,7 +234,7 @@ export class GameLoop {
         squash.update(plantedPlant, gameTime, this.zombieManager.zombies);
       } else if (plantedPlant.plant instanceof Chomper) {
         const chomper = plantedPlant.plant as Chomper;
-        chomper.chomp(plantedPlant, gameTime, this.zombieManager.zombies);
+        chomper.update(plantedPlant, gameTime, this.zombieManager.zombies);
       } else if (plantedPlant.plant instanceof SplitPea) {
         const splitPea = plantedPlant.plant as SplitPea;
 
@@ -264,17 +243,14 @@ export class GameLoop {
         );
 
         // Here we don't need to check if zombies are on the right side since split pea will shoot on both sides
-        if (
-          zombiesInRow.length > 0 &&
-          splitPea.canShoot(plantedPlant.plantedId, gameTime)
-        ) {
+        if (zombiesInRow.length > 0 && splitPea.canShoot(gameTime)) {
           projectiles = splitPea.shoot(plantedPlant, gameTime);
         }
       } else if (plantedPlant.plant instanceof Starfruit) {
         const starfruit = plantedPlant.plant as Starfruit;
 
         if (
-          starfruit.canShoot(plantedPlant.plantedId, gameTime) &&
+          starfruit.canShoot(gameTime) &&
           // Shoot when there are zombies on any row
           this.zombieManager.zombies.length > 0
         ) {

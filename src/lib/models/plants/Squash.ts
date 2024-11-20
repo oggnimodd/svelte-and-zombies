@@ -1,55 +1,34 @@
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../../constants/sizes";
 
-export default class Squash extends BasePlant {
-  jumpingSquash = new Set<string>();
-  landedSquash = new Set<string>();
-  private jumpStartTimes: { [key: string]: number } = {};
+export const SquashStats: PlantStats = {
+  id: "squash",
+  name: "Squash",
+  price: 50,
+  health: 100,
+  damage: 1800,
+};
 
+export default class Squash extends BasePlant {
   // Configuration constants
   private readonly TRIGGER_RADIUS = CELL_WIDTH * 1.2; // Radius to detect zombies
   private readonly JUMP_DURATION = 1000; // Time for jump animation in milliseconds
   private readonly SQUASH_DAMAGE = 1800; // Instant kill damage
 
+  public isJumping: boolean = false;
+  public isLanded: boolean = false;
+  private jumpStartTime: number = 0;
+
   constructor() {
-    super({
-      id: "squash",
-      name: "Squash",
-      price: 50,
-      health: 100,
-      damage: 1800,
-    });
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupPlant(plantedId);
-    });
+    super(SquashStats);
   }
 
-  private cleanupPlant(plantedId: string) {
-    this.jumpingSquash.delete(plantedId);
-    this.landedSquash.delete(plantedId);
-    delete this.jumpStartTimes[plantedId];
-  }
-
-  isJumping(plantedId: string): boolean {
-    return this.jumpingSquash.has(plantedId);
-  }
-
-  hasLanded(plantedId: string): boolean {
-    return this.landedSquash.has(plantedId);
-  }
-
-  update(
-    plantedPlant: PlantedPlant,
-    gameTime: number,
-    zombies: Zombie[]
-  ): void {
-    const plantId = plantedPlant.plantedId;
-
-    // Skip if already landed
-    if (this.hasLanded(plantId)) {
+  update(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
+    // If already landed, do nothing
+    if (this.isLanded) {
       return;
     }
 
@@ -65,18 +44,14 @@ export default class Squash extends BasePlant {
     });
 
     // Start jumping if zombies are nearby and not already jumping
-    if (
-      nearbyZombies.length > 0 &&
-      !this.isJumping(plantId) &&
-      !this.hasLanded(plantId)
-    ) {
-      this.jumpingSquash.add(plantId);
-      this.jumpStartTimes[plantId] = gameTime;
+    if (nearbyZombies.length > 0 && !this.isJumping && !this.isLanded) {
+      this.isJumping = true;
+      this.jumpStartTime = gameTime;
     }
 
     // Check if jump animation is complete
-    if (this.isJumping(plantId) && !this.hasLanded(plantId)) {
-      const elapsedTime = gameTime - this.jumpStartTimes[plantId];
+    if (this.isJumping && !this.isLanded) {
+      const elapsedTime = gameTime - this.jumpStartTime;
       if (elapsedTime >= this.JUMP_DURATION) {
         // If there are no nearby zombies, skip
         if (nearbyZombies.length === 0) return;
@@ -108,11 +83,11 @@ export default class Squash extends BasePlant {
         }
 
         // Mark as landed
-        this.jumpingSquash.delete(plantId);
-        this.landedSquash.add(plantId);
+        this.isJumping = false;
+        this.isLanded = true;
 
         // Emit event for removal
-        EventEmitter.emit("squashLanded", plantId);
+        EventEmitter.emit("squashLanded", plantedPlant.plantedId);
       }
     }
   }

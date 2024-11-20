@@ -1,47 +1,35 @@
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
-import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../../constants/sizes";
 
+export const ChomperStats: PlantStats = {
+  id: "chomper",
+  name: "Chomper",
+  price: 150,
+  health: 100,
+  damage: 1000,
+};
+
 export default class Chomper extends BasePlant {
-  private chewingPlants = new Set<string>();
-  private chewStartTimes: { [key: string]: number } = {};
-  private readonly CHEW_DURATION = 5000; // 2 seconds for chewing animation
+  private readonly CHEW_DURATION = 5000; // 5 seconds for chewing animation
   private readonly RANGE = CELL_WIDTH;
 
+  private isChewing: boolean = false;
+  private chewStartTime: number = 0;
+
   constructor() {
-    super({
-      id: "chomper",
-      name: "Chomper",
-      price: 150,
-      health: 100,
-      damage: 1000,
-    });
-
-    // Cleanup when plant is removed
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupPlant(plantedId);
-    });
+    super(ChomperStats);
   }
 
-  private cleanupPlant(plantedId: string) {
-    this.chewingPlants.delete(plantedId);
-    delete this.chewStartTimes[plantedId];
-  }
-
-  isChewing(plantedId: string): boolean {
-    return this.chewingPlants.has(plantedId);
-  }
-
-  chomp(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
+  update(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
     const plantId = plantedPlant.plantedId;
 
     // Check if currently chewing
-    if (this.isChewing(plantId)) {
-      const elapsedTime = gameTime - this.chewStartTimes[plantId];
+    if (this.isChewing) {
+      const elapsedTime = gameTime - this.chewStartTime;
       if (elapsedTime >= this.CHEW_DURATION) {
-        this.chewingPlants.delete(plantId); // Finish chewing
+        this.isChewing = false; // Finish chewing
       }
       return;
     }
@@ -66,8 +54,8 @@ export default class Chomper extends BasePlant {
 
       if (targetZombie) {
         targetZombie.health -= this.damage; // Apply damage
-        this.chewingPlants.add(plantId); // Start chewing
-        this.chewStartTimes[plantId] = gameTime;
+        this.isChewing = true; // Start chewing
+        this.chewStartTime = gameTime;
       }
     }
   }

@@ -3,39 +3,22 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
+
+export const IcePeaStats: PlantStats = {
+  id: "ice-pea",
+  name: "Ice Pea",
+  price: 100,
+  health: 100,
+  damage: 20,
+  cooldown: 3000,
+  range: Infinity,
+};
 
 export default class IcePea extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {}; // Track lastShotTime per planted instance
-
   constructor() {
-    super({
-      id: "ice-pea",
-      name: "Ice Pea",
-      price: 100,
-      health: 100,
-      damage: 20,
-      cooldown: 3000,
-      range: Infinity,
-    });
-
-    // Subscribe to plant removal events to clean up lastShotTime
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupLastShotTime(plantedId);
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
-    }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
-  }
-
-  private cleanupLastShotTime(plantedId: string) {
-    delete this.lastShotTime[plantedId];
+    super(IcePeaStats);
   }
 
   getProjectileStats(): ProjectileStats {
@@ -57,7 +40,7 @@ export default class IcePea extends BasePlant {
       sourcePlant: this,
     });
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectile;
   }
 }

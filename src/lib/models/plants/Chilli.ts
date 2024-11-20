@@ -1,64 +1,38 @@
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 
+export const ChilliStats: PlantStats = {
+  id: "chilli",
+  name: "Chilli",
+  price: 150,
+  health: 100,
+  damage: 1800,
+};
+
 export default class Chilli extends BasePlant {
-  private explodingPlants = new Set<string>();
-  private explodedPlants = new Set<string>();
-  private explosionStartTimes: { [key: string]: number } = {};
   private readonly INFLATE_DURATION = 1000; // In seconds
+  private isExploding: boolean = false;
+  private isExploded: boolean = false;
+  private explosionStartTime: number = 0;
 
   constructor() {
-    super({
-      id: "chilli",
-      name: "Chilli",
-      price: 150,
-      health: 100,
-      damage: 1800,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupPlant(plantedId);
-    });
+    super(ChilliStats);
   }
 
-  private cleanupPlant(plantedId: string) {
-    this.explodingPlants.delete(plantedId);
-    this.explodedPlants.delete(plantedId);
-    delete this.explosionStartTimes[plantedId];
-  }
-
-  isExploding(plantedId: string): boolean {
-    return this.explodingPlants.has(plantedId);
-  }
-
-  isExploded(plantedId: string): boolean {
-    return this.explodedPlants.has(plantedId);
-  }
-
-  explode(
-    plantedPlant: PlantedPlant,
-    gameTime: number,
-    zombies: Zombie[]
-  ): void {
+  explode(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
     const plantId = plantedPlant.plantedId;
 
     // Start exploding animation if not already exploding or exploded
-    if (
-      !this.explodingPlants.has(plantId) &&
-      !this.explodedPlants.has(plantId)
-    ) {
-      this.explodingPlants.add(plantId);
-      this.explosionStartTimes[plantId] = gameTime;
+    if (!this.isExploding && !this.isExploded) {
+      this.isExploding = true;
+      this.explosionStartTime = gameTime;
     }
 
     // Check if inflation time is complete
-    if (
-      this.explodingPlants.has(plantId) &&
-      !this.explodedPlants.has(plantId)
-    ) {
-      const elapsedTime = gameTime - this.explosionStartTimes[plantId];
+    if (this.isExploding && !this.isExploded) {
+      const elapsedTime = gameTime - this.explosionStartTime;
 
       if (elapsedTime >= this.INFLATE_DURATION) {
         // Get all zombies in the same row as the planted plant
@@ -72,8 +46,8 @@ export default class Chilli extends BasePlant {
         });
 
         // Mark as exploded
-        this.explodingPlants.delete(plantId);
-        this.explodedPlants.add(plantId);
+        this.isExploding = false;
+        this.isExploded = true;
 
         // Emit the chilli exploded event so the plant manager can remove the plant
         EventEmitter.emit("chilliExploded", plantId);

@@ -3,39 +3,23 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
+export const SplitPeaStats: PlantStats = {
+  id: "splitpea",
+  name: "Split Pea",
+  price: 200,
+  health: 100,
+  damage: 20,
+  cooldown: 3000,
+  range: Infinity,
+};
+
 export default class SplitPea extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {};
-
   constructor() {
-    super({
-      id: "splitpea",
-      name: "Split Pea",
-      price: 200,
-      health: 100,
-      damage: 20,
-      cooldown: 3000,
-      range: Infinity,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupLastShotTime(plantedId);
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
-    }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
-  }
-
-  private cleanupLastShotTime(plantedId: string) {
-    delete this.lastShotTime[plantedId];
+    super(SplitPeaStats);
   }
 
   getProjectileStats(): ProjectileStats {
@@ -74,7 +58,7 @@ export default class SplitPea extends BasePlant {
     });
     projectiles.push(leftProjectile);
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectiles;
   }
 }

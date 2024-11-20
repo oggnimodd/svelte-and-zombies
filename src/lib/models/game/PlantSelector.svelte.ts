@@ -1,7 +1,7 @@
 // Track the selected plant from the plant list
 // Track which cell is being hovered over
 
-import Plant from "../plants/Plant";
+import { type PlantStats } from "../plants/Plant";
 
 export interface HoverCell {
   x: number;
@@ -9,12 +9,12 @@ export interface HoverCell {
 }
 
 export default class PlantSelector {
-  plants: Plant[] = $state([]);
+  plants: PlantStats[] = $state([]);
   selectedPlant: string | null = $state(null);
   hoveredCell: HoverCell | null = $state(null);
   isShoveling: boolean = $state(false);
 
-  constructor(plants: Plant[]) {
+  constructor(plants: PlantStats[]) {
     this.plants = plants;
     // Add event listener for escape key
     window.addEventListener("keydown", this.handleKeyPress.bind(this));

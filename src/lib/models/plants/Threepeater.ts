@@ -2,40 +2,24 @@ import { generate } from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH, NUM_ROWS } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
 import ThreepeaterProjectile from "../projectiles/ThreepeaterProjectile";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
+export const ThreepeaterStats: PlantStats = {
+  id: "threepeater",
+  name: "Threepeater",
+  price: 325,
+  health: 100,
+  damage: 20,
+  cooldown: 2000,
+  range: Infinity,
+};
+
 export default class Threepeater extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {};
-
   constructor() {
-    super({
-      id: "threepeater",
-      name: "Threepeater",
-      price: 325,
-      health: 100,
-      damage: 20,
-      cooldown: 2000,
-      range: Infinity,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      this.cleanupLastShotTime(plantedId);
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
-    }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
-  }
-
-  private cleanupLastShotTime(plantedId: string) {
-    delete this.lastShotTime[plantedId];
+    super(ThreepeaterStats);
   }
 
   getProjectileStats() {
@@ -84,7 +68,7 @@ export default class Threepeater extends BasePlant {
       projectiles.push(projectile);
     });
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectiles;
   }
 }

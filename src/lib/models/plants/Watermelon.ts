@@ -3,35 +3,32 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import WatermelonProjectile from "../projectiles/WatermelonProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
+
+export const WatermelonStats: PlantStats = {
+  id: "watermelon",
+  name: "Melon-pult",
+  price: 300,
+  health: 100,
+  damage: 80,
+  cooldown: 2000,
+  range: Infinity,
+};
 
 export default class Watermelon extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {};
   private readonly SPLASH_RADIUS = CELL_WIDTH * 1.5;
+  private ice: boolean = false;
 
-  constructor() {
-    super({
-      id: "watermelon",
-      name: "Melon-pult",
-      price: 300,
-      health: 100,
-      damage: 80,
-      cooldown: 2000,
-      range: Infinity,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      delete this.lastShotTime[plantedId];
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
+  // Constructor with optional stats to make it easier to create variations of the plant
+  constructor(
+    stats?: PlantStats & {
+      ice?: boolean;
     }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
+  ) {
+    super(stats ?? WatermelonStats);
+
+    this.ice = stats?.ice ?? false;
   }
 
   private findTarget(
@@ -53,7 +50,9 @@ export default class Watermelon extends BasePlant {
   }
 
   getProjectileStats() {
-    return ProjectileTypes.WATERMELON;
+    return this.ice
+      ? ProjectileTypes.ICE_WATERMELON
+      : ProjectileTypes.WATERMELON;
   }
 
   shoot(
@@ -86,7 +85,7 @@ export default class Watermelon extends BasePlant {
       splashRadius: this.SPLASH_RADIUS,
     });
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectile;
   }
 }

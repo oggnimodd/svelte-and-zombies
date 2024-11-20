@@ -3,35 +3,24 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import CabbageProjectile from "../projectiles/CabbageProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../../constants/sizes";
-import EventEmitter from "../EventEmitter";
+
+export const CabbageStats: PlantStats = {
+  id: "cabbage",
+  name: "Cabbage-pult",
+  price: 100,
+  health: 100,
+  damage: 40,
+  cooldown: 2000,
+  range: Infinity,
+};
 
 export default class Cabbage extends BasePlant {
-  private lastShotTime: { [key: string]: number } = {};
   private readonly SPLASH_RADIUS = CELL_WIDTH;
 
   constructor() {
-    super({
-      id: "cabbage",
-      name: "Cabbage-pult",
-      price: 100,
-      health: 100,
-      damage: 40,
-      cooldown: 2000,
-      range: Infinity,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      delete this.lastShotTime[plantedId];
-    });
-  }
-
-  canShoot(plantedId: string, gameTime: number): boolean {
-    if (!this.lastShotTime[plantedId]) {
-      this.lastShotTime[plantedId] = 0;
-    }
-    return gameTime - this.lastShotTime[plantedId] >= this.cooldown;
+    super(CabbageStats);
   }
 
   private findTarget(
@@ -81,7 +70,7 @@ export default class Cabbage extends BasePlant {
       splashRadius: this.SPLASH_RADIUS,
     });
 
-    this.lastShotTime[plantedPlant.plantedId] = gameTime;
+    this.resetLastShotTime(gameTime);
     return projectile;
   }
 }

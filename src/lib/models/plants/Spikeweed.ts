@@ -4,30 +4,22 @@ import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../../constants/sizes";
 
+export const SpikeweedStats = {
+  id: "spikeweed",
+  name: "Spikeweed",
+  price: 100,
+  health: 100,
+  damage: 20,
+  cooldown: 1000,
+};
+
 export default class Spikeweed extends BasePlant {
-  private lastAttackTime: { [key: string]: number } = {};
-  private readonly ATTACK_COOLDOWN = 1000; // 1 second between attacks
-
   constructor() {
-    super({
-      id: "spikeweed",
-      name: "Spikeweed",
-      price: 100,
-      health: 100,
-      damage: 20,
-      cooldown: 1000,
-    });
-
-    EventEmitter.on("plantRemoved", (plantedId: string) => {
-      delete this.lastAttackTime[plantedId];
-    });
+    super(SpikeweedStats);
   }
 
-  canAttack(plantedId: string, currentTime: number): boolean {
-    if (!this.lastAttackTime[plantedId]) {
-      this.lastAttackTime[plantedId] = 0;
-    }
-    return currentTime - this.lastAttackTime[plantedId] >= this.ATTACK_COOLDOWN;
+  canAttack(gameTime: number) {
+    return this.canShoot(gameTime);
   }
 
   update(
@@ -35,7 +27,7 @@ export default class Spikeweed extends BasePlant {
     gameTime: number,
     zombies: Zombie[]
   ): void {
-    if (plantedPlant.currentHealth <= 0) return;
+    if (plantedPlant.currentHealth <= 0 || !this.canAttack(gameTime)) return;
 
     const plantCenterX = plantedPlant.coordinates.x + CELL_WIDTH / 2;
 
@@ -51,15 +43,12 @@ export default class Spikeweed extends BasePlant {
     });
 
     // If there are zombies and cooldown has passed, attack
-    if (
-      zombiesOnSpikeweed.length > 0 &&
-      this.canAttack(plantedPlant.plantedId, gameTime)
-    ) {
+    if (zombiesOnSpikeweed.length > 0) {
       zombiesOnSpikeweed.forEach((zombie) => {
         zombie.health -= this.damage;
       });
 
-      this.lastAttackTime[plantedPlant.plantedId] = gameTime;
+      this.resetLastShotTime(gameTime);
       EventEmitter.emit("spikeweedAttack", plantedPlant.plantedId);
     }
   }
