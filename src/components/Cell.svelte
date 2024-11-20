@@ -91,6 +91,7 @@
   onmouseover={onHover}
   id="cell-{y}-{x}"
   style="width: {width}px; height: {height}px;"
+  tabindex="-1"
   class={"bg-green-500 flex items-center justify-center flex-col select-none" +
     (isDarkBackground ? " dark-bg" : " light-bg")}
 >
