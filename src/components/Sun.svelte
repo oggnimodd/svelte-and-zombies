@@ -1,6 +1,7 @@
 <script lang="ts">
   import { CELL_WIDTH } from "../constants/sizes";
   import { onDestroy } from "svelte";
+  import { gameLoop } from "../reactivity/gameLoop.svelte";
 
   interface SunProps {
     x: number;
@@ -16,7 +17,7 @@
   let autoCollectTimer: number;
 
   function collect() {
-    if (collected) return;
+    if (collected || gameLoop.isPaused) return;
     collected = true;
     timeOut = setTimeout(() => onCollect(id), 600);
   }
