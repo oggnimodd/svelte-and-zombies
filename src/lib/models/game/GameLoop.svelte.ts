@@ -32,7 +32,7 @@ export class GameLoop {
   isPaused: boolean = $state(false);
   deltaTime: number = 0;
   fps: number = $state(0);
-  private readonly MAX_DELTA = 1000 / 60; // Cap at ~60fps for smoother performance
+  private readonly MAX_DELTA = 1000 / 30;
 
   zombieManager: ZombieManager;
   plantManager: PlantManager;
