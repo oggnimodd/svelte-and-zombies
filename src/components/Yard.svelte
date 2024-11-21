@@ -24,8 +24,6 @@
     plantSelector.destroy();
     gameLoop.stop();
   });
-
-  console.log(gameLoop.sunManager.suns);
 </script>
 
 <!-- For debugging -->
@@ -52,7 +50,7 @@
   {/each}
 
   <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
-    {#each gameLoop.projectileManager.projectiles as projectile (projectile.id)}
+    {#each gameLoop.projectileManager.projectiles.values() as projectile (projectile.id)}
       <Projectile {projectile} />
     {/each}
   </div>
