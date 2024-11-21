@@ -23,7 +23,7 @@
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
-    "svelte": "^5.2.3",
+    "svelte": "^5.2.7",
     "svelte-check": "^4.0.9",
     "tailwindcss": "^3.4.15",
     "tslib": "^2.8.1",
