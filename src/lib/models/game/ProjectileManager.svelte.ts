@@ -22,8 +22,12 @@ export default class ProjectileManager {
     );
   }
 
-  addProjectile(projectile: Projectile) {
-    this.projectiles = [...this.projectiles, projectile];
+  addProjectile(projectiles: Projectile | Projectile[]) {
+    if (Array.isArray(projectiles)) {
+      this.projectiles.push(...projectiles);
+    } else {
+      this.projectiles.push(projectiles);
+    }
   }
 
   private updateQuadTree() {
