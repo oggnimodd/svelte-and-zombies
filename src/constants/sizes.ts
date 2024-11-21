@@ -1,5 +1,6 @@
 import isMobile from "is-mobile";
 
+// TODO: make this dynamic based on screen size
 export const YARD_WIDTH = isMobile() ? 300 : 1000;
 export const NUM_ROWS = 5;
 export const NUM_COLS = 9;
