@@ -22,6 +22,7 @@
 
   onDestroy(() => {
     plantSelector.destroy();
+    gameLoop.stop();
   });
 
   console.log(gameLoop.sunManager.suns);
