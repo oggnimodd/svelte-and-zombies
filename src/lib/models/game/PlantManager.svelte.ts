@@ -1,6 +1,6 @@
-import { getCellCoordinates } from "../../../utils/getCellCoordinates";
+import { getCellCoordinates } from "../../utils/getCellCoordinates";
 import Plant, { type PlantStats } from "../plants/Plant";
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import EventEmitter from "../EventEmitter";
 import { gameTime } from "./GameTime.svelte";
 import Sunflower from "../plants/Sunflower";
@@ -108,7 +108,7 @@ export default class PlantManager {
   }
 
   plant(plantStats: PlantStats, cell: { row: number; col: number }) {
-    const plantedId = generate();
+    const plantedId = uuid.generate();
     const coordinates = getCellCoordinates(cell.row, cell.col);
     const plant = this.plantBuilder(plantStats);
     const plantedPlant = {

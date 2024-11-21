@@ -42,7 +42,7 @@
   class:collected
   style="width: {CELL_WIDTH}px; height: {CELL_WIDTH}px; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{x},{y},0,1);"
 >
-  <div class="w-full h-full flex items-center justify-center sun-image">
+  <div class="sun-image flex h-full w-full items-center justify-center">
     <img class="w-[4rem]" src="/sun.png" alt="sun" />
   </div>
 </button>

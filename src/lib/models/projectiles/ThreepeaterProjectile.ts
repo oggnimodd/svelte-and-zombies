@@ -1,4 +1,4 @@
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 import PeaProjectile from "./PeaProjectile";

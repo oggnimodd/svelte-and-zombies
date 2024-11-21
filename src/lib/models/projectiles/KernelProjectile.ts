@@ -1,5 +1,5 @@
 import Projectile from "./Projectile.svelte";
-import { YARD_WIDTH } from "../../../constants/sizes";
+import { YARD_WIDTH } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 

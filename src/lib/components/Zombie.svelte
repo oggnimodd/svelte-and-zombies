@@ -1,6 +1,6 @@
 <script lang="ts">
   import { CELL_WIDTH } from "../constants/sizes";
-  import type Zombie from "../lib/models/zombies/Zombie.svelte";
+  import type Zombie from "$lib/models/zombies/Zombie.svelte";
   import { getZombieZIndex } from "../utils/getZIndex";
 
   interface ZombieProps {
@@ -20,9 +20,9 @@
     zombie.row
   )}; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{zombie.x},{zombie.y},0,1);"
 >
-  <div class="w-full h-full flex items-center justify-center text-6xl relative">
+  <div class="relative flex h-full w-full items-center justify-center text-6xl">
     {#if zombie.isStunned}
-      <div class="absolute top-0 left-0 w-full h-full">😴</div>
+      <div class="absolute left-0 top-0 h-full w-full">😴</div>
     {/if}
 
     <span> 🧛🏻‍♀️ </span>

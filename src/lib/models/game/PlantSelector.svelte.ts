@@ -16,17 +16,9 @@ export default class PlantSelector {
 
   constructor(plants: PlantStats[]) {
     this.plants = plants;
-    // Add event listener for escape key
-    window.addEventListener("keydown", this.handleKeyPress.bind(this));
   }
 
-  private handleKeyPress(event: KeyboardEvent) {
-    if (event.key === "Escape") {
-      this.cancelAll();
-    }
-  }
-
-  private cancelAll() {
+  cancelAll() {
     this.selectedPlant = null;
     this.isShoveling = false;
   }
@@ -54,9 +46,5 @@ export default class PlantSelector {
 
   cancelSelection() {
     this.selectedPlant = null;
-  }
-
-  destroy() {
-    window.removeEventListener("keydown", this.handleKeyPress.bind(this));
   }
 }

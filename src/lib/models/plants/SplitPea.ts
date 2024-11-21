@@ -1,10 +1,10 @@
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
 export const SplitPeaStats: PlantStats = {
@@ -37,7 +37,7 @@ export default class SplitPea extends BasePlant {
 
     // Shoot the first pea to the right
     const rightProjectile = new PeaProjectile({
-      id: generate(),
+      id: uuid.generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
       y: rowYPosition + projectileYOffset,
@@ -48,7 +48,7 @@ export default class SplitPea extends BasePlant {
 
     // Shoot the second pea to the left
     const leftProjectile = new PeaProjectile({
-      id: generate(),
+      id: uuid.generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
       y: rowYPosition + projectileYOffset,

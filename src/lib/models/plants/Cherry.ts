@@ -2,7 +2,7 @@ import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 
 export const CherryStats: PlantStats = {
   id: "cherry",

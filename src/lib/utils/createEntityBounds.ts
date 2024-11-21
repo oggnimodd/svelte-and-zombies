@@ -1,5 +1,5 @@
-import type { PlantedPlant } from "../lib/models/game/PlantManager.svelte";
-import type Zombie from "../lib/models/zombies/Zombie.svelte";
+import type { PlantedPlant } from "../models/game/PlantManager.svelte";
+import type Zombie from "../models/zombies/Zombie.svelte";
 import { CELL_WIDTH } from "../constants/sizes";
 
 export function createPlantBounds(plant: PlantedPlant) {

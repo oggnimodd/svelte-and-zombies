@@ -1,4 +1,4 @@
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 
 export interface ZombieConfig {

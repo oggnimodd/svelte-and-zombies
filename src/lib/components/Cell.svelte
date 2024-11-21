@@ -1,7 +1,7 @@
 <script lang="ts">
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import { plantManager } from "../reactivity/plantManager.svelte";
-  import type { PlantedPlant } from "../lib/models/game/PlantManager.svelte";
+  import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
   import Plant from "./Plant.svelte";
   import GhostPlant from "./GhostPlant.svelte";
 
@@ -92,7 +92,7 @@
   id="cell-{y}-{x}"
   style="width: {width}px; height: {height}px;"
   tabindex="-1"
-  class={"bg-green-500 flex items-center justify-center flex-col select-none" +
+  class={"flex select-none flex-col items-center justify-center bg-green-500" +
     (isDarkBackground ? " dark-bg" : " light-bg")}
 >
   <!-- If shoveling and there is a plant planted -->
@@ -103,7 +103,7 @@
   <!-- If hovered and there is no plant planted -->
   {#if isHoveredOver && !plantedPlantAtThisCell && plantSelector.selectedPlant}
     <div
-      class="text-white text-sm flex items-center justify-center w-full h-full"
+      class="flex h-full w-full items-center justify-center text-sm text-white"
     >
       <GhostPlant />
     </div>
@@ -112,7 +112,7 @@
   <!-- If planted -->
   {#if plantedPlantAtThisCell}
     <div
-      class="text-white text-sm flex items-center justify-center w-full h-full"
+      class="flex h-full w-full items-center justify-center text-sm text-white"
     >
       <Plant plantedPlant={plantedPlantAtThisCell} />
 

@@ -14,25 +14,36 @@
   import { gameLoop } from "../reactivity/gameLoop.svelte";
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import Sun from "./Sun.svelte";
+  import { browser } from "$app/environment";
+
+  const handleEscape = (event: KeyboardEvent) => {
+    if (event.key === "Escape") {
+      plantSelector.cancelAll();
+    }
+  };
 
   onMount(() => {
-    gameLoop.start();
-    return () => gameLoop.stop();
+    if (browser) {
+      window.addEventListener("keydown", handleEscape);
+      gameLoop.start();
+    }
   });
 
   onDestroy(() => {
-    plantSelector.destroy();
-    gameLoop.stop();
+    if (browser) {
+      window.removeEventListener("keydown", handleEscape);
+      gameLoop.stop();
+    }
   });
 </script>
 
 <!-- For debugging -->
-<div class="fixed top-2 right-2 text-white bg-black/50 p-2 rounded">
+<div class="fixed right-2 top-2 rounded bg-black/50 p-2 text-white">
   FPS: {gameLoop.fps.toFixed(1)}
 </div>
 
 <!-- Total sun:  -->
-<div class="fixed bottom-2 right-2 text-white bg-black/50 p-2 rounded">
+<div class="fixed bottom-2 right-2 rounded bg-black/50 p-2 text-white">
   Total Sun: {gameLoop.sunManager.total}
 </div>
 
@@ -49,19 +60,19 @@
     </Row>
   {/each}
 
-  <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+  <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
     {#each gameLoop.projectileManager.projectiles.values() as projectile (projectile.id)}
       <Projectile {projectile} />
     {/each}
   </div>
 
-  <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+  <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
     {#each gameLoop.zombieManager.zombies as zombie (zombie.name + zombie.row + zombie.x)}
       <Zombie {zombie} />
     {/each}
   </div>
 
-  <div class="absolute top-0 left-0 w-full h-full pointer-events-none">
+  <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
     <div class="pointer-events-auto">
       {#each gameLoop.sunManager.suns as sun (sun.id)}
         <Sun

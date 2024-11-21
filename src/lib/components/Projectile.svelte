@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type Projectile from "../lib/models/projectiles/Projectile.svelte";
-  import { ProjectileTypes } from "../lib/models/projectiles/ProjectileTypes";
+  import type Projectile from "$lib/models/projectiles/Projectile.svelte";
+  import { ProjectileTypes } from "$lib/models/projectiles/ProjectileTypes";
   import { getProjectileZIndex } from "../utils/getZIndex";
 
   const { projectile }: { projectile: Projectile } = $props();

@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { PlantedPlant } from "../lib/models/game/PlantManager.svelte";
-  import type Squash from "../lib/models/plants/Squash";
+  import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
+  import type Squash from "$lib/models/plants/Squash";
   import { getPlantImage } from "../utils/getPlantImage";
   import { getPlantZIndex } from "../utils/getZIndex";
 
@@ -33,14 +33,14 @@
 </script>
 
 <div
-  class="w-full h-full relative flex items-center justify-center"
+  class="relative flex h-full w-full items-center justify-center"
   style="z-index: {getPlantZIndex(plantedPlant.cell.row)}"
 >
   {#if plantedPlant.plant.id === "chilli" || plantedPlant.plant.id === "cherry"}
     <img
       src={getPlantImage(plantedPlant.plant.id)}
       alt={plantedPlant.plant.name}
-      class="inflating w-full pointer-events-none cursor-none absolute bottom-0"
+      class="inflating pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {:else if plantedPlant.plant.id === "squash"}
     <img
@@ -48,13 +48,13 @@
       alt={plantedPlant.plant.id}
       class="{isJumping ? 'squash-jumping' : ''} 
                {hasLanded ? 'squash-landed' : ''} 
-               w-full pointer-events-none cursor-none absolute bottom-0 subtle-animation"
+               subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {:else}
     <img
       src={plantImage}
       alt={plantedPlant.plant.id}
-      class="subtle-animation w-full pointer-events-none cursor-none absolute bottom-0"
+      class="subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {/if}
 </div>

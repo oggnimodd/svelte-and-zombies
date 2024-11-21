@@ -6,15 +6,15 @@ import {
   NUM_COLS,
   YARD_WIDTH,
   YARD_HEIGHT,
-} from "../../../constants/sizes";
-import { getCellCoordinates } from "../../../utils/getCellCoordinates";
+} from "../../constants/sizes";
+import { getCellCoordinates } from "../../utils/getCellCoordinates";
 import EventEmitter from "../EventEmitter";
 import NormalZombie from "../zombies/NormalZombie.svelte";
 import QuadTree from "../../algo/QuadTree";
 import {
   createPlantBounds,
   createZombieBounds,
-} from "../../../utils/createEntityBounds";
+} from "../../utils/createEntityBounds";
 import type { PlantedPlant } from "./PlantManager.svelte";
 
 export default class ZombieManager {

@@ -16,7 +16,7 @@ import Cabbage from "../plants/Cabbage";
 import Potato from "../plants/Potato";
 import Threepeater from "../plants/Threepeater";
 import Spikeweed from "../plants/Spikeweed";
-import { NUM_ROWS } from "../../../constants/sizes";
+import { NUM_ROWS } from "../../constants/sizes";
 import Kernelpult from "../plants/Kernelpult";
 import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";

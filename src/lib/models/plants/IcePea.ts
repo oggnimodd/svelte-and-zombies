@@ -1,10 +1,10 @@
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 
 export const IcePeaStats: PlantStats = {
   id: "ice-pea",
@@ -32,7 +32,7 @@ export default class IcePea extends BasePlant {
       (CELL_WIDTH - this.getProjectileStats().height) / 2;
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
     const projectile = new Projectile({
-      id: generate(),
+      id: uuid.generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
       y: rowYPosition + projectileYOffset,

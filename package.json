@@ -1,5 +1,5 @@
 {
-  "name": "svelte-plants-vs-zombies",
+  "name": "svelte-vs-zombies",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -8,7 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "format": "prettier --write .",
-    "check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+    "lint": "prettier --check .",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "prepare": "husky",
     "pre-commit": "lint-staged",
     "aider:commit": "aider --commit --model mistral/mistral-large-latest",
@@ -16,6 +18,10 @@
     "aider:gemini": "aider --model gemini/gemini-1.5-pro-latest"
   },
   "devDependencies": {
+    "@sveltejs/adapter-auto": "^3.3.1",
+    "@sveltejs/adapter-node": "^5.2.9",
+    "@sveltejs/adapter-vercel": "^5.4.7",
+    "@sveltejs/kit": "^2.8.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.1",
     "@tsconfig/svelte": "^5.0.4",
     "autoprefixer": "^10.4.20",
@@ -23,6 +29,8 @@
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
+    "prettier-plugin-svelte": "^3.2.8",
+    "prettier-plugin-tailwindcss": "^0.6.9",
     "svelte": "^5.2.7",
     "svelte-check": "^4.0.9",
     "tailwindcss": "^3.4.15",

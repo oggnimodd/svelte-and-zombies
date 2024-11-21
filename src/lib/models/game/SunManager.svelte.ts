@@ -1,5 +1,5 @@
-import { generate } from "short-uuid";
-import { YARD_HEIGHT, YARD_WIDTH, CELL_WIDTH } from "../../../constants/sizes";
+import uuid from "short-uuid";
+import { YARD_HEIGHT, YARD_WIDTH, CELL_WIDTH } from "../../constants/sizes";
 import { gameTime } from "./GameTime.svelte";
 
 export interface FallingSun {
@@ -58,7 +58,7 @@ export default class SunManager {
     const targetY = Math.random() * (YARD_HEIGHT - 100) + 50;
 
     this.suns.push({
-      id: generate(),
+      id: uuid.generate(),
       x,
       y: -50,
       targetY,
@@ -78,7 +78,7 @@ export default class SunManager {
     const targetY = y + 30;
 
     this.suns.push({
-      id: generate(),
+      id: uuid.generate(),
       x,
       y: startY,
       targetY,

@@ -1,9 +1,9 @@
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
 export const PeashooterStats: PlantStats = {
@@ -30,7 +30,7 @@ export default class Peashooter extends BasePlant {
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
     const projectile = new PeaProjectile({
-      id: generate(),
+      id: uuid.generate(),
       stats: this.getProjectileStats(),
       x: plantedPlant.coordinates.x + projectileXOffset,
       y: rowYPosition + projectileYOffset,

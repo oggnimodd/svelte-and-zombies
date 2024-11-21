@@ -14,11 +14,11 @@
   style="z-index: {plantSelector.hoveredCell
     ? getPlantZIndex(plantSelector.hoveredCell.y)
     : 'auto'}"
-  class="w-full h-full relative flex items-center justify-center"
+  class="relative flex h-full w-full items-center justify-center"
 >
   <img
     src={plantImage}
     alt={plantSelector.selectedPlant + "-ghost"}
-    class="w-full pointer-events-none cursor-none absolute bottom-0 opacity-30"
+    class="pointer-events-none absolute bottom-0 w-full cursor-none opacity-30"
   />
 </div>

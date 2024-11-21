@@ -1,10 +1,10 @@
 import BasePlant from "./Plant";
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import KernelProjectile from "../projectiles/KernelProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 
 export const KernelpultStats = {
   id: "kernelpult",
@@ -60,7 +60,7 @@ export default class Kernelpult extends BasePlant {
     const targetX = targetZombie.x + targetZombie.width / 2;
 
     const projectile = new KernelProjectile({
-      id: generate(),
+      id: uuid.generate(),
       stats: this.getProjectileStats(),
       startX: plantedPlant.coordinates.x + projectileXOffset,
       startY: rowYPosition + projectileYOffset,

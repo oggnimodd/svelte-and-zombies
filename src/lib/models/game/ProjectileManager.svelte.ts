@@ -1,5 +1,5 @@
 import type Zombie from "../zombies/Zombie.svelte";
-import { YARD_WIDTH, CELL_WIDTH, YARD_HEIGHT } from "../../../constants/sizes";
+import { YARD_WIDTH, CELL_WIDTH, YARD_HEIGHT } from "../../constants/sizes";
 import QuadTree from "../../algo/QuadTree";
 import Projectile from "../../models/projectiles/Projectile.svelte";
 import PeaProjectile from "../../models/projectiles/PeaProjectile";

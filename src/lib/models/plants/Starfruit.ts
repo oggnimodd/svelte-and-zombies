@@ -1,8 +1,8 @@
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant from "./Plant";
-import { CELL_WIDTH } from "../../../constants/sizes";
+import { CELL_WIDTH } from "../../constants/sizes";
 import StarProjectile from "../projectiles/StarProjectile";
 import type Projectile from "../projectiles/Projectile.svelte";
 
@@ -46,7 +46,7 @@ export default class Starfruit extends BasePlant {
     const projectiles = this.DIRECTIONS.map(
       ({ angle, direction }) =>
         new StarProjectile({
-          id: generate(),
+          id: uuid.generate(),
           stats: this.getProjectileStats(),
           x: startX,
           y: startY,

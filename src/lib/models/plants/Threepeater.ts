@@ -1,9 +1,9 @@
-import { generate } from "short-uuid";
+import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
-import { CELL_WIDTH, NUM_ROWS } from "../../../constants/sizes";
+import { CELL_WIDTH, NUM_ROWS } from "../../constants/sizes";
 import ThreepeaterProjectile from "../projectiles/ThreepeaterProjectile";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
@@ -47,7 +47,7 @@ export default class Threepeater extends BasePlant {
         targetRow === sourceRow
           ? new PeaProjectile({
               // Middle pea uses normal projectile
-              id: generate(),
+              id: uuid.generate(),
               stats: this.getProjectileStats(),
               x: plantedPlant.coordinates.x + projectileXOffset,
               y: startY,
@@ -56,7 +56,7 @@ export default class Threepeater extends BasePlant {
             })
           : new ThreepeaterProjectile({
               // Top and bottom peas use special diagonal projectile
-              id: generate(),
+              id: uuid.generate(),
               stats: this.getProjectileStats(),
               x: plantedPlant.coordinates.x + projectileXOffset,
               y: startY,
