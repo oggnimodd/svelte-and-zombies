@@ -7,11 +7,6 @@
 
   let element: HTMLDivElement;
 
-  $effect(() => {
-    if (!element) return;
-    element.style.transform = `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${projectile.x},${projectile.y},0,1)`;
-  });
-
   // Helper to determine if projectile should rotate
   const shouldRotate = (type: string) =>
     type === ProjectileTypes.WATERMELON.type ||
@@ -23,9 +18,10 @@
 <div
   bind:this={element}
   class="projectile z-50 {shouldRotate(projectile.type) ? 'rotating' : ''}"
-  style="z-index: {getProjectileZIndex(
-    projectile.row
-  )};width: {projectile.width}px; height: {projectile.height}px;"
+  style="z-index: {getProjectileZIndex(projectile.row)}; 
+         width: {projectile.width}px; 
+         height: {projectile.height}px; 
+         transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{projectile.x},{projectile.y},0,1);"
 >
   <img
     src={projectile.image}

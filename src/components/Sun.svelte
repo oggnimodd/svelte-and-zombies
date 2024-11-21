@@ -23,9 +23,6 @@
   }
 
   $effect(() => {
-    if (!element) return;
-    element.style.transform = `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${x},${y},0,1)`;
-
     // Start auto-collect timer
     autoCollectTimer = setTimeout(() => {
       collect();
@@ -43,7 +40,7 @@
   onmouseenter={collect}
   class="sun z-[8000]"
   class:collected
-  style="width: {CELL_WIDTH}px; height: {CELL_WIDTH}px;"
+  style="width: {CELL_WIDTH}px; height: {CELL_WIDTH}px; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{x},{y},0,1);"
 >
   <div class="w-full h-full flex items-center justify-center sun-image">
     <img class="w-[4rem]" src="/sun.png" alt="sun" />

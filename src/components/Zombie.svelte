@@ -9,12 +9,6 @@
   const { zombie }: ZombieProps = $props();
 
   let element: HTMLDivElement;
-
-  // Use a matrix3d transform for better performance
-  $effect(() => {
-    if (!element) return;
-    element.style.transform = `matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${zombie.x},${zombie.y},0,1)`;
-  });
 </script>
 
 <div
@@ -22,7 +16,9 @@
   class="zombie"
   class:frozen={zombie.isFrozen}
   style="width: {CELL_WIDTH / 1.5}px; height: {CELL_WIDTH /
-    1.5}px; z-index: {getZombieZIndex(zombie.row)}"
+    1.5}px; z-index: {getZombieZIndex(
+    zombie.row
+  )}; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{zombie.x},{zombie.y},0,1);"
 >
   <div class="w-full h-full flex items-center justify-center text-6xl relative">
     {#if zombie.isStunned}
