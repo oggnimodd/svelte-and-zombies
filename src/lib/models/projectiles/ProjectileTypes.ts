@@ -19,8 +19,8 @@ export const ProjectileTypes = {
   FIRE_PEA: {
     type: "fire_pea",
     speed: 5,
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     image: "/projectiles/firepea.png",
   },
   ICE_PEA: {
