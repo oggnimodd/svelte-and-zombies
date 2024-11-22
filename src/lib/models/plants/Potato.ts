@@ -3,6 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const PotatoStats: PlantStats = {
   id: "potato",
@@ -66,6 +67,8 @@ export default class Potato extends BasePlant {
         });
 
         this.isExploded = true;
+
+        soundManager.playSound("explosion");
         EventEmitter.emit("potatoExploded", plantedPlant.plantedId);
       }
     }

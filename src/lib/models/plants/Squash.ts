@@ -3,6 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const SquashStats: PlantStats = {
   id: "squash",
@@ -85,6 +86,8 @@ export default class Squash extends BasePlant {
         // Mark as landed
         this.isJumping = false;
         this.isLanded = true;
+
+        soundManager.playSound("slap");
 
         // Emit event for removal
         EventEmitter.emit("squashLanded", plantedPlant.plantedId);

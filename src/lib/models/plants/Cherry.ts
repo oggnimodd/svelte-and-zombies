@@ -3,6 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const CherryStats: PlantStats = {
   id: "cherry",
@@ -22,7 +23,7 @@ export default class Cherry extends BasePlant {
     super(CherryStats);
   }
 
-  explode(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
+  update(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
     const plantId = plantedPlant.plantedId;
 
     // Start exploding animation if not already exploding or exploded
@@ -58,6 +59,8 @@ export default class Cherry extends BasePlant {
         // Mark as exploded
         this.isExploding = false;
         this.isExploded = true;
+
+        soundManager.playSound("explosion");
 
         // Emit the cherry exploded event
         EventEmitter.emit("cherryExploded", plantId);

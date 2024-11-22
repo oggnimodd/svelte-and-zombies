@@ -1,3 +1,4 @@
+import { soundManager } from "../game/SoundManager.svelte";
 import type { ProjectileProps } from "./Projectile.svelte";
 import Projectile from "./Projectile.svelte";
 import { ProjectileTypes } from "./ProjectileTypes";
@@ -39,5 +40,7 @@ export default class PeaProjectile extends Projectile {
     this.x -= widthOffset;
     this.y -= heightOffset;
     this.isFirePea = true;
+
+    soundManager.playSound("fire");
   }
 }

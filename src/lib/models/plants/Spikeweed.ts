@@ -3,6 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const SpikeweedStats = {
   id: "spikeweed",
@@ -49,6 +50,7 @@ export default class Spikeweed extends BasePlant {
       });
 
       this.resetLastShotTime(gameTime);
+      soundManager.playSound("weed");
       EventEmitter.emit("spikeweedAttack", plantedPlant.plantedId);
     }
   }

@@ -15,6 +15,7 @@
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import Sun from "./Sun.svelte";
   import { browser } from "$app/environment";
+  import { soundManager } from "$lib/models/game/SoundManager.svelte";
 
   const handleEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -25,7 +26,6 @@
   onMount(() => {
     if (browser) {
       window.addEventListener("keydown", handleEscape);
-      gameLoop.start();
     }
   });
 
@@ -45,6 +45,18 @@
 <!-- Total sun:  -->
 <div class="fixed bottom-2 right-2 rounded bg-black/50 p-2 text-white">
   Total Sun: {gameLoop.sunManager.total}
+
+  <!-- Button for muting/unmuting sound -->
+  <button
+    class="bg-red-500 p-2 text-white"
+    on:click={() => soundManager.toggleMute()}
+  >
+    {#if soundManager.isMuted}
+      Unmute
+    {:else}
+      Mute
+    {/if}
+  </button>
 </div>
 
 <div

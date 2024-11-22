@@ -32,9 +32,7 @@
   };
 
   const exitGame = () => {
-    console.log(
-      "Exit game clicked - would navigate to main menu in the future"
-    );
+    gameLoop.stop();
   };
 
   onMount(() => {

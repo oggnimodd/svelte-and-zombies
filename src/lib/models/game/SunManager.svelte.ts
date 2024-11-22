@@ -1,6 +1,7 @@
 import uuid from "short-uuid";
 import { YARD_HEIGHT, YARD_WIDTH, CELL_WIDTH } from "../../constants/sizes";
 import { gameTime } from "./GameTime.svelte";
+import { soundManager } from "./SoundManager.svelte";
 
 export interface FallingSun {
   id: string;
@@ -96,5 +97,11 @@ export default class SunManager {
       // Remove from the displayed available suns
       this.suns = this.suns.filter((s) => s.id !== id);
     }
+  }
+
+  reset() {
+    this.suns = [];
+    this.totalSun = 100;
+    this.lastSpawnTime = 0;
   }
 }

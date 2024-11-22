@@ -4,6 +4,7 @@
   import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
   import Plant from "./Plant.svelte";
   import GhostPlant from "./GhostPlant.svelte";
+  import { soundManager } from "$lib/models/game/SoundManager.svelte";
 
   interface CellProps {
     width: number;
@@ -37,6 +38,8 @@
     if (plantSelector.isShoveling && plantedPlantAtThisCell) {
       plantManager.remove(plantedPlantAtThisCell.plantedId);
       plantedPlantAtThisCell = null;
+
+      soundManager.playSound("shovel");
       return;
     }
 

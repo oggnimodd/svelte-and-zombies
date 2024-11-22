@@ -2,6 +2,7 @@ import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const ChomperStats: PlantStats = {
   id: "chomper",
@@ -55,6 +56,7 @@ export default class Chomper extends BasePlant {
       if (targetZombie) {
         targetZombie.health -= this.damage; // Apply damage
         this.isChewing = true; // Start chewing
+        soundManager.playSound("chomper");
         this.chewStartTime = gameTime;
       }
     }

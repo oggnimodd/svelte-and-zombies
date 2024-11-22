@@ -172,4 +172,10 @@ export default class ZombieManager {
       return true;
     });
   }
+
+  reset() {
+    this.zombies = [];
+    this.timeSinceLastSpawn = 0;
+    this.quadTree.clear();
+  }
 }

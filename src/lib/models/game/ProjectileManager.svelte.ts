@@ -6,6 +6,8 @@ import PeaProjectile from "../../models/projectiles/PeaProjectile";
 import type { PlantedPlant } from "./PlantManager.svelte";
 import WatermelonProjectile from "../../models/projectiles/WatermelonProjectile";
 import { SvelteMap } from "svelte/reactivity";
+import { soundManager } from "./SoundManager.svelte";
+import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 
 export default class ProjectileManager {
   // Use Map for efficient projectile management
@@ -161,6 +163,17 @@ export default class ProjectileManager {
 
       if (projectile && zombie) {
         this.handleProjectileHit(projectile, zombie, zombies);
+
+        switch (projectile.type) {
+          case ProjectileTypes.CABBAGE.type:
+            soundManager.playSound("splat");
+            break;
+          case ProjectileTypes.FIRE_PEA.type:
+            soundManager.playSound("impact");
+          default:
+            soundManager.playSound("hit");
+            break;
+        }
       }
     }
   }
@@ -238,5 +251,12 @@ export default class ProjectileManager {
         }
       }
     }
+  }
+
+  reset() {
+    this.zombieCache.clear();
+    this.projectileCache.clear();
+    this.quadTree.clear();
+    this.projectiles = new SvelteMap();
   }
 }

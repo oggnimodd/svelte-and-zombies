@@ -25,6 +25,7 @@ import Starfruit from "../plants/Starfruit";
 import SunManager from "./SunManager.svelte";
 import EventEmitter from "../EventEmitter";
 import Sunflower from "../plants/Sunflower";
+import { soundManager } from "./SoundManager.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -58,8 +59,22 @@ export class GameLoop {
   }
 
   stop() {
+    // Reset game state
     gameTime.set(0);
     this.isRunning = false;
+    this.lastFrameTime = 0;
+    this.deltaTime = 0;
+    this.fps = 0;
+    this.isPaused = false; // Make sure pause state is reset
+
+    // Reset all managers
+    this.zombieManager.reset();
+    this.projectileManager.reset();
+    this.plantManager.reset();
+    this.sunManager.reset();
+
+    // Stop background music
+    soundManager.stopBackgroundMusic();
   }
 
   pause() {
@@ -67,6 +82,10 @@ export class GameLoop {
   }
 
   resume() {
+    if (!this.isRunning) {
+      // Don't resume if the game was stopped
+      return;
+    }
     this.isPaused = false;
     this.lastFrameTime = performance.now();
     requestAnimationFrame(this.tick);
@@ -195,11 +214,11 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Chilli) {
         const chilli = plantedPlant.plant as Chilli;
         // Explode immediately without checking for zombies
-        chilli.explode(plantedPlant, gameTime, this.zombieManager.zombies);
+        chilli.update(plantedPlant, gameTime, this.zombieManager.zombies);
       } else if (plantedPlant.plant instanceof Cherry) {
         const cherry = plantedPlant.plant as Cherry;
         // Explode immediately without checking for zombies
-        cherry.explode(plantedPlant, gameTime, this.zombieManager.zombies);
+        cherry.update(plantedPlant, gameTime, this.zombieManager.zombies);
       } else if (plantedPlant.plant instanceof Potato) {
         const potato = plantedPlant.plant as Potato;
         potato.update(plantedPlant, gameTime, this.zombieManager.zombies);

@@ -25,6 +25,7 @@ import Potato from "../plants/Potato";
 import Spikeweed from "../plants/Spikeweed";
 import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
+import { soundManager } from "./SoundManager.svelte";
 
 interface PlantedPlantCell {
   row: number;
@@ -121,6 +122,9 @@ export default class PlantManager {
     };
     this.plantedPlants = [...this.plantedPlants, plantedPlant];
     EventEmitter.emit("plantAdded", plantedPlant);
+
+    soundManager.playSound("dig");
+
     return plantedPlant;
   }
 
@@ -149,5 +153,10 @@ export default class PlantManager {
 
   getPlantsInRow(row: number): PlantedPlant[] {
     return this.plantedPlants.filter((plant) => plant.cell.row === row);
+  }
+
+  reset() {
+    this.plantedPlants = [];
+    this.availablePlants = [];
   }
 }

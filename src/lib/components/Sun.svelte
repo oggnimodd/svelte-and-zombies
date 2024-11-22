@@ -2,6 +2,7 @@
   import { CELL_WIDTH } from "../constants/sizes";
   import { onDestroy } from "svelte";
   import { gameLoop } from "../reactivity/gameLoop.svelte";
+  import { soundManager } from "$lib/models/game/SoundManager.svelte";
 
   interface SunProps {
     x: number;
@@ -17,6 +18,8 @@
   let autoCollectTimer: number;
 
   function collect() {
+    soundManager.playSound("pop");
+
     if (collected || gameLoop.isPaused) return;
     collected = true;
     timeOut = setTimeout(() => onCollect(id), 600);

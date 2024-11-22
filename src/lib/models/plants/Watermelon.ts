@@ -5,6 +5,7 @@ import WatermelonProjectile from "../projectiles/WatermelonProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const WatermelonStats: PlantStats = {
   id: "watermelon",
@@ -86,6 +87,7 @@ export default class Watermelon extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+
     return projectile;
   }
 }
