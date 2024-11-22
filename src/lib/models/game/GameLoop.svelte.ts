@@ -303,9 +303,13 @@ export class GameLoop {
       this.plantManager.plantedPlants
     );
 
-    this.zombieManager.zombies = this.zombieManager.zombies.filter(
-      (zombie) => zombie.health > 0
-    );
+    this.zombieManager.zombies = this.zombieManager.zombies.filter((zombie) => {
+      if (zombie.health <= 0) {
+        zombie.stopEatingSound(); // Add this line to stop sound when zombie dies
+        return false;
+      }
+      return true;
+    });
 
     this.sunManager.suns = this.sunManager.suns.map((sun) => {
       if (sun.y < sun.targetY) {

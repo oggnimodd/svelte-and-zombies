@@ -1,5 +1,6 @@
 import { CELL_WIDTH } from "../../constants/sizes";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export interface ZombieConfig {
   name: string;
@@ -33,6 +34,7 @@ export default class Zombie {
   private baseSpeed: number;
   private freezeEndTime: number = 0;
   private stunEndTime: number = 0;
+  private eatingSoundId: string | null = null;
 
   constructor(config: ZombieConfig) {
     this.name = config.name;
@@ -46,7 +48,6 @@ export default class Zombie {
   }
 
   freeze(duration: number) {
-    // Set freeze end time to the latest end time
     this.freezeEndTime = Math.max(
       performance.now() + duration,
       this.freezeEndTime
@@ -56,53 +57,55 @@ export default class Zombie {
   }
 
   stun(duration: number) {
-    // Set stun end time to the latest end time
     this.stunEndTime = Math.max(performance.now() + duration, this.stunEndTime);
     this.isStunned = true;
   }
 
   move(deltaTime: number) {
     const currentTime = performance.now();
-
-    // Handle stun recovery
     if (this.stunEndTime > 0 && currentTime > this.stunEndTime) {
       this.stunEndTime = 0;
       this.isStunned = false;
     }
-
-    // Handle freeze recovery
     if (this.freezeEndTime > 0 && currentTime > this.freezeEndTime) {
       this.freezeEndTime = 0;
       this.isFrozen = false;
       this.speed = this.baseSpeed;
     }
-
-    // Don't move if stunned, regardless of freeze status
     if (this.isStunned) {
       return;
     }
-
-    // If not stunned but frozen, move at reduced speed
     if (!this.isAttacking) {
       this.x -= this.speed * (deltaTime / 16) * 0.5;
     }
   }
 
   attack(plant: PlantedPlant, currentTime: number): boolean {
-    // Don't attack if stunned, regardless of freeze status
     if (this.isStunned) {
       return false;
     }
-
     if (currentTime - this.lastAttackTime >= this.attackCooldown) {
       plant.currentHealth -= this.damage;
       this.lastAttackTime = currentTime;
+      this.startEatingSound();
       return true;
     }
     return false;
   }
 
-  // For debugging
+  startEatingSound() {
+    if (!this.eatingSoundId) {
+      this.eatingSoundId = soundManager.playEatingSound();
+    }
+  }
+
+  stopEatingSound() {
+    if (this.eatingSoundId) {
+      soundManager.stopEatingSound(this.eatingSoundId);
+      this.eatingSoundId = null;
+    }
+  }
+
   getStatus() {
     return {
       isStunned: this.isStunned,

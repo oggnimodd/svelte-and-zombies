@@ -110,6 +110,7 @@ export default class ZombieManager {
         zombie.isAttacking = false;
         zombie.attackingPlantId = null;
         zombie.lastAttackTime = 0;
+        zombie.stopEatingSound();
       }
       return zombie;
     });
@@ -138,6 +139,7 @@ export default class ZombieManager {
           zombie.isAttacking = false;
           zombie.attackingPlantId = null;
           zombie.lastAttackTime = 0;
+          zombie.stopEatingSound();
         } else {
           if (zombie.attack(attackedPlant, currentTime)) {
             if (attackedPlant.currentHealth <= 0) {
@@ -145,6 +147,7 @@ export default class ZombieManager {
               zombie.isAttacking = false;
               zombie.attackingPlantId = null;
               zombie.lastAttackTime = 0;
+              zombie.stopEatingSound();
             }
           }
         }
@@ -164,11 +167,11 @@ export default class ZombieManager {
               zombie.isAttacking = false;
               zombie.attackingPlantId = null;
               zombie.lastAttackTime = 0;
+              zombie.stopEatingSound();
             }
           }
         }
       }
-
       return true;
     });
   }
