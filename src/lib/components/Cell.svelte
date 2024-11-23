@@ -44,6 +44,7 @@
       plantedPlantAtThisCell = null;
 
       soundManager.playSound("shovel");
+      plantSelector.cancelAll();
       return;
     }
 
