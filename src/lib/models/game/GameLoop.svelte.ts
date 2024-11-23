@@ -354,7 +354,13 @@ export class GameLoop {
   }
 
   private checkWinCondition() {
-    // For now, just return false - we'll implement wave system later
+    // Check if the current wave is the last wave and all zombies are defeated
+    if (
+      this.zombieManager.currentWave >= this.zombieManager.waveConfigs.length &&
+      this.zombieManager.zombies.length === 0
+    ) {
+      return true;
+    }
     return false;
   }
 }
