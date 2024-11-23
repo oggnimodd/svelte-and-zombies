@@ -1,5 +1,6 @@
 import { Howl } from "howler";
 import uuid from "short-uuid";
+import LocalStorageManager from "../../utils/localStorage";
 
 type GameSoundEffect =
   | "pea-shoot"
@@ -67,7 +68,7 @@ export default class SoundManager {
     eating: 50,
     pop: 50,
   };
-  isMuted: boolean = $state(false);
+  isMuted: boolean = $state(LocalStorageManager.get("sound-muted") ?? false);
   private eatingSounds: Map<string, Howl> = new Map();
 
   constructor() {
@@ -80,6 +81,8 @@ export default class SoundManager {
           this.createHowl(config),
         ])
     );
+    const savedVolume = LocalStorageManager.get("sound-volume");
+    this.setVolume(savedVolume || 0.8);
   }
 
   private createHowl(config: SoundConfig): Howl {
@@ -127,6 +130,8 @@ export default class SoundManager {
 
   toggleMute() {
     this.isMuted = !this.isMuted;
+    LocalStorageManager.set("sound-muted", this.isMuted);
+
     if (this.isMuted) {
       this.bgMusic.pause();
     } else {
@@ -138,6 +143,8 @@ export default class SoundManager {
     if (volume < 0 || volume > 1) {
       throw new Error("Volume must be between 0 and 1");
     }
+    LocalStorageManager.set("sound-volume", volume);
+
     this.bgMusic.volume(volume);
     this.sounds.forEach((sound) => sound.volume(volume));
   }
@@ -171,6 +178,7 @@ export default class SoundManager {
       src: [SOUND_CONFIGS.eating.src],
       volume: SOUND_CONFIGS.eating.volume,
       loop: true,
+      mute: this.isMuted,
     });
     const soundId = uuid.generate();
     this.eatingSounds.set(soundId, sound);
