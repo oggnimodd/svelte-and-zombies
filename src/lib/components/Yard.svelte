@@ -59,6 +59,13 @@
       Mute
     {/if}
   </button>
+
+  <!-- Wave progress bar -->
+  <div class="h-2 w-full">
+    <span
+      >{gameLoop.zombieManager.currentWave + 1} / {gameLoop.zombieManager.getTotalWave()}</span
+    >
+  </div>
 </div>
 
 <!-- If not mobile -->

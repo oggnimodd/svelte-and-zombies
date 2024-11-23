@@ -2,17 +2,13 @@
   import { CELL_WIDTH } from "../constants/sizes";
   import type Zombie from "$lib/models/zombies/Zombie.svelte";
   import { getZombieZIndex } from "../utils/getZIndex";
-
   interface ZombieProps {
     zombie: Zombie;
   }
   const { zombie }: ZombieProps = $props();
-
-  let element: HTMLDivElement;
 </script>
 
 <div
-  bind:this={element}
   class="zombie"
   class:frozen={zombie.isFrozen}
   style="width: {CELL_WIDTH / 1.5}px; height: {CELL_WIDTH /
@@ -24,8 +20,9 @@
     {#if zombie.isStunned}
       <div class="absolute left-0 top-0 h-full w-full">😴</div>
     {/if}
-
-    <span> 🧛🏻‍♀️ </span>
+    <div class="absolute -bottom-4 left-0 w-24">
+      <img src={`/zombies/${zombie.image}`} alt={zombie.name} />
+    </div>
   </div>
 </div>
 

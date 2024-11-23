@@ -50,11 +50,18 @@ export class GameLoop {
     EventEmitter.on("produceSun", ({ x, y }) => {
       this.sunManager.spawnSunFromFlower(x, y);
     });
+
+    // Watch for winning conditions
+    EventEmitter.on("gameWon", () => {
+      this.stop();
+      alert("Congratulations! You've completed all waves! 🏆");
+    });
   }
 
   start() {
     this.isRunning = true;
     this.lastFrameTime = performance.now();
+    this.zombieManager.startNextWave(); // Start first wave immediately
     requestAnimationFrame(this.tick);
   }
 
@@ -75,6 +82,7 @@ export class GameLoop {
 
     // Stop background music
     soundManager.stopBackgroundMusic();
+    this.zombieManager.zombies.forEach((zombie) => zombie.stopEatingSound());
   }
 
   pause() {
@@ -329,12 +337,12 @@ export class GameLoop {
   private checkGameState(): boolean {
     if (this.checkLoseCondition()) {
       this.stop();
-      queueMicrotask(() => alert("Game Over! The zombies ate your brains! 🧠"));
+      alert("Game Over! The zombies ate your brains! 🧠");
       return false;
     }
     if (this.checkWinCondition()) {
       this.stop();
-      queueMicrotask(() => alert("You won! All zombies defeated! 🌻"));
+      alert("You won! All zombies defeated! 🌻");
       return false;
     }
     return true;

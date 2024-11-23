@@ -1,14 +1,14 @@
 import Zombie, { type ZombieConfig } from "./Zombie.svelte";
 
-export default class NormalZombie extends Zombie {
+export default class ConeHeadZombie extends Zombie {
   constructor(zombieConfig: Partial<ZombieConfig>) {
     super({
-      name: "Normal Zombie",
-      health: 100,
+      name: "Cone Head Zombie",
+      health: 200,
       damage: 8,
       speed: 0.8,
       row: zombieConfig.row || 0,
-      image: "normal-zombie.png",
+      image: "cone-head-zombie.png",
       ...zombieConfig,
     });
   }

@@ -12,6 +12,7 @@ export interface ZombieConfig {
   y?: number;
   width?: number;
   height?: number;
+  image: string;
 }
 
 export default class Zombie {
@@ -30,6 +31,7 @@ export default class Zombie {
   width: number = CELL_WIDTH / 1.5;
   height: number = CELL_WIDTH / 1.5;
   attackingPlantId: string | null = $state(null);
+  image: string;
 
   private baseSpeed: number;
   private freezeEndTime: number = 0;
@@ -45,6 +47,7 @@ export default class Zombie {
     this.x = config.x ?? 1100;
     this.y = config.y ?? 0;
     this.baseSpeed = config.speed;
+    this.image = config.image;
   }
 
   freeze(duration: number) {
