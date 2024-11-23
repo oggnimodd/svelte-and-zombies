@@ -61,7 +61,6 @@ export class GameLoop {
   start() {
     this.isRunning = true;
     this.lastFrameTime = performance.now();
-    this.zombieManager.startNextWave(); // Start first wave immediately
     requestAnimationFrame(this.tick);
   }
 

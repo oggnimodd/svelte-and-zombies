@@ -42,10 +42,14 @@ export default class ZombieManager {
   private waveDelay: number = 5000; // Added delay between waves
   private timeUntilNextWave: number = 0; // Added to handle wave transitions
 
+  // First Wave Delay
+  private isFirstWaveStarted: boolean = false;
+  private firstWaveDelay: number = 8000; // 5 seconds delay before the first wave
+
   readonly waveConfigs: WaveConfig[] = [
     {
       zombieCount: 4,
-      spawnInterval: 5000,
+      spawnInterval: 8000,
       zombieTypes: [{ type: NormalZombie, weight: 1 }],
     },
     {
@@ -101,7 +105,6 @@ export default class ZombieManager {
       width: zombieBounds.width + CELL_WIDTH,
       height: zombieBounds.height + CELL_WIDTH,
     };
-
     const potentialCollisions = this.quadTree.query(searchArea);
     const plantCollisions = potentialCollisions.filter((entity) => {
       const plant = this.plantManager.getPlantById(entity.id);
@@ -134,14 +137,12 @@ export default class ZombieManager {
 
   private selectZombieType() {
     if (this.currentWave >= this.waveConfigs.length) return NormalZombie;
-
     const config = this.waveConfigs[this.currentWave];
     const totalWeight = config.zombieTypes.reduce(
       (sum, type) => sum + type.weight,
       0
     );
     let random = Math.random() * totalWeight;
-
     for (const zombieType of config.zombieTypes) {
       random -= zombieType.weight;
       if (random <= 0) {
@@ -155,7 +156,6 @@ export default class ZombieManager {
     const ZombieType = this.selectZombieType();
     const randomRow = Math.floor(Math.random() * NUM_ROWS);
     const coordinates = getCellCoordinates(randomRow, NUM_COLS);
-
     const zombie = new ZombieType({
       row: randomRow,
       x: YARD_WIDTH + 100,
@@ -182,7 +182,6 @@ export default class ZombieManager {
       EventEmitter.emit("gameWon");
       return;
     }
-
     this.isWaveActive = true;
     this.zombiesSpawnedInWave = 0;
     this.spawnInterval = this.waveConfigs[this.currentWave].spawnInterval;
@@ -200,14 +199,20 @@ export default class ZombieManager {
         if (this.timeUntilNextWave <= 0) {
           this.startNextWave();
         }
+      } else if (!this.isFirstWaveStarted) {
+        // Handle delay before the first wave
+        this.firstWaveDelay -= deltaTime;
+        if (this.firstWaveDelay <= 0) {
+          this.isFirstWaveStarted = true;
+          this.startNextWave();
+        }
+        return;
       }
-      return;
     }
 
     this.timeSinceLastSpawn += deltaTime;
     if (this.currentWave < this.waveConfigs.length) {
       const currentWaveConfig = this.waveConfigs[this.currentWave];
-
       if (
         this.timeSinceLastSpawn >= this.spawnInterval &&
         this.zombiesSpawnedInWave < currentWaveConfig.zombieCount
@@ -220,7 +225,6 @@ export default class ZombieManager {
     const currentTime = performance.now();
     this.zombies = this.zombies.filter((zombie) => {
       if (zombie.x < -50) return false;
-
       if (zombie.isAttacking && zombie.attackingPlantId) {
         const attackedPlant = this.plantManager.getPlantById(
           zombie.attackingPlantId
@@ -240,7 +244,6 @@ export default class ZombieManager {
           }
         }
       }
-
       if (!zombie.isAttacking) {
         zombie.move(deltaTime);
         const collidedPlant = this.checkCollisions(zombie);
@@ -258,7 +261,6 @@ export default class ZombieManager {
           }
         }
       }
-
       return true;
     });
 
@@ -284,7 +286,6 @@ export default class ZombieManager {
         zombiesAlive: 0,
       };
     }
-
     return {
       wave: this.currentWave + 1,
       totalWaves: this.waveConfigs.length,
