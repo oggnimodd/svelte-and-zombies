@@ -5,6 +5,7 @@
   import Plant from "./Plant.svelte";
   import GhostPlant from "./GhostPlant.svelte";
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
+  import { gameLoop } from "$lib/reactivity/gameLoop.svelte";
 
   interface CellProps {
     width: number;
@@ -40,11 +41,15 @@
   const onClick = () => {
     // Handling removing a plant
     if (plantSelector.isShoveling && plantedPlantAtThisCell) {
+      // Add the sun back
+      gameLoop.sunManager.addSun(plantedPlantAtThisCell.plant.price);
+
       plantManager.remove(plantedPlantAtThisCell.plantedId);
       plantedPlantAtThisCell = null;
 
       soundManager.playSound("shovel");
       plantSelector.cancelAll();
+
       return;
     }
 
@@ -74,6 +79,9 @@
       plantSelector.cancelAll();
 
       plantedPlantAtThisCell = plantedPlant;
+
+      // Reduce the sun
+      gameLoop.sunManager.subtractSun(plant.price);
     }
   };
 

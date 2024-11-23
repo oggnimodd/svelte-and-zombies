@@ -44,12 +44,9 @@ export default class ZombieManager {
 
   readonly waveConfigs: WaveConfig[] = [
     {
-      zombieCount: 10,
-      spawnInterval: 3000,
-      zombieTypes: [
-        { type: NormalZombie, weight: 1 },
-        { type: ConeHeadZombie, weight: 1 },
-      ],
+      zombieCount: 4,
+      spawnInterval: 5000,
+      zombieTypes: [{ type: NormalZombie, weight: 1 }],
     },
     {
       zombieCount: 8,

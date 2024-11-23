@@ -47,4 +47,10 @@ export default class PlantSelector {
   cancelSelection() {
     this.selectedPlant = null;
   }
+
+  canBuyPlant({ totalSun, plantId }: { totalSun: number; plantId: string }) {
+    const plant = this.plants.find((p) => p.id === plantId);
+    if (!plant) return false;
+    return plant.price <= totalSun;
+  }
 }

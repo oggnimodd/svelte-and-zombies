@@ -12,7 +12,7 @@ export const SunflowerStats: PlantStats = {
 
 export default class Sunflower extends BasePlant {
   private lastSunProduction = 0;
-  private readonly productionInterval = 12000;
+  private readonly productionInterval = 8000;
 
   constructor() {
     super(SunflowerStats);
