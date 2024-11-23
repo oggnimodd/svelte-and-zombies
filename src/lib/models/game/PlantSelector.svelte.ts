@@ -40,7 +40,7 @@ export default class PlantSelector {
     }
   }
 
-  hoverCell(cell: HoverCell) {
+  hoverCell(cell: HoverCell | null) {
     this.hoveredCell = cell;
   }
 

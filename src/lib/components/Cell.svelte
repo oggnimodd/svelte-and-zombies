@@ -24,6 +24,10 @@
     });
   };
 
+  const onLeave = () => {
+    plantSelector.hoverCell(null);
+  };
+
   // On focus do nothing
   const onFocus = () => {};
 
@@ -65,6 +69,9 @@
         col: x,
       });
 
+      // Cancel the plant selector after planting
+      plantSelector.cancelAll();
+
       plantedPlantAtThisCell = plantedPlant;
     }
   };
@@ -92,6 +99,7 @@
   onfocus={onFocus}
   onclick={onClick}
   onmouseover={onHover}
+  onmouseleave={onLeave}
   id="cell-{y}-{x}"
   style="width: {width}px; height: {height}px;"
   tabindex="-1"

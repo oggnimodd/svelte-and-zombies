@@ -15,9 +15,13 @@
 </script>
 
 <button
-  onclick={handleClick}
+  onmousedown={handleClick}
   class="flex aspect-square w-16 flex-col items-center justify-center p-4 text-white"
 >
-  <img src={getPlantImage(id)} alt={name} class="w-full" />
+  <img
+    src={getPlantImage(id)}
+    alt={name}
+    class="pointer-events-none w-full select-none"
+  />
   <p>{price}</p>
 </button>

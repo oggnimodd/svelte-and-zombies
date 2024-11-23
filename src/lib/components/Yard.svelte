@@ -16,6 +16,8 @@
   import Sun from "./Sun.svelte";
   import { browser } from "$app/environment";
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
+  import PlantCursor from "./PlantCursor.svelte";
+  import isMobile from "is-mobile";
 
   const handleEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -58,6 +60,11 @@
     {/if}
   </button>
 </div>
+
+<!-- If not mobile -->
+{#if !isMobile()}
+  <PlantCursor />
+{/if}
 
 <div
   id="yard"
