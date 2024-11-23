@@ -5,8 +5,6 @@ import LocalStorageManager from "../../utils/localStorage";
 type GameSoundEffect =
   | "pea-shoot"
   | "explosion"
-  | "chomp"
-  | "plant-place"
   | "chomper"
   | "slap"
   | "weed"
@@ -31,8 +29,6 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   "pea-shoot": { src: "/sounds/pea-pop.mp3", volume: 0.5 },
   pop: { src: "/sounds/pop.mp3", volume: 0.6 },
   explosion: { src: "/sounds/explosion.mp3", volume: 0.9 },
-  chomp: { src: "/sounds/chomp.mp3", volume: 0.6 },
-  "plant-place": { src: "/sounds/plant-place.mp3", volume: 0.6 },
   splash: { src: "/sounds/splash.mp3", volume: 0.6 },
   chomper: { src: "/sounds/chomper.mp3", volume: 0.6 },
   slap: { src: "/sounds/slap.mp3", volume: 0.8 },
@@ -53,8 +49,6 @@ export default class SoundManager {
   private readonly cooldownDurations: Record<GameSoundEffect, number> = {
     "pea-shoot": 50,
     explosion: 200,
-    chomp: 100,
-    "plant-place": 100,
     splash: 100,
     chomper: 200,
     slap: 100,

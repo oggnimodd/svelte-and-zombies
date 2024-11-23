@@ -1,3 +1,5 @@
+import { browser } from "$app/environment";
+
 type LocalStorageKey = "sound-muted" | "sound-volume";
 
 type LocalStorageSchema = {
@@ -7,6 +9,13 @@ type LocalStorageSchema = {
 
 class LocalStorageManager {
   static get<K extends LocalStorageKey>(key: K): LocalStorageSchema[K] | null {
+    if (!browser) {
+      console.warn(
+        "LocalStorageManager.get called on the server. Returning null."
+      );
+      return null;
+    }
+
     try {
       const item = localStorage.getItem(key);
       return item ? JSON.parse(item) : null;
@@ -15,10 +24,14 @@ class LocalStorageManager {
     }
   }
 
-  static set<K extends LocalStorageKey>(
-    key: K,
-    value: LocalStorageSchema[K]
-  ): void {
+  static set<K extends LocalStorageKey>(key: K, value: LocalStorageSchema[K]) {
+    if (!browser) {
+      console.warn(
+        "LocalStorageManager.set called on the server. No action taken."
+      );
+      return;
+    }
+
     try {
       localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
@@ -26,7 +39,14 @@ class LocalStorageManager {
     }
   }
 
-  static remove(key: LocalStorageKey): void {
+  static remove(key: LocalStorageKey) {
+    if (!browser) {
+      console.warn(
+        "LocalStorageManager.remove called on the server. No action taken."
+      );
+      return;
+    }
+
     try {
       localStorage.removeItem(key);
     } catch (error) {
@@ -34,7 +54,14 @@ class LocalStorageManager {
     }
   }
 
-  static clear(): void {
+  static clear() {
+    if (!browser) {
+      console.warn(
+        "LocalStorageManager.clear called on the server. No action taken."
+      );
+      return;
+    }
+
     try {
       localStorage.clear();
     } catch (error) {
