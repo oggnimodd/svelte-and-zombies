@@ -44,7 +44,7 @@ export class GameLoop {
     this.plantManager = plantManager;
     this.zombieManager = new ZombieManager(plantManager);
     this.projectileManager = new ProjectileManager();
-    this.sunManager = new SunManager(100);
+    this.sunManager = new SunManager(10000);
 
     // TODO: make sunmanager available globally
     EventEmitter.on("produceSun", ({ x, y }) => {

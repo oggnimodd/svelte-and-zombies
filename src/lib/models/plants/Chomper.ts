@@ -10,6 +10,7 @@ export const ChomperStats: PlantStats = {
   price: 150,
   health: 100,
   damage: 1000,
+  buyCooldown: 5000,
 };
 
 export default class Chomper extends BasePlant {

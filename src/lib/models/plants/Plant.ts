@@ -4,7 +4,10 @@ export interface PlantStats {
   price: number;
   health: number;
   damage?: number;
-  cooldown?: number;
+  // Shooting cooldown
+  shootCooldown?: number;
+  // Buy cooldown
+  buyCooldown?: number;
   range?: number;
 }
 
@@ -17,6 +20,7 @@ export default class BasePlant {
   cooldown: number;
   range: number;
   lastShotTime: number = 0;
+  buyCooldown: number = 0;
 
   constructor(stats: PlantStats) {
     this.id = stats.id;
@@ -24,7 +28,8 @@ export default class BasePlant {
     this.price = stats.price;
     this.health = stats.health;
     this.damage = stats.damage ?? 0;
-    this.cooldown = stats.cooldown ?? 0;
+    this.cooldown = stats.shootCooldown ?? 0;
+    this.buyCooldown = stats.buyCooldown ?? 0;
     this.range = stats.range ?? 0;
   }
 

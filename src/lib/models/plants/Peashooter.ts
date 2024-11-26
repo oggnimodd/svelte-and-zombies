@@ -12,8 +12,9 @@ export const PeashooterStats: PlantStats = {
   price: 100,
   health: 100,
   damage: 20,
-  cooldown: 3000,
+  shootCooldown: 3000,
   range: Infinity,
+  buyCooldown: 5000,
 };
 
 export default class Peashooter extends BasePlant {

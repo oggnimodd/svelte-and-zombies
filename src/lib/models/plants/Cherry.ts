@@ -11,6 +11,7 @@ export const CherryStats: PlantStats = {
   price: 150,
   health: 100,
   damage: 1800,
+  buyCooldown: 5000,
 };
 
 export default class Cherry extends BasePlant {

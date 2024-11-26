@@ -1,7 +1,6 @@
 import uuid from "short-uuid";
 import { YARD_HEIGHT, YARD_WIDTH, CELL_WIDTH } from "../../constants/sizes";
 import { gameTime } from "./GameTime.svelte";
-import { soundManager } from "./SoundManager.svelte";
 
 export interface FallingSun {
   id: string;
@@ -12,8 +11,10 @@ export interface FallingSun {
   spawnTime: number;
 }
 
+const INITIAL_TOTAL_SUN = 100;
+
 export default class SunManager {
-  totalSun: number = $state(100);
+  totalSun: number = $state(INITIAL_TOTAL_SUN);
   // Displayed suns
   suns: FallingSun[] = $state([]);
 
@@ -22,8 +23,8 @@ export default class SunManager {
   private readonly sunValue = 25;
   private lastSpawnTime = 0;
 
-  constructor(totalSun: number) {
-    this.totalSun = totalSun;
+  constructor(totalSun?: number) {
+    this.totalSun = totalSun || INITIAL_TOTAL_SUN;
   }
 
   addSun(sun: number) {
@@ -101,7 +102,7 @@ export default class SunManager {
 
   reset() {
     this.suns = [];
-    this.totalSun = 100;
+    this.totalSun = INITIAL_TOTAL_SUN;
     this.lastSpawnTime = 0;
   }
 }

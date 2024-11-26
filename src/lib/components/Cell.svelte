@@ -82,6 +82,9 @@
 
       // Reduce the sun
       gameLoop.sunManager.subtractSun(plant.price);
+
+      // Update the plant cooldown
+      plantSelector.updatePlantCooldown(plant.id);
     }
   };
 

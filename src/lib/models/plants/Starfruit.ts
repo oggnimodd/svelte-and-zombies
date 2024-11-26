@@ -14,6 +14,7 @@ export const StarfruitStats = {
   damage: 20,
   cooldown: 2000,
   range: Infinity,
+  buyCooldown: 8000,
 };
 
 // TODO: Improve performance

@@ -14,6 +14,7 @@ export const KernelpultStats = {
   damage: 20,
   cooldown: 3000,
   range: Infinity,
+  buyCooldown: 5000,
 };
 
 export default class Kernelpult extends BasePlant {

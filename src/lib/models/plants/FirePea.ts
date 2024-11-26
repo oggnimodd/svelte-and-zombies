@@ -13,8 +13,9 @@ export const FirePeaStats: PlantStats = {
   price: 200,
   health: 100,
   damage: 40,
-  cooldown: 2000, // Reduced cooldown compared to Peashooter
+  shootCooldown: 2000, // Reduced cooldown compared to Peashooter
   range: Infinity,
+  buyCooldown: 6000,
 };
 
 export default class FirePea extends BasePlant {

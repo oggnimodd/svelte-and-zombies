@@ -11,6 +11,7 @@ export const PotatoStats: PlantStats = {
   price: 25,
   health: 100,
   damage: 1000,
+  buyCooldown: 4000,
 };
 
 export default class Potato extends BasePlant {

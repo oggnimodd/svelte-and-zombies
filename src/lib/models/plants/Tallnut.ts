@@ -5,6 +5,7 @@ export const TallnutStats: PlantStats = {
   name: "Tallnut",
   price: 50,
   health: 400,
+  buyCooldown: 5000,
 };
 
 export default class Tallnut extends BasePlant {

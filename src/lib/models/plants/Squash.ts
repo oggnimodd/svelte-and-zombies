@@ -11,6 +11,7 @@ export const SquashStats: PlantStats = {
   price: 50,
   health: 100,
   damage: 1800,
+  buyCooldown: 7000,
 };
 
 export default class Squash extends BasePlant {

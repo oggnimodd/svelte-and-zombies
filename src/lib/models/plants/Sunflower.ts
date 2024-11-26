@@ -8,6 +8,7 @@ export const SunflowerStats: PlantStats = {
   name: "Sunflower",
   price: 50,
   health: 50,
+  buyCooldown: 2000,
 };
 
 export default class Sunflower extends BasePlant {

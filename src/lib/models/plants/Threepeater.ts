@@ -13,8 +13,9 @@ export const ThreepeaterStats: PlantStats = {
   price: 325,
   health: 100,
   damage: 20,
-  cooldown: 2000,
+  shootCooldown: 2000,
   range: Infinity,
+  buyCooldown: 8000,
 };
 
 export default class Threepeater extends BasePlant {

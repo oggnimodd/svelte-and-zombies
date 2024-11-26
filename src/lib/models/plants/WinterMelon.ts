@@ -7,8 +7,9 @@ export const WinterMelonStats: PlantStats = {
   price: 400,
   health: 100,
   damage: 80,
-  cooldown: 2000,
+  shootCooldown: 2000,
   range: Infinity,
+  buyCooldown: 7000,
 };
 
 export default class WinterMelon extends Watermelon {

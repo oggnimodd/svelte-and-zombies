@@ -13,8 +13,9 @@ export const GatlingPeaStats: PlantStats = {
   price: 300,
   health: 100,
   damage: 20,
-  cooldown: 2000, // Similar cooldown to Repeater
+  shootCooldown: 2000, // Similar cooldown to Repeater
   range: Infinity,
+  buyCooldown: 10000,
 };
 
 export default class GatlingPea extends BasePlant {

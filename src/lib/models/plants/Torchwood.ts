@@ -5,6 +5,7 @@ export const TorchwoodStats: PlantStats = {
   name: "Torchwood",
   price: 175,
   health: 100,
+  buyCooldown: 6000,
 };
 
 export default class Torchwood extends BasePlant {

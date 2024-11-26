@@ -13,8 +13,9 @@ export const WatermelonStats: PlantStats = {
   price: 300,
   health: 100,
   damage: 80,
-  cooldown: 2000,
+  shootCooldown: 2000,
   range: Infinity,
+  buyCooldown: 6000,
 };
 
 export default class Watermelon extends BasePlant {

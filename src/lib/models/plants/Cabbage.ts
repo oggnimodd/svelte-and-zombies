@@ -12,8 +12,9 @@ export const CabbageStats: PlantStats = {
   price: 100,
   health: 100,
   damage: 40,
-  cooldown: 2000,
+  shootCooldown: 2000,
   range: Infinity,
+  buyCooldown: 5000,
 };
 
 export default class Cabbage extends BasePlant {

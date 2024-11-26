@@ -12,6 +12,7 @@ export const SpikeweedStats = {
   health: 100,
   damage: 20,
   cooldown: 1000,
+  buyCooldown: 5000,
 };
 
 export default class Spikeweed extends BasePlant {
