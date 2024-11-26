@@ -10,6 +10,7 @@ export const ChilliStats: PlantStats = {
   price: 150,
   health: 100,
   damage: 1800,
+  buyCooldown: 5000,
 };
 
 export default class Chilli extends BasePlant {
