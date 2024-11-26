@@ -1,4 +1,4 @@
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
@@ -6,13 +6,13 @@ import KernelProjectile from "../projectiles/KernelProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import { CELL_WIDTH } from "../../constants/sizes";
 
-export const KernelpultStats = {
+export const KernelpultStats: PlantStats = {
   id: "kernelpult",
   name: "Kernel-pult",
   price: 100,
   health: 100,
   damage: 20,
-  cooldown: 3000,
+  shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
 };

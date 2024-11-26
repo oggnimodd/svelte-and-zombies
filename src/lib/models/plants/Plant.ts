@@ -17,7 +17,7 @@ export default class BasePlant {
   price: number;
   health: number;
   damage: number;
-  cooldown: number;
+  shootCooldown: number;
   range: number;
   lastShotTime: number = 0;
   buyCooldown: number = 0;
@@ -28,13 +28,13 @@ export default class BasePlant {
     this.price = stats.price;
     this.health = stats.health;
     this.damage = stats.damage ?? 0;
-    this.cooldown = stats.shootCooldown ?? 0;
+    this.shootCooldown = stats.shootCooldown ?? 0;
     this.buyCooldown = stats.buyCooldown ?? 0;
     this.range = stats.range ?? 0;
   }
 
   canShoot(gameTime: number) {
-    return gameTime - this.lastShotTime >= this.cooldown;
+    return gameTime - this.lastShotTime >= this.shootCooldown;
   }
 
   resetLastShotTime(gameTime: number) {

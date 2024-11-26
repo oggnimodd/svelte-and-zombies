@@ -1,17 +1,17 @@
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { soundManager } from "../game/SoundManager.svelte";
 
-export const SpikeweedStats = {
+export const SpikeweedStats: PlantStats = {
   id: "spikeweed",
   name: "Spikeweed",
   price: 100,
   health: 100,
   damage: 20,
-  cooldown: 1000,
+  shootCooldown: 1000,
   buyCooldown: 5000,
 };
 

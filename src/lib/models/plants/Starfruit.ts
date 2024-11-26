@@ -1,18 +1,18 @@
 import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant";
 import { CELL_WIDTH } from "../../constants/sizes";
 import StarProjectile from "../projectiles/StarProjectile";
 import type Projectile from "../projectiles/Projectile.svelte";
 
-export const StarfruitStats = {
+export const StarfruitStats: PlantStats = {
   id: "starfruit",
   name: "Starfruit",
   price: 175,
   health: 100,
   damage: 20,
-  cooldown: 2000,
+  shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 8000,
 };
