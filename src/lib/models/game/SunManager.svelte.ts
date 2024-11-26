@@ -11,7 +11,8 @@ export interface FallingSun {
   spawnTime: number;
 }
 
-const INITIAL_TOTAL_SUN = 100;
+// TODO: change this to 100
+const INITIAL_TOTAL_SUN = 100000;
 
 export default class SunManager {
   totalSun: number = $state(INITIAL_TOTAL_SUN);
@@ -23,8 +24,8 @@ export default class SunManager {
   private readonly sunValue = 25;
   private lastSpawnTime = 0;
 
-  constructor(totalSun?: number) {
-    this.totalSun = totalSun || INITIAL_TOTAL_SUN;
+  constructor() {
+    this.totalSun = INITIAL_TOTAL_SUN;
   }
 
   addSun(sun: number) {

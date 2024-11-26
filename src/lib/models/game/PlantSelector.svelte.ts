@@ -12,7 +12,7 @@ export default class PlantSelector {
   selectedPlant: string | null = $state(null);
   hoveredCell: HoverCell | null = $state(null);
   isShoveling: boolean = $state(false);
-  cooldowns: Map<string, number> = new SvelteMap();
+  cooldowns: Map<string, number> = $state(new SvelteMap());
 
   constructor(plants: PlantStats[]) {
     this.plants = plants;
@@ -76,5 +76,15 @@ export default class PlantSelector {
   getRemainingCooldown(plantId: string) {
     const cooldownEnd = this.cooldowns.get(plantId) || 0;
     return Math.max(0, cooldownEnd - gameTime.get());
+  }
+
+  reset() {
+    this.selectedPlant = null;
+    this.hoveredCell = null;
+    this.isShoveling = false;
+    this.cooldowns = new SvelteMap();
+    this.plants.forEach((plant) => {
+      this.cooldowns.set(plant.id, 0);
+    });
   }
 }

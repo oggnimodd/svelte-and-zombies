@@ -26,6 +26,7 @@ import SunManager from "./SunManager.svelte";
 import EventEmitter from "../EventEmitter";
 import Sunflower from "../plants/Sunflower";
 import { soundManager } from "./SoundManager.svelte";
+import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -44,7 +45,7 @@ export class GameLoop {
     this.plantManager = plantManager;
     this.zombieManager = new ZombieManager(plantManager);
     this.projectileManager = new ProjectileManager();
-    this.sunManager = new SunManager(10000);
+    this.sunManager = new SunManager();
 
     // TODO: make sunmanager available globally
     EventEmitter.on("produceSun", ({ x, y }) => {
@@ -78,6 +79,8 @@ export class GameLoop {
     this.projectileManager.reset();
     this.plantManager.reset();
     this.sunManager.reset();
+
+    plantSelector.reset();
 
     // Stop background music
     soundManager.stopBackgroundMusic();

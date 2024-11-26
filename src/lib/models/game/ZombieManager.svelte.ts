@@ -303,6 +303,8 @@ export default class ZombieManager {
     this.timeSinceLastSpawn = 0;
     this.timeUntilNextWave = 0;
     this.quadTree.clear();
+    this.isFirstWaveStarted = false;
+    this.firstWaveDelay = 8000;
   }
 
   getTotalWave() {
