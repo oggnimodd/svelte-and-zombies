@@ -71,13 +71,13 @@ export default class ZombieManager {
       ],
     },
     {
-      zombieCount: 20,
-      spawnInterval: 2500,
+      zombieCount: 40,
+      spawnInterval: 1800,
       zombieTypes: [
         { type: NormalZombie, weight: 3 },
         { type: ConeHeadZombie, weight: 5 },
         { type: BucketHeadZombie, weight: 10 },
-        { type: FootballZombie, weight: 5 },
+        { type: FootballZombie, weight: 7 },
       ],
     },
   ];
