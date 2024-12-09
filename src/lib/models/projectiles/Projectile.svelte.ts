@@ -1,5 +1,6 @@
 import { type ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
+import { CELL_WIDTH, NUM_COLS } from "$lib/constants/sizes";
 
 export interface ProjectileProps {
   id: string;
@@ -51,8 +52,9 @@ export default class Projectile {
   }
 
   move(deltaTime: number) {
-    const speedAdjustment = this.speed * (deltaTime / 16);
-    this.x += this.direction * speedAdjustment;
+    this.x +=
+      (this.direction * this.speed * (deltaTime / 1000) * CELL_WIDTH) /
+      NUM_COLS; // Normalize and consider columns
   }
 
   // Override this method in subclasses if needed

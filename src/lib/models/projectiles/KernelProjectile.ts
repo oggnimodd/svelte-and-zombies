@@ -1,5 +1,5 @@
 import Projectile from "./Projectile.svelte";
-import { YARD_WIDTH } from "../../constants/sizes";
+import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 
@@ -44,7 +44,8 @@ export default class KernelProjectile extends Projectile {
     }
 
     const totalDistance = this.targetX - this.startX;
-    this.progress += (this.speed * deltaTime) / 1000;
+    // Find a better normalization factor
+    this.progress += (this.speed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
     const normalizedProgress = Math.min(this.progress, 1);
 
     this.x = this.startX + totalDistance * normalizedProgress;

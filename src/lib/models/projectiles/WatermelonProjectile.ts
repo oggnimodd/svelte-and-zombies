@@ -1,5 +1,5 @@
 import Projectile from "./Projectile.svelte";
-import { YARD_WIDTH } from "../../constants/sizes";
+import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "../../constants/sizes";
 import type BasePlant from "../plants/Plant";
 import type { ProjectileStats } from "./ProjectileTypes";
 
@@ -49,7 +49,8 @@ export default class WatermelonProjectile extends Projectile {
     }
 
     const totalDistance = this.targetX - this.startX;
-    this.progress += (this.speed * deltaTime) / 1000;
+    // Find a better normalization factor
+    this.progress += (this.speed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
     const normalizedProgress = Math.min(this.progress, 1);
 
     // Update X position based on progress to target

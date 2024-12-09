@@ -1,3 +1,4 @@
+import { CELL_WIDTH, NUM_COLS } from "$lib/constants/sizes";
 import type BasePlant from "../plants/Plant";
 import Projectile from "./Projectile.svelte";
 import type { ProjectileStats } from "./ProjectileTypes";
@@ -33,8 +34,8 @@ export default class StarProjectile extends Projectile {
   }
 
   move(deltaTime: number) {
-    const speedAdjustment = this.baseSpeed * (deltaTime / 16);
-
+    const speedAdjustment =
+      (this.baseSpeed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
     // Calculate x and y components based on angle
     this.x += Math.cos(this.angle) * speedAdjustment;
     this.y += Math.sin(this.angle) * speedAdjustment;

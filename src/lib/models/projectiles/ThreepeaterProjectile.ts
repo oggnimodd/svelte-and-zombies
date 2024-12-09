@@ -1,4 +1,4 @@
-import { CELL_WIDTH } from "../../constants/sizes";
+import { CELL_WIDTH, NUM_COLS } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 import PeaProjectile from "./PeaProjectile";
@@ -34,12 +34,17 @@ class ThreepeaterProjectile extends PeaProjectile {
   }
 
   move(deltaTime: number) {
-    const delta = deltaTime / 16;
+    const delta = deltaTime / 1000; // Convert to seconds
+
+    const normalizationFactor = CELL_WIDTH / NUM_COLS; // Normalization factor
 
     if (!this.hasReachedRow && this.targetRow !== this.row) {
-      // Calculate how much we need to move vertically
+      // Normalized vertical movement
       const verticalMove =
-        this.diagonalSpeed * delta * Math.sign(this.verticalDistance);
+        this.speed *
+        normalizationFactor *
+        delta *
+        Math.sign(this.verticalDistance);
       const targetY =
         this.targetRow * CELL_WIDTH + (CELL_WIDTH - this.height) / 2;
 
@@ -55,11 +60,11 @@ class ThreepeaterProjectile extends PeaProjectile {
         this.row = this.targetRow;
       }
 
-      // Move horizontally at a slightly reduced speed while moving diagonally
-      this.x += this.speed * delta * 0.8;
+      // Normalized horizontal movement (reduced while diagonal)
+      this.x += this.speed * normalizationFactor * delta * 0.8;
     } else {
-      // Move straight once we've reached the target row
-      this.x += this.speed * delta;
+      // Normalized horizontal movement
+      this.x += this.speed * normalizationFactor * delta;
     }
   }
 }
