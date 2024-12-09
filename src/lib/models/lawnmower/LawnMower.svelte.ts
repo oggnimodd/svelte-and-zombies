@@ -1,6 +1,6 @@
 import type Zombie from "../zombies/Zombie.svelte";
 import { soundManager } from "../game/SoundManager.svelte";
-import { CELL_WIDTH, YARD_WIDTH } from "$lib/constants/sizes";
+import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "$lib/constants/sizes";
 
 export interface LawnMowerConfig {
   row: number;
@@ -11,7 +11,7 @@ export default class LawnMower {
   x: number = $state(-CELL_WIDTH);
   y: number;
   isActivated: boolean = false;
-  speed: number = 5;
+  speed: number = 25;
   width: number = CELL_WIDTH;
   height: number = CELL_WIDTH;
 
@@ -29,7 +29,7 @@ export default class LawnMower {
 
   move(deltaTime: number) {
     if (this.isActivated) {
-      this.x += this.speed * (deltaTime / 16);
+      this.x += (this.speed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
     }
   }
 
