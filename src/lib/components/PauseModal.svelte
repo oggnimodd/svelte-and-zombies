@@ -4,30 +4,45 @@
   import { gameLoop } from "../reactivity/gameLoop.svelte";
 
   let isVisible = $state(false);
+  let isBlurred = $state(false); // Track blur state
 
   const handleVisibilityChange = () => {
     if (document.hidden && gameLoop.isRunning) {
       isVisible = true;
+      isBlurred = true; // Mark as blurred when becoming hidden
       gameLoop.pause();
+    } else if (!document.hidden && isBlurred) {
+      // If visibility is restored and we were previously blurred, treat it as a focus
+      isBlurred = false; // Reset blurred state
     }
   };
 
   const handleBlur = () => {
-    if (document.hasFocus() && gameLoop.isRunning) {
+    if (gameLoop.isRunning) {
       isVisible = true;
+      isBlurred = true;
       gameLoop.pause();
+    }
+  };
+
+  const handleFocus = () => {
+    // When regaining focus, check if the pause overlay is visible
+    if (isVisible) {
+      isBlurred = false;
     }
   };
 
   const handlePageHide = () => {
     if (gameLoop.isRunning) {
       isVisible = true;
+      isBlurred = true; // Page is hiding, consider it blurred
       gameLoop.pause();
     }
   };
 
   const resumeGame = () => {
     isVisible = false;
+    isBlurred = false;
     gameLoop.resume();
   };
 
@@ -37,16 +52,18 @@
 
   onMount(() => {
     if (browser) {
-      document.addEventListener("visibilitychange", handleVisibilityChange);
+      window.addEventListener("visibilitychange", handleVisibilityChange);
       window.addEventListener("blur", handleBlur);
+      window.addEventListener("focus", handleFocus);
       window.addEventListener("pagehide", handlePageHide);
     }
   });
 
   onDestroy(() => {
     if (browser) {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("visibilitychange", handleVisibilityChange);
       window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
       window.removeEventListener("pagehide", handlePageHide);
     }
   });

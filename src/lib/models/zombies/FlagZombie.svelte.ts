@@ -5,7 +5,7 @@ export default class FlagZombie extends Zombie {
   constructor(zombieConfig: Partial<ZombieConfig>) {
     super({
       name: "Flag Zombie",
-      health: 100,
+      health: 200,
       damage: 8,
       speed: 1.2,
       row: zombieConfig.row || 0,
