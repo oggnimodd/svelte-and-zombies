@@ -6,7 +6,7 @@ export default class ConeHeadZombie extends Zombie {
       name: "Cone Head Zombie",
       health: 200,
       damage: 8,
-      speed: 0.8,
+      speed: 0.5,
       row: zombieConfig.row || 0,
       image: "cone-head-zombie.png",
       ...zombieConfig,

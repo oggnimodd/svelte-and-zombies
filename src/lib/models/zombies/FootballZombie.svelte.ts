@@ -7,7 +7,7 @@ export default class FootballZombie extends Zombie {
       name: "Football Zombie",
       health: 500,
       damage: 15,
-      speed: 1.6,
+      speed: 1,
       row: zombieConfig.row || 0,
       image: "football-zombie.png",
       imageWidth: CELL_WIDTH * 1.2,

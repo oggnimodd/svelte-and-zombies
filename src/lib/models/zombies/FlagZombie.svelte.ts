@@ -7,7 +7,7 @@ export default class FlagZombie extends Zombie {
       name: "Flag Zombie",
       health: 200,
       damage: 8,
-      speed: 1.2,
+      speed: 0.7,
       row: zombieConfig.row || 0,
       image: "flag-zombie.png",
       imageWidth: CELL_WIDTH * 1.2,

@@ -80,11 +80,8 @@ export default class Zombie {
       this.isFrozen = false;
       this.speed = this.baseSpeed;
     }
-    if (this.isStunned) {
-      return;
-    }
-    if (!this.isAttacking) {
-      this.x -= this.speed * (deltaTime / 16) * 0.5;
+    if (!this.isAttacking && !this.isStunned) {
+      this.x -= this.speed * (deltaTime / 1000) * CELL_WIDTH;
     }
   }
 

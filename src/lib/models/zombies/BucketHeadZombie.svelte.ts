@@ -6,7 +6,7 @@ export default class BucketHeadZombie extends Zombie {
       name: "Bucket Head Zombie",
       health: 300,
       damage: 8,
-      speed: 0.8,
+      speed: 0.5,
       row: zombieConfig.row || 0,
       image: "bucket-head-zombie.png",
       ...zombieConfig,
