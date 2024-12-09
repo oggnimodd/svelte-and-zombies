@@ -51,10 +51,7 @@ export default class ZombieManager {
     {
       zombieCount: 4,
       spawnInterval: 8000,
-      zombieTypes: [
-        { type: NormalZombie, weight: 1 },
-        { type: FootballZombie, weight: 2 },
-      ],
+      zombieTypes: [{ type: NormalZombie, weight: 1 }],
     },
     {
       zombieCount: 8,
@@ -71,6 +68,16 @@ export default class ZombieManager {
         { type: NormalZombie, weight: 3 },
         { type: ConeHeadZombie, weight: 5 },
         { type: BucketHeadZombie, weight: 10 },
+      ],
+    },
+    {
+      zombieCount: 20,
+      spawnInterval: 2500,
+      zombieTypes: [
+        { type: NormalZombie, weight: 3 },
+        { type: ConeHeadZombie, weight: 5 },
+        { type: BucketHeadZombie, weight: 10 },
+        { type: FootballZombie, weight: 5 },
       ],
     },
   ];
