@@ -15,11 +15,9 @@ export const SquashStats: PlantStats = {
 };
 
 export default class Squash extends BasePlant {
-  // Configuration constants
   private readonly TRIGGER_RADIUS = CELL_WIDTH * 1.2; // Radius to detect zombies
   private readonly JUMP_DURATION = 1000; // Time for jump animation in milliseconds
   private readonly SQUASH_DAMAGE = 1800; // Instant kill damage
-
   public isJumping: boolean = $state(false);
   public isLanded: boolean = $state(false);
   private jumpStartTime: number = 0;
@@ -37,42 +35,35 @@ export default class Squash extends BasePlant {
     // Get plant center coordinates
     const plantCenterX = plantedPlant.coordinates.x + CELL_WIDTH / 2;
 
-    // Check for zombies in the same row within trigger radius (both front and back)
-    const nearbyZombies = zombies.filter((zombie) => {
-      if (zombie.row !== plantedPlant.cell.row) return false;
-      const zombieCenterX = zombie.x + zombie.width / 2;
-      const distance = Math.abs(zombieCenterX - plantCenterX);
-      return distance <= this.TRIGGER_RADIUS;
-    });
-
-    // Start jumping if zombies are nearby and not already jumping
-    if (nearbyZombies.length > 0 && !this.isJumping && !this.isLanded) {
-      this.isJumping = true;
-      this.jumpStartTime = gameTime;
-    }
-
-    // Check if jump animation is complete
     if (this.isJumping && !this.isLanded) {
       const elapsedTime = gameTime - this.jumpStartTime;
       if (elapsedTime >= this.JUMP_DURATION) {
-        // If there are no nearby zombies, skip
-        if (nearbyZombies.length === 0) return;
-
-        // Find closest zombie regardless of direction
-        const targetZombie = nearbyZombies.reduce((closest, current) => {
-          const currentDistance = Math.abs(
-            current.x + current.width / 2 - plantCenterX
-          );
-          const closestDistance = Math.abs(
-            closest.x + closest.width / 2 - plantCenterX
-          );
-          return currentDistance < closestDistance ? current : closest;
+        // FIX: Recalculate nearby zombies *after* the jump
+        const nearbyZombies = zombies.filter((zombie) => {
+          if (zombie.row !== plantedPlant.cell.row) return false;
+          const zombieCenterX = zombie.x + zombie.width / 2;
+          const distance = Math.abs(zombieCenterX - plantCenterX);
+          return distance <= this.TRIGGER_RADIUS;
         });
 
-        // Damage the targeted zombie and adjacent zombies if there is a target
+        // Find closest zombie regardless of direction (if any)
+        let targetZombie: Zombie | null = null;
+        if (nearbyZombies.length > 0) {
+          targetZombie = nearbyZombies.reduce((closest, current) => {
+            const currentDistance = Math.abs(
+              current.x + current.width / 2 - plantCenterX
+            );
+            const closestDistance = Math.abs(
+              closest.x + closest.width / 2 - plantCenterX
+            );
+            return currentDistance < closestDistance ? current : closest;
+          });
+        }
+
+        // Damage all zombies near the targeted point
         if (targetZombie) {
+          // Make sure a zombie is actually targeted
           const targetX = targetZombie.x + targetZombie.width / 2;
-          // Damage all zombies within a small radius of the target point
           zombies.forEach((zombie) => {
             if (zombie.row === plantedPlant.cell.row) {
               const zombieX = zombie.x + zombie.width / 2;
@@ -84,14 +75,25 @@ export default class Squash extends BasePlant {
           });
         }
 
-        // Mark as landed
         this.isJumping = false;
         this.isLanded = true;
-
         soundManager.playSound("slap");
-
         // Emit event for removal
         EventEmitter.emit("squashLanded", plantedPlant.plantedId);
+      }
+    } else {
+      // Squash is not jumping and hasn't landed yet
+      // Existing logic to start the jump (unchanged)
+      const nearbyZombies = zombies.filter((zombie) => {
+        if (zombie.row !== plantedPlant.cell.row) return false;
+        const zombieCenterX = zombie.x + zombie.width / 2;
+        const distance = Math.abs(zombieCenterX - plantCenterX);
+        return distance <= this.TRIGGER_RADIUS;
+      });
+
+      if (nearbyZombies.length > 0 && !this.isJumping && !this.isLanded) {
+        this.isJumping = true;
+        this.jumpStartTime = gameTime;
       }
     }
   }
