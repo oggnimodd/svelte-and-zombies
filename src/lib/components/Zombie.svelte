@@ -16,13 +16,18 @@
     zombie.row
   )}; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{zombie.x},{zombie.y},0,1);"
 >
-  <div class="relative flex h-full w-full items-center justify-center text-6xl">
+  <div class="relative flex h-full w-full items-center justify-center">
     {#if zombie.isStunned}
-      <div class="absolute left-0 top-0 h-full w-full">😴</div>
+      <div class="absolute left-0 top-0 z-50 h-full w-full text-6xl">😴</div>
     {/if}
-    <div class="absolute -bottom-4 left-0 w-24">
-      <img src={`/zombies/${zombie.image}`} alt={zombie.name} />
-    </div>
+    <img
+      class="absolute object-contain"
+      src={`/zombies/${zombie.image}`}
+      alt={zombie.name}
+      width={zombie.imageWidth}
+      height="auto"
+      style="max-width: none; bottom: -{(CELL_WIDTH - CELL_WIDTH / 1.5) / 2}px;"
+    />
   </div>
 </div>
 

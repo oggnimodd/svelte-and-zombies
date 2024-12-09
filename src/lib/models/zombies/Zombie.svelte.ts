@@ -10,6 +10,9 @@ export interface ZombieConfig {
   row: number;
   x?: number;
   y?: number;
+  // Image size, we only need the width to maintain aspect ratio
+  imageWidth?: number;
+  // Bounding box
   width?: number;
   height?: number;
   image: string;
@@ -28,6 +31,7 @@ export default class Zombie {
   isStunned: boolean = $state(false);
   lastAttackTime: number = $state(0);
   attackCooldown: number = 1000;
+  imageWidth: number = CELL_WIDTH / 1.1;
   width: number = CELL_WIDTH / 1.5;
   height: number = CELL_WIDTH / 1.5;
   attackingPlantId: string | null = $state(null);
@@ -48,6 +52,7 @@ export default class Zombie {
     this.y = config.y ?? 0;
     this.baseSpeed = config.speed;
     this.image = config.image;
+    this.imageWidth = config.imageWidth ?? CELL_WIDTH / 1.1;
   }
 
   freeze(duration: number) {

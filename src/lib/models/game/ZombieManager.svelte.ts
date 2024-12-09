@@ -18,6 +18,7 @@ import {
   createZombieBounds,
 } from "../../utils/createEntityBounds";
 import type { PlantedPlant } from "./PlantManager.svelte";
+import FootballZombie from "../zombies/FootballZombie.svelte";
 
 interface WaveConfig {
   zombieCount: number;
@@ -50,7 +51,10 @@ export default class ZombieManager {
     {
       zombieCount: 4,
       spawnInterval: 8000,
-      zombieTypes: [{ type: NormalZombie, weight: 1 }],
+      zombieTypes: [
+        { type: NormalZombie, weight: 1 },
+        { type: FootballZombie, weight: 2 },
+      ],
     },
     {
       zombieCount: 8,
