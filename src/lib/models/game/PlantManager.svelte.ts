@@ -23,9 +23,9 @@ import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry";
 import Potato from "../plants/Potato";
 import Spikeweed from "../plants/Spikeweed";
-import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
 import { soundManager } from "./SoundManager.svelte";
+import Squash from "../plants/Squash.svelte";
 
 interface PlantedPlantCell {
   row: number;

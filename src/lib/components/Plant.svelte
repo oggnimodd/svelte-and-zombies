@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
-  import type Squash from "$lib/models/plants/Squash";
+  import type Squash from "$lib/models/plants/Squash.svelte";
   import { getPlantImage } from "../utils/getPlantImage";
   import { getPlantZIndex } from "../utils/getZIndex";
 
@@ -19,13 +19,13 @@
     return getPlantImage(plantedPlant.plant.id);
   });
 
-  // TODO: fix animation not working
-  const isJumping = $derived(
-    plantedPlant.plant.id === "squash" &&
+  const isJumping = $derived.by(() => {
+    return (
+      plantedPlant.plant.id === "squash" &&
       (plantedPlant.plant as Squash).isJumping
-  );
+    );
+  });
 
-  // TODO: fix animation not working
   const hasLanded = $derived(
     plantedPlant.plant.id === "squash" &&
       (plantedPlant.plant as Squash).isLanded
@@ -48,7 +48,8 @@
       alt={plantedPlant.plant.id}
       class="{isJumping ? 'squash-jumping' : ''} 
                {hasLanded ? 'squash-landed' : ''} 
-               subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
+               {(!isJumping || !hasLanded) &&
+        'subtle-animation'} pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {:else}
     <img
@@ -93,30 +94,39 @@
 
   @keyframes squashJump {
     0% {
-      transform: scale(1) translateY(0);
+      transform: scale(1, 1) translateY(0); /* Initial state: normal size */
+    }
+    25% {
+      transform: scale(1.2, 0.6) translateY(-30px); /* Prepare for jump: stretch vertically, reduce width, move up slightly */
     }
     50% {
-      transform: scale(0.8) translateY(-40px);
+      transform: scale(0.6, 1.4) translateY(-150px); /* Peak of jump: squash horizontally, stretch vertically, move up a lot */
+    }
+    75% {
+      transform: scale(1.8, 0.4) translateY(0); /* Landing: flatten significantly, widen, return to ground level */
     }
     100% {
-      transform: scale(1.2) translateY(0);
+      transform: scale(1, 1) translateY(0); /* Return to normal: normal size */
     }
   }
 
   @keyframes squashLand {
     0% {
-      transform: scale(1);
+      transform: scale(1.8, 0.4); /* Start flattened */
     }
     50% {
-      transform: scale(1.5);
+      transform: scale(
+        0.3,
+        2
+      ); /* Overshoot upwards: stretch vertically, reduce width a lot */
     }
     100% {
-      transform: scale(0);
+      transform: scale(0, 0); /* Disappear */
     }
   }
 
   .squash-jumping {
-    animation: squashJump 1s ease-in-out;
+    animation: squashJump 1.1s ease-in-out forwards;
   }
 
   .squash-landed {

@@ -18,7 +18,6 @@ import Threepeater from "../plants/Threepeater";
 import Spikeweed from "../plants/Spikeweed";
 import { NUM_ROWS } from "../../constants/sizes";
 import Kernelpult from "../plants/Kernelpult";
-import Squash from "../plants/Squash";
 import Chomper from "../plants/Chomper";
 import SplitPea from "../plants/SplitPea";
 import Starfruit from "../plants/Starfruit";
@@ -28,6 +27,7 @@ import Sunflower from "../plants/Sunflower";
 import { soundManager } from "./SoundManager.svelte";
 import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
 import LawnMowerManager from "./LawnMowerManager.svelte";
+import Squash from "../plants/Squash.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;

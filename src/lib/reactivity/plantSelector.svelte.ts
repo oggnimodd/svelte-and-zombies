@@ -12,7 +12,7 @@ import { PotatoStats } from "$lib/models/plants/Potato";
 import { RepeaterStats } from "$lib/models/plants/Repeater";
 import { SpikeweedStats } from "$lib/models/plants/Spikeweed";
 import { SplitPeaStats } from "$lib/models/plants/SplitPea";
-import { SquashStats } from "$lib/models/plants/Squash";
+import { SquashStats } from "$lib/models/plants/Squash.svelte";
 import { StarfruitStats } from "$lib/models/plants/Starfruit";
 import { SunflowerStats } from "$lib/models/plants/Sunflower";
 import { TallnutStats } from "$lib/models/plants/Tallnut";

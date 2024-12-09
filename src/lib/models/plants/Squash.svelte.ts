@@ -20,8 +20,8 @@ export default class Squash extends BasePlant {
   private readonly JUMP_DURATION = 1000; // Time for jump animation in milliseconds
   private readonly SQUASH_DAMAGE = 1800; // Instant kill damage
 
-  public isJumping: boolean = false;
-  public isLanded: boolean = false;
+  public isJumping: boolean = $state(false);
+  public isLanded: boolean = $state(false);
   private jumpStartTime: number = 0;
 
   constructor() {
