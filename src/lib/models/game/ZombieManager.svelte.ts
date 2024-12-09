@@ -174,8 +174,6 @@ export default class ZombieManager {
       ZombieType = this.selectZombieType();
     }
 
-    console.log(ZombieType);
-
     const randomRow = Math.floor(Math.random() * NUM_ROWS);
     const coordinates = getCellCoordinates(randomRow, NUM_COLS);
     const zombie = new ZombieType({

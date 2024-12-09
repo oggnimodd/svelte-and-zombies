@@ -1,3 +1,5 @@
+import { CELL_WIDTH } from "$lib/constants/sizes";
+
 export interface ProjectileStats {
   type: string;
   speed: number;
@@ -8,64 +10,67 @@ export interface ProjectileStats {
   stunDuration?: number;
 }
 
+// Helper function to calculate dimensions based on CELL_WIDTH
+const getDimension = (multiplier: number): number => multiplier * CELL_WIDTH;
+
 export const ProjectileTypes = {
   PEA: {
     type: "pea",
     speed: 5,
-    width: 20,
-    height: 20,
+    width: getDimension(0.25),
+    height: getDimension(0.25),
     image: "/projectiles/pea.png",
   },
   FIRE_PEA: {
     type: "fire_pea",
     speed: 5,
-    width: 40,
-    height: 40,
+    width: getDimension(0.5),
+    height: getDimension(0.5),
     image: "/projectiles/firepea.png",
   },
   ICE_PEA: {
     type: "ice_pea",
     speed: 5,
-    width: 20,
-    height: 20,
+    width: getDimension(0.25),
+    height: getDimension(0.25),
     image: "/projectiles/icepea.png",
     freezeDuration: 2000,
   },
   WATERMELON: {
     type: "watermelon",
     speed: 1.5,
-    width: 50,
-    height: 50,
+    width: getDimension(0.55),
+    height: getDimension(0.55),
     image: "/projectiles/watermelon.png",
   },
   ICE_WATERMELON: {
     type: "ice_watermelon",
     speed: 1.5,
-    width: 50,
-    height: 50,
+    width: getDimension(0.55),
+    height: getDimension(0.55),
     image: "/projectiles/icewatermelon.png",
     freezeDuration: 3000,
   },
   CABBAGE: {
     type: "cabbage",
     speed: 2.5,
-    width: 35,
-    height: 35,
+    width: getDimension(0.4),
+    height: getDimension(0.4),
     image: "/projectiles/cabbage.png",
   },
   KERNEL: {
     type: "kernelpult",
     speed: 2.5,
-    width: 30,
-    height: 30,
+    width: getDimension(0.35),
+    height: getDimension(0.35),
     image: "/projectiles/kernelpult.png",
     stunDuration: 1500, // 1.5 seconds stun
   },
   STAR: {
     type: "star",
     speed: 4,
-    width: 25,
-    height: 25,
+    width: getDimension(0.3),
+    height: getDimension(0.3),
     image: "/projectiles/star.png",
   },
 } as const;
