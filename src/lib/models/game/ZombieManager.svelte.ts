@@ -19,12 +19,18 @@ import {
 } from "../../utils/createEntityBounds";
 import type { PlantedPlant } from "./PlantManager.svelte";
 import FootballZombie from "../zombies/FootballZombie.svelte";
+import FlagZombie from "../zombies/FlagZombie.svelte";
 
 interface WaveConfig {
   zombieCount: number;
   spawnInterval: number;
   zombieTypes: Array<{
-    type: typeof NormalZombie | typeof ConeHeadZombie | typeof BucketHeadZombie;
+    type:
+      | typeof NormalZombie
+      | typeof ConeHeadZombie
+      | typeof BucketHeadZombie
+      | typeof FootballZombie
+      | typeof FlagZombie;
     weight: number;
   }>;
 }
@@ -94,15 +100,12 @@ export default class ZombieManager {
   }
 
   private updateQuadTree() {
-    // Clear and rebuild quadtree
     this.quadTree.clear();
 
-    // Insert all plants
     for (const plant of this.plantManager.plantedPlants) {
       this.quadTree.insert(createPlantBounds(plant));
     }
 
-    // Insert all zombies
     for (const zombie of this.zombies) {
       this.quadTree.insert(createZombieBounds(zombie));
     }
@@ -129,13 +132,11 @@ export default class ZombieManager {
 
     if (plantCollisions.length === 0) return null;
 
-    // Sort by x position to get leftmost plant
     plantCollisions.sort((a, b) => a.x - b.x);
     const collidedPlantId = plantCollisions[0].id;
     return this.plantManager.getPlantById(collidedPlantId) || null;
   }
 
-  // Add this helper method for detailed collision checking
   private checkDetailedCollision(
     zombieBounds: ReturnType<typeof createZombieBounds>,
     plantBounds: ReturnType<typeof createPlantBounds>
@@ -164,7 +165,17 @@ export default class ZombieManager {
   }
 
   private spawnZombie() {
-    const ZombieType = this.selectZombieType();
+    let ZombieType: WaveConfig["zombieTypes"][0]["type"];
+
+    // Ensure the first zombie in waves 2 and above is a Flag Zombie
+    if (this.currentWave > 0 && this.zombiesSpawnedInWave === 0) {
+      ZombieType = FlagZombie;
+    } else {
+      ZombieType = this.selectZombieType();
+    }
+
+    console.log(ZombieType);
+
     const randomRow = Math.floor(Math.random() * NUM_ROWS);
     const coordinates = getCellCoordinates(randomRow, NUM_COLS);
     const zombie = new ZombieType({
@@ -196,12 +207,11 @@ export default class ZombieManager {
     this.isWaveActive = true;
     this.zombiesSpawnedInWave = 0;
     this.spawnInterval = this.waveConfigs[this.currentWave].spawnInterval;
-    this.timeSinceLastSpawn = this.spawnInterval;
+    this.timeSinceLastSpawn = 0;
     EventEmitter.emit("waveStarted", this.currentWave);
   }
 
   updateZombies(deltaTime: number) {
-    // Always update quadtree regardless of wave status
     this.updateQuadTree();
 
     if (!this.isWaveActive) {
@@ -211,7 +221,6 @@ export default class ZombieManager {
           this.startNextWave();
         }
       } else if (!this.isFirstWaveStarted) {
-        // Handle delay before the first wave
         this.firstWaveDelay -= deltaTime;
         if (this.firstWaveDelay <= 0) {
           this.isFirstWaveStarted = true;
@@ -221,15 +230,17 @@ export default class ZombieManager {
       }
     }
 
-    this.timeSinceLastSpawn += deltaTime;
-    if (this.currentWave < this.waveConfigs.length) {
-      const currentWaveConfig = this.waveConfigs[this.currentWave];
-      if (
-        this.timeSinceLastSpawn >= this.spawnInterval &&
-        this.zombiesSpawnedInWave < currentWaveConfig.zombieCount
-      ) {
-        this.spawnZombie();
-        this.timeSinceLastSpawn = 0;
+    if (this.isWaveActive) {
+      this.timeSinceLastSpawn += deltaTime;
+      if (this.currentWave < this.waveConfigs.length) {
+        const currentWaveConfig = this.waveConfigs[this.currentWave];
+        if (
+          this.timeSinceLastSpawn >= this.spawnInterval &&
+          this.zombiesSpawnedInWave < currentWaveConfig.zombieCount
+        ) {
+          this.timeSinceLastSpawn = 0;
+          this.spawnZombie();
+        }
       }
     }
 
@@ -275,6 +286,7 @@ export default class ZombieManager {
       return true;
     });
 
+    // Only transition to next wave when ALL zombies are cleared AND all zombies have been spawned
     if (
       this.zombiesSpawnedInWave >=
         this.waveConfigs[this.currentWave]?.zombieCount &&
