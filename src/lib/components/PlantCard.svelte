@@ -41,7 +41,7 @@
 
 <button
   onmousedown={handleClick}
-  class="group relative flex aspect-square w-16 select-none flex-col items-center justify-center p-4 text-white"
+  class="group relative flex aspect-square select-none flex-col items-center justify-center p-4 text-white"
   class:opacity-50={!isSunEnough}
   class:grayscale={isOnCooldown}
 >
