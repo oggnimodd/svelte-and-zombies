@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
+  import type Chomper from "$lib/models/plants/Chomper.svelte";
   import type Squash from "$lib/models/plants/Squash.svelte";
   import { getPlantImage } from "../utils/getPlantImage";
   import { getPlantZIndex } from "../utils/getZIndex";
@@ -19,6 +20,7 @@
     return getPlantImage(plantedPlant.plant.id);
   });
 
+  // Squash-specific variables
   const isJumping = $derived.by(() => {
     return (
       plantedPlant.plant.id === "squash" &&
@@ -29,6 +31,12 @@
   const hasLanded = $derived(
     plantedPlant.plant.id === "squash" &&
       (plantedPlant.plant as Squash).isLanded
+  );
+
+  // Chomper-specific variables
+  const isChomperFull = $derived(
+    plantedPlant.plant.id === "chomper" &&
+      (plantedPlant.plant as Chomper).isChewing
   );
 </script>
 
@@ -50,6 +58,14 @@
                {hasLanded ? 'squash-landed' : ''} 
                {(!isJumping || !hasLanded) &&
         'subtle-animation'} pointer-events-none absolute bottom-0 w-full cursor-none"
+    />
+  {:else if plantedPlant.plant.id === "chomper"}
+    <img
+      src={isChomperFull
+        ? getPlantImage("chomper-full")
+        : getPlantImage("chomper")}
+      alt={plantedPlant.plant.id}
+      class="subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {:else}
     <img

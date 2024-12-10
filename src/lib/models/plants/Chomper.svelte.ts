@@ -17,7 +17,7 @@ export default class Chomper extends BasePlant {
   private readonly CHEW_DURATION = 5000; // 5 seconds for chewing animation
   private readonly RANGE = CELL_WIDTH;
 
-  private isChewing: boolean = false;
+  isChewing: boolean = $state(false);
   private chewStartTime: number = 0;
 
   constructor() {
