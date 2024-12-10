@@ -38,7 +38,7 @@ export const ProjectileTypes = {
   },
   WATERMELON: {
     type: "watermelon",
-    speed: 8,
+    speed: 0.2,
     width: getDimension(0.55),
     height: getDimension(0.55),
     image: "/projectiles/watermelon.png",
@@ -60,7 +60,7 @@ export const ProjectileTypes = {
   },
   KERNEL: {
     type: "kernelpult",
-    speed: 0.2,
+    speed: 0.35,
     width: getDimension(0.35),
     height: getDimension(0.35),
     image: "/projectiles/kernelpult.png",
