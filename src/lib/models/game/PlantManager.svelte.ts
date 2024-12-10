@@ -20,7 +20,7 @@ import Kernelpult from "../plants/Kernelpult";
 import SplitPea from "../plants/SplitPea";
 import Starfruit from "../plants/Starfruit";
 import Chilli from "../plants/Chilli";
-import Cherry from "../plants/Cherry";
+import Cherry from "../plants/Cherry.svelte";
 import Potato from "../plants/Potato";
 import Spikeweed from "../plants/Spikeweed";
 import { soundManager } from "./SoundManager.svelte";

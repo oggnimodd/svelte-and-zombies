@@ -1,6 +1,6 @@
 import PlantSelector from "$lib/models/game/PlantSelector.svelte";
 import { CabbageStats } from "$lib/models/plants/Cabbage";
-import { CherryStats } from "$lib/models/plants/Cherry";
+import { CherryStats } from "$lib/models/plants/Cherry.svelte";
 import { ChilliStats } from "$lib/models/plants/Chilli";
 import { ChomperStats } from "$lib/models/plants/Chomper.svelte";
 import { FirePeaStats } from "$lib/models/plants/FirePea";

@@ -4,6 +4,7 @@ import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { soundManager } from "../game/SoundManager.svelte";
+import type { CircularExplosionParams } from "../game/ExplosionManager.svelte";
 
 export const CherryStats: PlantStats = {
   id: "cherry",
@@ -16,7 +17,7 @@ export const CherryStats: PlantStats = {
 
 export default class Cherry extends BasePlant {
   private readonly INFLATE_DURATION = 1000; // 1 second for inflation animation
-  private isExploding: boolean = false;
+  isExploding: boolean = $state(false);
   private isExploded: boolean = false;
   private explosionStartTime: number = 0;
 
@@ -38,6 +39,12 @@ export default class Cherry extends BasePlant {
       const elapsedTime = gameTime - this.explosionStartTime;
 
       if (elapsedTime >= this.INFLATE_DURATION) {
+        // Emit event to display explosion
+        EventEmitter.emit("addCircularExplosion", {
+          col: plantedPlant.cell.col,
+          row: plantedPlant.cell.row,
+        } satisfies CircularExplosionParams);
+
         // Get zombies in current and adjacent rows
         const currentRow = plantedPlant.cell.row;
         const affectedZombies = zombies.filter((zombie) => {
@@ -52,7 +59,7 @@ export default class Cherry extends BasePlant {
               (plantedPlant.coordinates.x + CELL_WIDTH / 2)
           );
 
-          if (zombieDistance <= CELL_WIDTH * 1.5) {
+          if (zombieDistance <= CELL_WIDTH * 2) {
             zombie.health -= this.damage;
           }
         });

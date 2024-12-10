@@ -19,6 +19,7 @@
   import PlantCursor from "./PlantCursor.svelte";
   import isMobile from "is-mobile";
   import LawnMower from "./LawnMower.svelte";
+  import Explosion from "./Explosion.svelte";
 
   const handleEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -86,6 +87,17 @@
       {/each}
     </Row>
   {/each}
+
+  <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
+    {#each gameLoop.explosionManager.getExplosions() as explosion (explosion.id)}
+      <Explosion
+        x={explosion.x}
+        y={explosion.y}
+        duration={explosion.duration}
+        type={explosion.type}
+      />
+    {/each}
+  </div>
 
   <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
     {#each gameLoop.lawnMowerManager.getLawnMowers() as lawnMower (lawnMower.row)}

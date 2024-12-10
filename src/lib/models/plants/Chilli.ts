@@ -3,6 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { soundManager } from "../game/SoundManager.svelte";
+import type { RowExplosionParams } from "../game/ExplosionManager.svelte";
 
 export const ChilliStats: PlantStats = {
   id: "chilli",
@@ -37,6 +38,11 @@ export default class Chilli extends BasePlant {
       const elapsedTime = gameTime - this.explosionStartTime;
 
       if (elapsedTime >= this.INFLATE_DURATION) {
+        // Emit event to display explosion
+        EventEmitter.emit("addRowExplosion", {
+          row: plantedPlant.cell.row,
+        } satisfies RowExplosionParams);
+
         // Get all zombies in the same row as the planted plant
         const rowZombies = zombies.filter(
           (zombie) => zombie.row === plantedPlant.cell.row

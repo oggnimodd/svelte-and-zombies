@@ -4,6 +4,8 @@ import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { soundManager } from "../game/SoundManager.svelte";
+import type { CircularExplosionParams } from "../game/ExplosionManager.svelte";
+import { gameTime } from "../game/GameTime.svelte";
 
 export const PotatoStats: PlantStats = {
   id: "potato",
@@ -17,7 +19,7 @@ export const PotatoStats: PlantStats = {
 export default class Potato extends BasePlant {
   // Configuration constants
   private readonly ACTIVATION_RADIUS = CELL_WIDTH * 1.05; // Radius to detect zombies
-  private readonly ACTIVATION_DURATION = 5000; // Time to activate in milliseconds
+  private readonly ACTIVATION_DURATION = 4000; // Time to activate in milliseconds
   private readonly EXPLOSION_DAMAGE = 1800;
 
   private isActivating: boolean = true;
@@ -27,7 +29,7 @@ export default class Potato extends BasePlant {
 
   constructor() {
     super(PotatoStats);
-    this.activationStartTime = performance.now();
+    this.activationStartTime = gameTime.get();
   }
 
   update(plantedPlant: PlantedPlant, gameTime: number, zombies: Zombie[]) {
@@ -62,6 +64,12 @@ export default class Potato extends BasePlant {
       });
 
       if (zombiesInRange.length > 0) {
+        //  Display circular explosion
+        EventEmitter.emit("addCircularExplosion", {
+          col: plantedPlant.cell.col,
+          row: plantedPlant.cell.row,
+        } satisfies CircularExplosionParams);
+
         // Explode!
         zombiesInRange.forEach((zombie) => {
           zombie.health -= this.EXPLOSION_DAMAGE;

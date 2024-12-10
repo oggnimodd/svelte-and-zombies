@@ -11,7 +11,7 @@ import IcePea from "../plants/IcePea";
 import WinterMelon from "../plants/WinterMelon";
 import { gameTime } from "./GameTime.svelte";
 import Chilli from "../plants/Chilli";
-import Cherry from "../plants/Cherry";
+import Cherry from "../plants/Cherry.svelte";
 import Cabbage from "../plants/Cabbage";
 import Potato from "../plants/Potato";
 import Threepeater from "../plants/Threepeater";
@@ -28,6 +28,10 @@ import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
 import LawnMowerManager from "./LawnMowerManager.svelte";
 import Squash from "../plants/Squash.svelte";
 import Chomper from "../plants/Chomper.svelte";
+import ExplosionManager, {
+  type CircularExplosionParams,
+  type RowExplosionParams,
+} from "./ExplosionManager.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -41,6 +45,7 @@ export class GameLoop {
   projectileManager: ProjectileManager;
   sunManager: SunManager;
   lawnMowerManager: LawnMowerManager;
+  explosionManager: ExplosionManager;
 
   constructor(plantManager: PlantManager) {
     this.plantManager = plantManager;
@@ -48,6 +53,7 @@ export class GameLoop {
     this.projectileManager = new ProjectileManager();
     this.sunManager = new SunManager();
     this.lawnMowerManager = new LawnMowerManager();
+    this.explosionManager = new ExplosionManager();
 
     EventEmitter.on("produceSun", ({ x, y }) => {
       this.sunManager.spawnSunFromFlower(x, y);
@@ -56,6 +62,18 @@ export class GameLoop {
     EventEmitter.on("gameWon", () => {
       this.stop();
       alert("Congratulations! You've completed all waves! 🏆");
+    });
+
+    // Listen for explosion events
+    EventEmitter.on(
+      "addCircularExplosion",
+      (params: CircularExplosionParams) => {
+        this.explosionManager.addCircularExplosion(params);
+      }
+    );
+
+    EventEmitter.on("addRowExplosion", (params: RowExplosionParams) => {
+      this.explosionManager.addRowExplosion(params);
     });
   }
 
@@ -80,6 +98,7 @@ export class GameLoop {
     plantSelector.reset();
     soundManager.stopBackgroundMusic();
     this.zombieManager.zombies.forEach((zombie) => zombie.stopEatingSound());
+    this.explosionManager.reset();
   }
 
   pause() {
@@ -308,6 +327,8 @@ export class GameLoop {
       deltaTime,
       this.zombieManager.zombies
     );
+
+    this.explosionManager.update();
   }
 
   private checkGameState(): boolean {
