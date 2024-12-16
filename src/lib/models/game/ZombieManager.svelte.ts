@@ -24,6 +24,7 @@ import FlagZombie from "../zombies/FlagZombie.svelte";
 interface WaveConfig {
   zombieCount: number;
   spawnInterval: number;
+  maxSimultaneousSpawnCount?: number;
   zombieTypes: Array<{
     type:
       | typeof NormalZombie
@@ -60,12 +61,13 @@ export default class ZombieManager {
       zombieTypes: [{ type: NormalZombie, weight: 1 }],
     },
     {
-      zombieCount: 8,
+      zombieCount: 15,
       spawnInterval: 2800,
       zombieTypes: [
         { type: NormalZombie, weight: 7 },
         { type: ConeHeadZombie, weight: 3 },
       ],
+      maxSimultaneousSpawnCount: 2,
     },
     {
       zombieCount: 20,
@@ -75,6 +77,7 @@ export default class ZombieManager {
         { type: ConeHeadZombie, weight: 5 },
         { type: BucketHeadZombie, weight: 10 },
       ],
+      maxSimultaneousSpawnCount: 4,
     },
     {
       zombieCount: 40,
@@ -85,6 +88,7 @@ export default class ZombieManager {
         { type: BucketHeadZombie, weight: 10 },
         { type: FootballZombie, weight: 7 },
       ],
+      maxSimultaneousSpawnCount: 5,
     },
   ];
 
@@ -164,25 +168,44 @@ export default class ZombieManager {
     return config.zombieTypes[0].type;
   }
 
-  private spawnZombie() {
-    let ZombieType: WaveConfig["zombieTypes"][0]["type"];
+  private spawnZombies() {
+    const currentWaveConfig = this.waveConfigs[this.currentWave];
+    const remainingZombies =
+      currentWaveConfig.zombieCount - this.zombiesSpawnedInWave;
 
-    // Ensure the first zombie in waves 2 and above is a Flag Zombie
-    if (this.currentWave > 0 && this.zombiesSpawnedInWave === 0) {
-      ZombieType = FlagZombie;
-    } else {
-      ZombieType = this.selectZombieType();
+    // Determine simultaneous spawn count with default of 1
+    const simultaneousSpawnCount = Math.min(
+      Math.floor(
+        Math.random() * (currentWaveConfig.maxSimultaneousSpawnCount ?? 1)
+      ) + 1,
+      remainingZombies
+    );
+
+    // Ensure first zombie in waves 2+ is always a Flag Zombie
+    const firstZombieType =
+      this.currentWave > 0 && this.zombiesSpawnedInWave === 0
+        ? FlagZombie
+        : null;
+
+    for (let i = 0; i < simultaneousSpawnCount; i++) {
+      let ZombieType: WaveConfig["zombieTypes"][0]["type"];
+
+      if (firstZombieType && i === 0) {
+        ZombieType = firstZombieType;
+      } else {
+        ZombieType = this.selectZombieType();
+      }
+
+      const randomRow = Math.floor(Math.random() * NUM_ROWS);
+      const coordinates = getCellCoordinates(randomRow, NUM_COLS);
+      const zombie = new ZombieType({
+        row: randomRow,
+        x: YARD_WIDTH + 100 + Math.random() * 50, // Add slight variation in spawn x position
+        y: coordinates.y + (CELL_WIDTH - CELL_WIDTH / 1.5) / 2,
+      });
+      this.zombies = [...this.zombies, zombie];
+      this.zombiesSpawnedInWave++;
     }
-
-    const randomRow = Math.floor(Math.random() * NUM_ROWS);
-    const coordinates = getCellCoordinates(randomRow, NUM_COLS);
-    const zombie = new ZombieType({
-      row: randomRow,
-      x: YARD_WIDTH + 100,
-      y: coordinates.y + (CELL_WIDTH - CELL_WIDTH / 1.5) / 2,
-    });
-    this.zombies = [...this.zombies, zombie];
-    this.zombiesSpawnedInWave++;
   }
 
   private handlePlantRemoved(plantedId: string) {
@@ -237,7 +260,7 @@ export default class ZombieManager {
           this.zombiesSpawnedInWave < currentWaveConfig.zombieCount
         ) {
           this.timeSinceLastSpawn = 0;
-          this.spawnZombie();
+          this.spawnZombies();
         }
       }
     }
