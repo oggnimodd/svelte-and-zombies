@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { PlantedPlant } from "$lib/models/game/PlantManager.svelte";
   import type Chomper from "$lib/models/plants/Chomper.svelte";
+  import type Potato from "$lib/models/plants/Potato.svelte";
   import type Squash from "$lib/models/plants/Squash.svelte";
   import { getPlantImage } from "../utils/getPlantImage";
   import { getPlantZIndex } from "../utils/getZIndex";
@@ -38,6 +39,12 @@
     plantedPlant.plant.id === "chomper" &&
       (plantedPlant.plant as Chomper).isChewing
   );
+
+  // Potato-specific variables
+  const isPotatoActivating = $derived(
+    plantedPlant.plant.id === "potato" &&
+      (plantedPlant.plant as Potato).isActivating
+  );
 </script>
 
 <div
@@ -71,6 +78,14 @@
       src={isChomperFull
         ? getPlantImage("chomper-full")
         : getPlantImage("chomper")}
+      alt={plantedPlant.plant.id}
+      class="subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
+    />
+  {:else if plantedPlant.plant.id === "potato"}
+    <img
+      src={isPotatoActivating
+        ? getPlantImage("potato-activating")
+        : getPlantImage("potato")}
       alt={plantedPlant.plant.id}
       class="subtle-animation pointer-events-none absolute bottom-0 w-full cursor-none"
     />

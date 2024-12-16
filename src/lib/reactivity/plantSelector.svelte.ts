@@ -8,7 +8,7 @@ import { GatlingPeaStats } from "$lib/models/plants/GatlingPea";
 import { IcePeaStats } from "$lib/models/plants/IcePea";
 import { KernelpultStats } from "$lib/models/plants/Kernelpult";
 import { PeashooterStats } from "$lib/models/plants/Peashooter";
-import { PotatoStats } from "$lib/models/plants/Potato";
+import { PotatoStats } from "$lib/models/plants/Potato.svelte";
 import { RepeaterStats } from "$lib/models/plants/Repeater";
 import { SpikeweedStats } from "$lib/models/plants/Spikeweed";
 import { SplitPeaStats } from "$lib/models/plants/SplitPea";

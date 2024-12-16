@@ -22,9 +22,9 @@ export default class Potato extends BasePlant {
   private readonly ACTIVATION_DURATION = 4000; // Time to activate in milliseconds
   private readonly EXPLOSION_DAMAGE = 1800;
 
-  private isActivating: boolean = true;
-  private isActivated: boolean = false;
-  private isExploded: boolean = false;
+  isActivating: boolean = $state(true);
+  isActivated: boolean = $state(false);
+  isExploded: boolean = $state(false);
   private activationStartTime: number;
 
   constructor() {

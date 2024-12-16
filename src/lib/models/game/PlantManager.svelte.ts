@@ -21,11 +21,11 @@ import SplitPea from "../plants/SplitPea";
 import Starfruit from "../plants/Starfruit";
 import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry.svelte";
-import Potato from "../plants/Potato";
 import Spikeweed from "../plants/Spikeweed";
 import { soundManager } from "./SoundManager.svelte";
 import Squash from "../plants/Squash.svelte";
 import Chomper from "../plants/Chomper.svelte";
+import Potato from "../plants/Potato.svelte";
 
 interface PlantedPlantCell {
   row: number;

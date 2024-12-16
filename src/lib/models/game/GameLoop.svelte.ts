@@ -13,7 +13,6 @@ import { gameTime } from "./GameTime.svelte";
 import Chilli from "../plants/Chilli";
 import Cherry from "../plants/Cherry.svelte";
 import Cabbage from "../plants/Cabbage";
-import Potato from "../plants/Potato";
 import Threepeater from "../plants/Threepeater";
 import Spikeweed from "../plants/Spikeweed";
 import { NUM_ROWS } from "../../constants/sizes";
@@ -32,6 +31,7 @@ import ExplosionManager, {
   type CircularExplosionParams,
   type RowExplosionParams,
 } from "./ExplosionManager.svelte";
+import Potato from "../plants/Potato.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;
