@@ -8,3 +8,7 @@ export const NUM_COLS = 9;
 // The cells should be squares
 export const CELL_WIDTH = YARD_WIDTH / NUM_COLS;
 export const YARD_HEIGHT = CELL_WIDTH * NUM_ROWS;
+
+export const YARD_BOUNDARY_OFFSET = CELL_WIDTH * 2;
+
+export const ZOMBIE_SPAWN_AREA_WIDTH = CELL_WIDTH;

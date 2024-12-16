@@ -1,5 +1,10 @@
 import Projectile from "./Projectile.svelte";
-import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "../../constants/sizes";
+import {
+  CELL_WIDTH,
+  NUM_COLS,
+  YARD_BOUNDARY_OFFSET,
+  YARD_WIDTH,
+} from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 
@@ -39,7 +44,7 @@ export default class KernelProjectile extends Projectile {
 
   move(deltaTime: number) {
     if (this.hasLanded) {
-      this.x = YARD_WIDTH + 300;
+      this.x = YARD_WIDTH + YARD_BOUNDARY_OFFSET;
       return;
     }
 

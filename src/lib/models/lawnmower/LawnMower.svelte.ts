@@ -1,6 +1,10 @@
-import type Zombie from "../zombies/Zombie.svelte";
 import { soundManager } from "../game/SoundManager.svelte";
-import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "$lib/constants/sizes";
+import {
+  CELL_WIDTH,
+  NUM_COLS,
+  YARD_BOUNDARY_OFFSET,
+  YARD_WIDTH,
+} from "$lib/constants/sizes";
 
 export interface LawnMowerConfig {
   row: number;
@@ -34,6 +38,6 @@ export default class LawnMower {
   }
 
   isOutOfBounds() {
-    return this.x > YARD_WIDTH + 300;
+    return this.x > YARD_WIDTH + YARD_BOUNDARY_OFFSET;
   }
 }

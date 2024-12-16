@@ -1,5 +1,9 @@
 <script lang="ts">
-  import { CELL_WIDTH, YARD_WIDTH } from "$lib/constants/sizes";
+  import {
+    CELL_WIDTH,
+    YARD_BOUNDARY_OFFSET,
+    YARD_WIDTH,
+  } from "$lib/constants/sizes";
   interface ExplosionProps {
     type: "circular" | "row";
     x: number;
@@ -11,7 +15,7 @@
   // Just for row explosions
   const explosionHeight = (CELL_WIDTH * 4) / 5;
 
-  const explosionWidth = YARD_WIDTH + 300;
+  const explosionWidth = YARD_WIDTH + YARD_BOUNDARY_OFFSET;
 </script>
 
 <!-- Circular explosion -->

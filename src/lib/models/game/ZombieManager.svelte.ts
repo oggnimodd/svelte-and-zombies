@@ -6,6 +6,7 @@ import {
   NUM_COLS,
   YARD_WIDTH,
   YARD_HEIGHT,
+  ZOMBIE_SPAWN_AREA_WIDTH,
 } from "../../constants/sizes";
 import { getCellCoordinates } from "../../utils/getCellCoordinates";
 import EventEmitter from "../EventEmitter";
@@ -200,7 +201,10 @@ export default class ZombieManager {
       const coordinates = getCellCoordinates(randomRow, NUM_COLS);
       const zombie = new ZombieType({
         row: randomRow,
-        x: YARD_WIDTH + 100 + Math.random() * 50, // Add slight variation in spawn x position
+        x:
+          YARD_WIDTH +
+          ZOMBIE_SPAWN_AREA_WIDTH -
+          Math.random() * (ZOMBIE_SPAWN_AREA_WIDTH / 2), // Add slight variation in spawn x position
         y: coordinates.y + (CELL_WIDTH - CELL_WIDTH / 1.5) / 2,
       });
       this.zombies = [...this.zombies, zombie];

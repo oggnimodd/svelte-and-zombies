@@ -1,5 +1,10 @@
 import type Zombie from "../zombies/Zombie.svelte";
-import { YARD_WIDTH, CELL_WIDTH, YARD_HEIGHT } from "../../constants/sizes";
+import {
+  YARD_WIDTH,
+  CELL_WIDTH,
+  YARD_HEIGHT,
+  YARD_BOUNDARY_OFFSET,
+} from "../../constants/sizes";
 import QuadTree from "../../algo/QuadTree";
 import Projectile from "../../models/projectiles/Projectile.svelte";
 import PeaProjectile from "../../models/projectiles/PeaProjectile";
@@ -134,10 +139,14 @@ export default class ProjectileManager {
 
       // Check if projectile is within game bounds
       const isWithinBounds =
-        projectile.x < YARD_WIDTH + 200 &&
-        projectile.x > -50 &&
+        // Right offset
+        projectile.x < YARD_WIDTH + YARD_BOUNDARY_OFFSET &&
+        // Left offset
+        projectile.x > -YARD_BOUNDARY_OFFSET / 4 &&
+        // Bottom offset
         projectile.y < YARD_HEIGHT &&
-        projectile.y > -200;
+        // Top offset
+        projectile.y > -YARD_BOUNDARY_OFFSET / 4;
 
       if (isWithinBounds) {
         remainingProjectiles.push(projectile);

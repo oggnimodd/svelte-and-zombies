@@ -1,5 +1,10 @@
 import Projectile from "./Projectile.svelte";
-import { CELL_WIDTH, NUM_COLS, YARD_WIDTH } from "../../constants/sizes";
+import {
+  CELL_WIDTH,
+  NUM_COLS,
+  YARD_BOUNDARY_OFFSET,
+  YARD_WIDTH,
+} from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
 
@@ -45,7 +50,7 @@ export default class CabbageProjectile extends Projectile {
   move(deltaTime: number) {
     // If already landed, remove the projectile
     if (this.hasLanded) {
-      this.x = YARD_WIDTH + 300; // Force removal by moving outside bounds
+      this.x = YARD_WIDTH + YARD_BOUNDARY_OFFSET; // Force removal by moving outside bounds
       return;
     }
 
