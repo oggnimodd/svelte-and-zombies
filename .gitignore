@@ -38,3 +38,6 @@ convo.md
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Preload list
+src/lib/preload-list.json
