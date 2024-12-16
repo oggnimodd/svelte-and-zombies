@@ -26,7 +26,6 @@
     "@sveltejs/vite-plugin-svelte": "^4.0.2",
     "@tsconfig/svelte": "^5.0.4",
     "@types/howler": "^2.2.12",
-    "@types/node": "^22.10.2",
     "autoprefixer": "^10.4.20",
     "husky": "^9.1.7",
     "lint-staged": "^15.2.10",
