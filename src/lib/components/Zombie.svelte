@@ -18,7 +18,13 @@
 >
   <div class="relative flex h-full w-full items-center justify-center">
     {#if zombie.isStunned}
-      <div class="absolute left-0 top-0 z-50 h-full w-full text-6xl">😴</div>
+      <img
+        class="absolute bottom-full left-0 z-10 object-contain"
+        src="/effects/butter.png"
+        alt="Butter"
+        width={CELL_WIDTH * 0.5}
+        height="auto"
+      />
     {/if}
     <img
       class="absolute object-contain"
