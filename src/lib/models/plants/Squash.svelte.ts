@@ -20,6 +20,8 @@ export default class Squash extends BasePlant {
   private readonly SQUASH_DAMAGE = 1800; // Instant kill damage
   public isJumping: boolean = $state(false);
   public isLanded: boolean = $state(false);
+  public jumpDirection: "left" | "right" | null = $state(null);
+
   private jumpStartTime: number = 0;
 
   constructor() {
@@ -38,7 +40,7 @@ export default class Squash extends BasePlant {
     if (this.isJumping && !this.isLanded) {
       const elapsedTime = gameTime - this.jumpStartTime;
       if (elapsedTime >= this.JUMP_DURATION) {
-        // FIX: Recalculate nearby zombies *after* the jump
+        // Find nearby zombies after jump
         const nearbyZombies = zombies.filter((zombie) => {
           if (zombie.row !== plantedPlant.cell.row) return false;
           const zombieCenterX = zombie.x + zombie.width / 2;
@@ -62,7 +64,6 @@ export default class Squash extends BasePlant {
 
         // Damage all zombies near the targeted point
         if (targetZombie) {
-          // Make sure a zombie is actually targeted
           const targetX = targetZombie.x + targetZombie.width / 2;
           zombies.forEach((zombie) => {
             if (zombie.row === plantedPlant.cell.row) {
@@ -83,7 +84,6 @@ export default class Squash extends BasePlant {
       }
     } else {
       // Squash is not jumping and hasn't landed yet
-      // Existing logic to start the jump (unchanged)
       const nearbyZombies = zombies.filter((zombie) => {
         if (zombie.row !== plantedPlant.cell.row) return false;
         const zombieCenterX = zombie.x + zombie.width / 2;
@@ -92,6 +92,18 @@ export default class Squash extends BasePlant {
       });
 
       if (nearbyZombies.length > 0 && !this.isJumping && !this.isLanded) {
+        // Determine jump direction based on zombie's relative position
+        const closestZombie = nearbyZombies.reduce((closest, current) => {
+          const currentDistance = Math.abs(
+            current.x + current.width / 2 - plantCenterX
+          );
+          const closestDistance = Math.abs(
+            closest.x + closest.width / 2 - plantCenterX
+          );
+          return currentDistance < closestDistance ? current : closest;
+        });
+
+        this.jumpDirection = closestZombie.x < plantCenterX ? "left" : "right";
         this.isJumping = true;
         this.jumpStartTime = gameTime;
       }

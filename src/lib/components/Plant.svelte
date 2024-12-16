@@ -54,10 +54,17 @@
     <img
       src={plantImage}
       alt={plantedPlant.plant.id}
-      class="{isJumping ? 'squash-jumping' : ''} 
-               {hasLanded ? 'squash-landed' : ''} 
-               {(!isJumping || !hasLanded) &&
-        'subtle-animation'} pointer-events-none absolute bottom-0 w-full cursor-none"
+      class="{isJumping &&
+      (plantedPlant.plant as Squash).jumpDirection === 'left'
+        ? 'squash-jumping-left'
+        : ''} 
+             {isJumping &&
+      (plantedPlant.plant as Squash).jumpDirection === 'right'
+        ? 'squash-jumping-right'
+        : ''} 
+             {hasLanded ? 'squash-landed' : ''} 
+             {(!isJumping || !hasLanded) && 'subtle-animation'} 
+             pointer-events-none absolute bottom-0 w-full cursor-none"
     />
   {:else if plantedPlant.plant.id === "chomper"}
     <img
@@ -108,24 +115,6 @@
     }
   }
 
-  @keyframes squashJump {
-    0% {
-      transform: scale(1, 1) translateY(0); /* Initial state: normal size */
-    }
-    25% {
-      transform: scale(1.2, 0.6) translateY(-30px); /* Prepare for jump: stretch vertically, reduce width, move up slightly */
-    }
-    50% {
-      transform: scale(0.6, 1.4) translateY(-150px); /* Peak of jump: squash horizontally, stretch vertically, move up a lot */
-    }
-    75% {
-      transform: scale(1.8, 0.4) translateY(0); /* Landing: flatten significantly, widen, return to ground level */
-    }
-    100% {
-      transform: scale(1, 1) translateY(0); /* Return to normal: normal size */
-    }
-  }
-
   @keyframes squashLand {
     0% {
       transform: scale(1.8, 0.4); /* Start flattened */
@@ -141,11 +130,51 @@
     }
   }
 
-  .squash-jumping {
-    animation: squashJump 1.1s ease-in-out forwards;
-  }
-
   .squash-landed {
     animation: squashLand 0.5s ease-in forwards;
+  }
+
+  /* New Left and Right Jump Animations */
+  @keyframes squashJumpLeft {
+    0% {
+      transform: scale(1, 1) translateY(0) translateX(0);
+    }
+    25% {
+      transform: scale(1.2, 0.8) translateY(-40%) translateX(-10%);
+    }
+    50% {
+      transform: scale(0.7, 1.3) translateY(-80%) translateX(-25%);
+    }
+    75% {
+      transform: scale(1.5, 0.6) translateY(0) translateX(-40%);
+    }
+    100% {
+      transform: scale(1, 1) translateY(0) translateX(-40%);
+    }
+  }
+
+  @keyframes squashJumpRight {
+    0% {
+      transform: scale(1, 1) translateY(0) translateX(0);
+    }
+    25% {
+      transform: scale(1.2, 0.8) translateY(-40%) translateX(10%);
+    }
+    50% {
+      transform: scale(0.7, 1.3) translateY(-80%) translateX(25%);
+    }
+    75% {
+      transform: scale(1.5, 0.6) translateY(0) translateX(40%);
+    }
+    100% {
+      transform: scale(1, 1) translateY(0) translateX(40%);
+    }
+  }
+  .squash-jumping-left {
+    animation: squashJumpLeft 1.1s ease-in-out forwards;
+  }
+
+  .squash-jumping-right {
+    animation: squashJumpRight 1.1s ease-in-out forwards;
   }
 </style>

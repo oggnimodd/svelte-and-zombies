@@ -13,9 +13,9 @@
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "prepare": "husky",
     "pre-commit": "lint-staged",
-    "aider:commit": "aider --commit --model mistral/mistral-large-latest",
+    "aider:commit": "aider --commit --model gemini/gemini-2.0-flash-exp",
     "aider:mistral": "aider --model mistral/mistral-large-latest",
-    "aider:gemini": "aider --model gemini/gemini-1.5-pro-latest"
+    "aider:gemini": "aider --model gemini/gemini-2.0-flash-exp"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.3.1",
