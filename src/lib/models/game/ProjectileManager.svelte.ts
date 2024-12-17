@@ -146,7 +146,7 @@ export default class ProjectileManager {
         // Bottom offset
         projectile.y < YARD_HEIGHT &&
         // Top offset
-        projectile.y > -YARD_BOUNDARY_OFFSET / 4;
+        projectile.y > -YARD_BOUNDARY_OFFSET;
 
       if (isWithinBounds) {
         remainingProjectiles.push(projectile);

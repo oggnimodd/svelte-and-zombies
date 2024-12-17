@@ -103,6 +103,7 @@ export default class SoundManager {
 
   playSound(soundName: GameSoundEffect) {
     const sound = this.sounds.get(soundName);
+    // Sound cooldowns will always be based on real-time (performance.now() instead of gameTime), regardless of whether the game is paused or the game time is manipulated
     const currentTime = performance.now();
     const lastPlayTime = this.soundCooldowns.get(soundName) || 0;
     const cooldownDuration = this.cooldownDurations[soundName];

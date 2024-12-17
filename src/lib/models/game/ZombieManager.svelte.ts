@@ -21,6 +21,7 @@ import {
 import type { PlantedPlant } from "./PlantManager.svelte";
 import FootballZombie from "../zombies/FootballZombie.svelte";
 import FlagZombie from "../zombies/FlagZombie.svelte";
+import { gameTime } from "./GameTime.svelte";
 
 interface WaveConfig {
   zombieCount: number;
@@ -269,7 +270,7 @@ export default class ZombieManager {
       }
     }
 
-    const currentTime = performance.now();
+    const currentTime = gameTime.get();
     this.zombies = this.zombies.filter((zombie) => {
       if (zombie.x < -50) return false;
       if (zombie.isAttacking && zombie.attackingPlantId) {

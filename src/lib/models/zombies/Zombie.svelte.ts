@@ -1,4 +1,5 @@
 import { CELL_WIDTH } from "../../constants/sizes";
+import { gameTime } from "../game/GameTime.svelte";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import { soundManager } from "../game/SoundManager.svelte";
 
@@ -57,7 +58,7 @@ export default class Zombie {
 
   freeze(duration: number) {
     this.freezeEndTime = Math.max(
-      performance.now() + duration,
+      gameTime.get() + duration,
       this.freezeEndTime
     );
     this.isFrozen = true;
@@ -65,12 +66,12 @@ export default class Zombie {
   }
 
   stun(duration: number) {
-    this.stunEndTime = Math.max(performance.now() + duration, this.stunEndTime);
+    this.stunEndTime = Math.max(gameTime.get() + duration, this.stunEndTime);
     this.isStunned = true;
   }
 
   move(deltaTime: number) {
-    const currentTime = performance.now();
+    const currentTime = gameTime.get();
     if (this.stunEndTime > 0 && currentTime > this.stunEndTime) {
       this.stunEndTime = 0;
       this.isStunned = false;
