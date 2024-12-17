@@ -21,9 +21,9 @@ export default class KernelProjectile extends Projectile {
   private startX: number;
   private startY: number;
   private targetX: number;
-  private arcHeight: number = CELL_WIDTH;
+  private arcHeight: number = CELL_WIDTH * 1.8;
   private progress: number = 0;
-  private readonly IMPACT_THRESHOLD = 1.8;
+  private readonly IMPACT_THRESHOLD = 0.95;
   private canCollide: boolean = false;
   private hasLanded: boolean = false;
 
