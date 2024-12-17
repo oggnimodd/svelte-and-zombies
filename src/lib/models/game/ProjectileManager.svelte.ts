@@ -13,6 +13,7 @@ import WatermelonProjectile from "../../models/projectiles/WatermelonProjectile"
 import { SvelteMap } from "svelte/reactivity";
 import { soundManager } from "./SoundManager.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
+import BucketHeadZombie from "../zombies/BucketHeadZombie.svelte";
 
 export default class ProjectileManager {
   // Use Map for efficient projectile management
@@ -180,7 +181,12 @@ export default class ProjectileManager {
           case ProjectileTypes.FIRE_PEA.type:
             soundManager.playSound("impact");
           default:
-            soundManager.playSound("hit");
+            // TODO: create a play sound based on zombie type method before playing the default hit sound
+            if (zombie instanceof BucketHeadZombie) {
+              soundManager.playSound("bucket-hit");
+            } else {
+              soundManager.playSound("hit");
+            }
             break;
         }
       }
