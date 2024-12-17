@@ -7,6 +7,7 @@ import {
 } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
+import { soundManager } from "../game/SoundManager.svelte";
 
 interface CabbageProjectileProps {
   id: string;
@@ -77,6 +78,7 @@ export default class CabbageProjectile extends Projectile {
     // Mark as landed when reaching target
     if (normalizedProgress >= 1) {
       this.hasLanded = true;
+      soundManager.playSound("splat");
     }
 
     // Enable collisions near the ground

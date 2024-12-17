@@ -7,6 +7,7 @@ import {
 } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
 import type BasePlant from "../plants/Plant";
+import { soundManager } from "../game/SoundManager.svelte";
 
 interface KernelProjectileProps {
   id: string;
@@ -63,6 +64,7 @@ export default class KernelProjectile extends Projectile {
 
     if (normalizedProgress >= 1) {
       this.hasLanded = true;
+      soundManager.playSound("hit");
     }
 
     this.canCollide = normalizedProgress > this.IMPACT_THRESHOLD;

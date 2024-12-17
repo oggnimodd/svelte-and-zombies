@@ -7,6 +7,7 @@ import {
 } from "../../constants/sizes";
 import type BasePlant from "../plants/Plant";
 import type { ProjectileStats } from "./ProjectileTypes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 interface WatermelonProjectileProps {
   id: string;
@@ -73,6 +74,7 @@ export default class WatermelonProjectile extends Projectile {
     // Mark as landed when reaching target
     if (normalizedProgress >= 1) {
       this.hasLanded = true;
+      soundManager.playSound("hit");
     }
 
     // Only allow collisions near the ground
