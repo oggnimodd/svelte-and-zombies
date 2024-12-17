@@ -106,6 +106,8 @@ export default class Squash extends BasePlant {
         this.jumpDirection = closestZombie.x < plantCenterX ? "left" : "right";
         this.isJumping = true;
         this.jumpStartTime = gameTime;
+
+        soundManager.playSound("hmm");
       }
     }
   }

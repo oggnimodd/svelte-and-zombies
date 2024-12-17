@@ -18,6 +18,7 @@ type GameSoundEffect =
   | "eating"
   | "lawnmower"
   | "bucket-hit"
+  | "hmm"
   | "splash";
 
 interface SoundConfig {
@@ -43,7 +44,8 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   shovel: { src: "/sounds/shovel.mp3", volume: 0.8 },
   eating: { src: "/sounds/eating.mp3", volume: 0.4 },
   lawnmower: { src: "/sounds/lawnmower.mp3", volume: 0.7 },
-  "bucket-hit": { src: "/sounds/bucket-hit.mp3", volume: 0.3 }, // Add this line
+  "bucket-hit": { src: "/sounds/bucket-hit.mp3", volume: 0.3 },
+  hmm: { src: "/sounds/hmm.mp3", volume: 0.6 },
 };
 
 export default class SoundManager {
@@ -67,6 +69,7 @@ export default class SoundManager {
     pop: 50,
     lawnmower: 100,
     "bucket-hit": 100,
+    hmm: 100,
   };
   isMuted: boolean = $state(LocalStorageManager.get("sound-muted") ?? false);
   private eatingSounds: Map<string, Howl> = new Map();
