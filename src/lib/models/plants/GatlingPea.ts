@@ -37,7 +37,12 @@ export default class GatlingPea extends BasePlant {
     const rowYPosition = plantedPlant.cell.row * CELL_WIDTH;
 
     // Define a consistent offset for each pea
-    const offsets = [-30, -10, 10, 30]; // Adjust these values to control the spread
+    const offsets = [
+      -0.5 * CELL_WIDTH,
+      -0.25 * CELL_WIDTH,
+      0,
+      0.25 * CELL_WIDTH,
+    ]; // Adjust these values to control the spread
 
     // Shoot four peas
     for (let i = 0; i < 4; i++) {

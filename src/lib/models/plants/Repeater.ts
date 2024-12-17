@@ -40,7 +40,7 @@ export default class Repeater extends BasePlant {
     const firstProjectile = new PeaProjectile({
       id: uuid.generate(),
       stats: this.getProjectileStats(),
-      x: plantedPlant.coordinates.x + projectileXOffset - 30, // Slightly offset
+      x: plantedPlant.coordinates.x + projectileXOffset - CELL_WIDTH * 0.25, // Slightly offset
       y: rowYPosition + projectileYOffset,
       row: plantedPlant.cell.row,
       sourcePlant: this,
