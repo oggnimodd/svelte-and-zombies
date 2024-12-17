@@ -7,6 +7,7 @@
   import LoadingScreen from "$lib/components/LoadingScreen.svelte";
   import { gameLoop } from "$lib/reactivity/gameLoop.svelte";
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
+  import VictoryModal from "$lib/components/VictoryModal.svelte";
 
   let isPreloading = $state(false);
 
@@ -16,6 +17,8 @@
     gameLoop.start();
   };
 </script>
+
+<VictoryModal />
 
 {#if isPreloading}
   <LoadingScreen {startGame} />

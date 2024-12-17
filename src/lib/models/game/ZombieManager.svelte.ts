@@ -226,10 +226,6 @@ export default class ZombieManager {
   }
 
   startNextWave() {
-    if (this.currentWave >= this.waveConfigs.length) {
-      EventEmitter.emit("gameWon");
-      return;
-    }
     this.isWaveActive = true;
     this.zombiesSpawnedInWave = 0;
     this.spawnInterval = this.waveConfigs[this.currentWave].spawnInterval;

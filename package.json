@@ -43,7 +43,8 @@
   "dependencies": {
     "howler": "^2.2.4",
     "is-mobile": "^5.0.0",
-    "short-uuid": "^5.2.0"
+    "short-uuid": "^5.2.0",
+    "svelte-confetti": "^2.2.0"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,json,svelte}": [

@@ -65,7 +65,6 @@ export class GameLoop {
 
     EventEmitter.on("gameWon", () => {
       this.stop();
-      alert("Congratulations! You've completed all waves! 🏆");
     });
 
     // Listen for explosion events
@@ -355,8 +354,7 @@ export class GameLoop {
         // If the delay has been reached, announce the win
         if (this.winDelayAccumulator >= this.WIN_DELAY) {
           soundManager.playSound("victory");
-          this.stop();
-          alert("You won! All zombies defeated! 🌻");
+          EventEmitter.emit("gameWon");
           return false;
         }
       }
