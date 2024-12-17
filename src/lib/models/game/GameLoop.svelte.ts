@@ -47,6 +47,10 @@ export class GameLoop {
   lawnMowerManager: LawnMowerManager;
   explosionManager: ExplosionManager;
 
+  private isDelayingWin: boolean = false; // Flag to indicate delay before announcing win
+  private winDelayAccumulator: number = 0; // Accumulator for the delay
+  private readonly WIN_DELAY = 800; // 800ms delay before announcing the win
+
   constructor(plantManager: PlantManager) {
     this.plantManager = plantManager;
     this.zombieManager = new ZombieManager(plantManager);
@@ -99,6 +103,9 @@ export class GameLoop {
     soundManager.stopBackgroundMusic();
     this.zombieManager.zombies.forEach((zombie) => zombie.stopEatingSound());
     this.explosionManager.reset();
+
+    this.isDelayingWin = false; // Reset the win delay flag
+    this.winDelayAccumulator = 0; // Reset the delay accumulator
   }
 
   pause() {
@@ -338,10 +345,23 @@ export class GameLoop {
       return false;
     }
     if (this.checkWinCondition()) {
-      this.stop();
-      alert("You won! All zombies defeated! 🌻");
-      return false;
+      if (!this.isDelayingWin) {
+        this.isDelayingWin = true;
+        this.winDelayAccumulator = 0; // Reset the delay accumulator
+      } else {
+        // Accumulate the delay
+        this.winDelayAccumulator += this.deltaTime;
+
+        // If the delay has been reached, announce the win
+        if (this.winDelayAccumulator >= this.WIN_DELAY) {
+          soundManager.playSound("victory");
+          this.stop();
+          alert("You won! All zombies defeated! 🌻");
+          return false;
+        }
+      }
     }
+
     return true;
   }
 

@@ -19,6 +19,7 @@ type GameSoundEffect =
   | "lawnmower"
   | "bucket-hit"
   | "hmm"
+  | "victory"
   | "splash";
 
 interface SoundConfig {
@@ -29,6 +30,7 @@ interface SoundConfig {
 
 const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   "bg-music": { src: "/sounds/bg.mp3", volume: 0.5, loop: true },
+  victory: { src: "/sounds/victory.mp3", volume: 1 },
   "pea-shoot": { src: "/sounds/pea-pop.mp3", volume: 0.5 },
   pop: { src: "/sounds/pop.mp3", volume: 0.6 },
   explosion: { src: "/sounds/explosion.mp3", volume: 0.9 },
@@ -70,6 +72,7 @@ export default class SoundManager {
     lawnmower: 100,
     "bucket-hit": 100,
     hmm: 100,
+    victory: 100,
   };
   isMuted: boolean = $state(LocalStorageManager.get("sound-muted") ?? false);
   private eatingSounds: Map<string, Howl> = new Map();
