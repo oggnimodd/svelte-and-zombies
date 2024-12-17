@@ -43,7 +43,7 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   shovel: { src: "/sounds/shovel.mp3", volume: 0.8 },
   eating: { src: "/sounds/eating.mp3", volume: 0.4 },
   lawnmower: { src: "/sounds/lawnmower.mp3", volume: 0.7 },
-  "bucket-hit": { src: "/sounds/bucket-hit.mp3", volume: 0.45 }, // Add this line
+  "bucket-hit": { src: "/sounds/bucket-hit.mp3", volume: 0.3 }, // Add this line
 };
 
 export default class SoundManager {
