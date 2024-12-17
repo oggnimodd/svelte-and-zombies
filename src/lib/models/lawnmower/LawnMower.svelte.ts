@@ -1,7 +1,6 @@
 import { soundManager } from "../game/SoundManager.svelte";
 import {
   CELL_WIDTH,
-  NUM_COLS,
   YARD_BOUNDARY_OFFSET,
   YARD_WIDTH,
 } from "$lib/constants/sizes";
@@ -15,7 +14,7 @@ export default class LawnMower {
   x: number = $state(-CELL_WIDTH);
   y: number;
   isActivated: boolean = false;
-  speed: number = 25;
+  speed: number = 2.8;
   width: number = CELL_WIDTH;
   height: number = CELL_WIDTH;
 
@@ -33,7 +32,7 @@ export default class LawnMower {
 
   move(deltaTime: number) {
     if (this.isActivated) {
-      this.x += (this.speed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
+      this.x += this.speed * (deltaTime / 1000) * CELL_WIDTH;
     }
   }
 
