@@ -339,8 +339,10 @@ export class GameLoop {
 
   private checkGameState(): boolean {
     if (this.checkLoseCondition()) {
+      soundManager.playSound("lose");
+      soundManager.playSound("screaming");
+      EventEmitter.emit("gameLost");
       this.stop();
-      alert("Game Over! The zombies ate your brains! 🧠");
       return false;
     }
     if (this.checkWinCondition()) {
