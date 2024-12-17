@@ -23,7 +23,7 @@ export default class CabbageProjectile extends Projectile {
   private startX: number;
   private startY: number;
   private targetX: number;
-  private arcHeight: number = 100;
+  private arcHeight: number = CELL_WIDTH * 1.1;
   private progress: number = 0;
   private readonly IMPACT_THRESHOLD = 0.9;
   private splashRadius: number;

@@ -22,7 +22,7 @@ export default class WatermelonProjectile extends Projectile {
   private startX: number;
   private startY: number;
   private targetX: number;
-  private arcHeight: number = 150;
+  private arcHeight: number = CELL_WIDTH * 1.25;
   private progress: number = 0;
   private readonly IMPACT_THRESHOLD = 0.95;
   private splashRadius: number;
