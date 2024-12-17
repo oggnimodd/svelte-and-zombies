@@ -36,7 +36,7 @@ class ThreepeaterProjectile extends PeaProjectile {
   move(deltaTime: number) {
     const delta = deltaTime / 1000; // Convert to seconds
 
-    const normalizationFactor = CELL_WIDTH / NUM_COLS; // Normalization factor
+    const normalizationFactor = CELL_WIDTH; // Normalization factor
 
     if (!this.hasReachedRow && this.targetRow !== this.row) {
       // Normalized vertical movement

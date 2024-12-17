@@ -16,21 +16,21 @@ const getDimension = (multiplier: number): number => multiplier * CELL_WIDTH;
 export const ProjectileTypes = {
   PEA: {
     type: "pea",
-    speed: 26,
+    speed: 2.8,
     width: getDimension(0.25),
     height: getDimension(0.25),
     image: "/projectiles/pea.png",
   },
   FIRE_PEA: {
     type: "fire_pea",
-    speed: 26,
+    speed: 2.8,
     width: getDimension(0.5),
     height: getDimension(0.5),
     image: "/projectiles/firepea.png",
   },
   ICE_PEA: {
     type: "ice_pea",
-    speed: 26,
+    speed: 2.8,
     width: getDimension(0.25),
     height: getDimension(0.25),
     image: "/projectiles/icepea.png",
@@ -38,14 +38,14 @@ export const ProjectileTypes = {
   },
   WATERMELON: {
     type: "watermelon",
-    speed: 0.2,
+    speed: 10,
     width: getDimension(0.55),
     height: getDimension(0.55),
     image: "/projectiles/watermelon.png",
   },
   ICE_WATERMELON: {
     type: "ice_watermelon",
-    speed: 0.2,
+    speed: 10,
     width: getDimension(0.55),
     height: getDimension(0.55),
     image: "/projectiles/icewatermelon.png",
@@ -53,14 +53,14 @@ export const ProjectileTypes = {
   },
   CABBAGE: {
     type: "cabbage",
-    speed: 0.2,
+    speed: 10,
     width: getDimension(0.4),
     height: getDimension(0.4),
     image: "/projectiles/cabbage.png",
   },
   KERNEL: {
     type: "kernelpult",
-    speed: 0.35,
+    speed: 18,
     width: getDimension(0.35),
     height: getDimension(0.35),
     image: "/projectiles/kernelpult.png",
@@ -68,7 +68,7 @@ export const ProjectileTypes = {
   },
   STAR: {
     type: "star",
-    speed: 21,
+    speed: 2.3333,
     width: getDimension(0.3),
     height: getDimension(0.3),
     image: "/projectiles/star.png",

@@ -34,8 +34,7 @@ export default class StarProjectile extends Projectile {
   }
 
   move(deltaTime: number) {
-    const speedAdjustment =
-      (this.baseSpeed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
+    const speedAdjustment = this.baseSpeed * (deltaTime / 1000) * CELL_WIDTH;
     // Calculate x and y components based on angle
     this.x += Math.cos(this.angle) * speedAdjustment;
     this.y += Math.sin(this.angle) * speedAdjustment;

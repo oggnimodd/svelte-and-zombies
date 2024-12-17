@@ -1,7 +1,6 @@
 import Projectile from "./Projectile.svelte";
 import {
   CELL_WIDTH,
-  NUM_COLS,
   YARD_BOUNDARY_OFFSET,
   YARD_WIDTH,
 } from "../../constants/sizes";
@@ -55,27 +54,30 @@ export default class CabbageProjectile extends Projectile {
       return;
     }
 
+    // Calculate the total horizontal distance the projectile needs to cover
     const totalDistance = this.targetX - this.startX;
-    // Find a better normalization factor
-    this.progress += (this.speed * (deltaTime / 1000) * CELL_WIDTH) / NUM_COLS;
 
+    // Calculate the desired distance the projectile should cover for this update
+    // Use a speed relative to CELL_WIDTH so we're independent of screen size
+    const speedDistance = this.speed * (deltaTime / 1000) * CELL_WIDTH;
+
+    // Accumulate progress based on speed distance and total distance
+    this.progress += speedDistance / totalDistance;
+
+    // Clamp the progress to ensure it does not exceed 1. This is equivalent to our normalized time
     const normalizedProgress = Math.min(this.progress, 1);
 
-    // Update X position based on progress to target
+    // Update X based on the normalized progress
     this.x = this.startX + totalDistance * normalizedProgress;
 
-    // Calculate arc height with steeper initial ascent
-    // Modified parabola for a more cabbage-like arc
+    // Use the normalized progress to calculate our arc
+    // We'll use a parabola of the form y = -4 * h * x * (x - 1) to achieve a nice arc
+    // where x is the normalized progress, and h is the arcHeight
     const arcY =
-      -4 *
-      this.arcHeight *
-      ((normalizedProgress * 0.8 + 0.2) * normalizedProgress -
-        normalizedProgress);
-
-    // Update Y position with arc
+      -4 * this.arcHeight * normalizedProgress * (normalizedProgress - 1);
     this.y = this.startY - arcY;
 
-    // Mark as landed when reaching target
+    // If we've reached the end, mark as landed
     if (normalizedProgress >= 1) {
       this.hasLanded = true;
       soundManager.playSound("splat");
@@ -91,7 +93,7 @@ export default class CabbageProjectile extends Projectile {
 
   getSplashDamage(distance: number): number {
     if (distance > this.splashRadius) return 0;
-    // More linear damage falloff than watermelon
+    // More linear damage falloff
     const damageMultiplier = 0.8 * (1 - distance / this.splashRadius);
     return this.damage * damageMultiplier;
   }

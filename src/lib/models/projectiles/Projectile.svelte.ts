@@ -52,9 +52,7 @@ export default class Projectile {
   }
 
   move(deltaTime: number) {
-    this.x +=
-      (this.direction * this.speed * (deltaTime / 1000) * CELL_WIDTH) /
-      NUM_COLS; // Normalize and consider columns
+    this.x += this.direction * this.speed * (deltaTime / 1000) * CELL_WIDTH;
   }
 
   // Override this method in subclasses if needed
