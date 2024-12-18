@@ -21,7 +21,7 @@ export interface ZombieConfig {
 
 export default class Zombie {
   name: string;
-  health: number;
+  health: number = $state(0);
   damage: number;
   speed: number;
   row: number;
@@ -42,6 +42,9 @@ export default class Zombie {
   private freezeEndTime: number = 0;
   private stunEndTime: number = 0;
   private eatingSoundId: string | null = null;
+  isHit: boolean = $state(false);
+  hitEndTime: number = 0;
+  private hitEffectDuration: number = 80; // Duration of the hit effect
 
   constructor(config: ZombieConfig) {
     this.name = config.name;
@@ -67,11 +70,27 @@ export default class Zombie {
 
   stun(duration: number) {
     this.stunEndTime = Math.max(gameTime.get() + duration, this.stunEndTime);
-    this.isStunned = true;
+  }
+
+  takeHit(damage: number) {
+    this.health -= damage;
+    this.hitEndTime = Math.max(
+      gameTime.get() + this.hitEffectDuration,
+      this.hitEndTime
+    );
+    this.isHit = true;
   }
 
   move(deltaTime: number) {
     const currentTime = gameTime.get();
+
+    if (this.hitEndTime > 0) {
+      if (currentTime > this.hitEndTime) {
+        this.hitEndTime = 0;
+        this.isHit = false;
+      }
+    }
+
     if (this.stunEndTime > 0 && currentTime > this.stunEndTime) {
       this.stunEndTime = 0;
       this.isStunned = false;
@@ -120,6 +139,7 @@ export default class Zombie {
       baseSpeed: this.baseSpeed,
       stunEndTime: this.stunEndTime,
       freezeEndTime: this.freezeEndTime,
+      isHit: this.isHit,
     };
   }
 }

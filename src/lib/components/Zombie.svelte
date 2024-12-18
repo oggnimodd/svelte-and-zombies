@@ -32,7 +32,8 @@
       alt={zombie.name}
       width={zombie.imageWidth}
       height="auto"
-      style="max-width: none; bottom: -{(CELL_WIDTH - CELL_WIDTH / 1.5) / 2}px;"
+      style="max-width: none; bottom: -{(CELL_WIDTH - CELL_WIDTH / 1.5) /
+        2}px;filter: {zombie.getStatus().isHit ? 'brightness(120%)' : 'none'};"
     />
   </div>
 </div>

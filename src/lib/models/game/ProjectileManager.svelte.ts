@@ -199,7 +199,7 @@ export default class ProjectileManager {
     zombie: Zombie,
     zombies: Zombie[]
   ) {
-    zombie.health -= projectile.damage;
+    zombie.takeHit(projectile.damage);
 
     if (projectile.stats.freezeDuration) {
       zombie.freeze(projectile.stats.freezeDuration);
@@ -259,7 +259,7 @@ export default class ProjectileManager {
       const splashDamage = projectile.getSplashDamage(distance);
 
       if (splashDamage > 0) {
-        zombie.health -= splashDamage;
+        zombie.takeHit(splashDamage);
 
         if (projectile.stats.freezeDuration) {
           zombie.freeze(projectile.stats.freezeDuration);
