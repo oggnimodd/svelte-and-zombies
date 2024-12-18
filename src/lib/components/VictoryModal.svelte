@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { gameLoop } from "../reactivity/gameLoop.svelte";
   import { Confetti } from "svelte-confetti";
   import EventEmitter from "$lib/models/EventEmitter";
 
@@ -46,7 +45,7 @@
       class="relative max-w-lg transform rounded-lg border-2 border-yellow-400 bg-gradient-to-br from-yellow-600 to-yellow-800 p-8 shadow-xl transition-all"
     >
       <h2 class="mb-6 text-center text-4xl font-bold text-yellow-100">
-        🌻 You're a Plantastic Winner! 🌻
+        🌻 You're a Plantastic 🌻
       </h2>
       <p class="mb-4 text-center text-lg text-yellow-200">
         You've successfully defended your yard from those brain-hungry zombies!
