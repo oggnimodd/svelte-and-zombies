@@ -136,6 +136,16 @@ export class GameLoop {
     this.zombieManager.updateZombies(deltaTime);
     let allProjectiles: (Projectile | Projectile[] | null)[] = [];
     for (const plantedPlant of this.plantManager.plantedPlants) {
+      // Visual effect for hit plant
+      // Reset plant's hit state if the hitEndTime has passed
+      if (
+        plantedPlant.plant.isHit &&
+        gameTime > plantedPlant.plant.hitEndTime
+      ) {
+        plantedPlant.plant.isHit = false;
+        plantedPlant.plant.hitEndTime = 0; // Reset hitEndTime as well
+      }
+
       if (plantedPlant.plant instanceof Peashooter) {
         const peashooter = plantedPlant.plant as Peashooter;
         const zombiesInRow = this.zombieManager.zombies.filter(

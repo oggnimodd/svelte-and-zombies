@@ -1,4 +1,4 @@
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
@@ -29,7 +29,7 @@ export default class Spikeweed extends BasePlant {
     gameTime: number,
     zombies: Zombie[]
   ): void {
-    if (plantedPlant.currentHealth <= 0 || !this.canAttack(gameTime)) return;
+    if (plantedPlant.plant.health <= 0 || !this.canAttack(gameTime)) return;
 
     const plantCenterX = plantedPlant.coordinates.x + CELL_WIDTH / 2;
 

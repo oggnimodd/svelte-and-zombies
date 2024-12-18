@@ -1,6 +1,6 @@
 import { CELL_WIDTH, NUM_COLS } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
-import type BasePlant from "../plants/Plant";
+import type BasePlant from "../plants/Plant.svelte";
 import PeaProjectile from "./PeaProjectile";
 
 interface ThreepeaterProjectileProps {

@@ -1,7 +1,7 @@
 import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import StarProjectile from "../projectiles/StarProjectile";
 import type Projectile from "../projectiles/Projectile.svelte";
@@ -36,7 +36,7 @@ export default class Starfruit extends BasePlant {
   }
 
   shoot(plantedPlant: PlantedPlant, gameTime: number): Projectile[] {
-    if (plantedPlant.currentHealth <= 0) return [];
+    if (plantedPlant.plant.health <= 0) return [];
 
     const projectileXOffset = CELL_WIDTH / 2;
     const projectileYOffset =

@@ -1,5 +1,5 @@
 import { getCellCoordinates } from "../../utils/getCellCoordinates";
-import Plant, { type PlantStats } from "../plants/Plant";
+import Plant, { type PlantStats } from "../plants/Plant.svelte";
 import uuid from "short-uuid";
 import EventEmitter from "../EventEmitter";
 import { gameTime } from "./GameTime.svelte";
@@ -35,7 +35,6 @@ interface PlantedPlantCell {
 export interface PlantedPlant {
   plantedId: string;
   plant: Plant;
-  currentHealth: number;
   cell: PlantedPlantCell;
   coordinates: { x: number; y: number };
   plantedTime: number;
@@ -115,11 +114,10 @@ export default class PlantManager {
     const plantedPlant = {
       plantedId,
       plant,
-      currentHealth: plant.health,
       cell,
       coordinates,
       plantedTime: gameTime.get(),
-    };
+    } satisfies PlantedPlant;
     this.plantedPlants = [...this.plantedPlants, plantedPlant];
     EventEmitter.emit("plantAdded", plantedPlant);
 

@@ -105,12 +105,12 @@ export default class Zombie {
     }
   }
 
-  attack(plant: PlantedPlant, currentTime: number): boolean {
+  attack(plantedPlant: PlantedPlant, currentTime: number): boolean {
     if (this.isStunned) {
       return false;
     }
     if (currentTime - this.lastAttackTime >= this.attackCooldown) {
-      plant.currentHealth -= this.damage;
+      plantedPlant.plant.takeHit(this.damage, currentTime);
       this.lastAttackTime = currentTime;
       this.startEatingSound();
       return true;

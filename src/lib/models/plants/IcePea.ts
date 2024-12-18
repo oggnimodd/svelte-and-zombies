@@ -3,7 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 
 export const IcePeaStats: PlantStats = {
@@ -27,7 +27,7 @@ export default class IcePea extends BasePlant {
   }
 
   shoot(plantedPlant: PlantedPlant, gameTime: number): Projectile | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
     const projectileXOffset = CELL_WIDTH / 2;
     const projectileYOffset =
       (CELL_WIDTH - this.getProjectileStats().height) / 2;

@@ -1,5 +1,5 @@
 import { type ProjectileStats } from "./ProjectileTypes";
-import type BasePlant from "../plants/Plant";
+import type BasePlant from "../plants/Plant.svelte";
 import { CELL_WIDTH, NUM_COLS } from "$lib/constants/sizes";
 
 export interface ProjectileProps {

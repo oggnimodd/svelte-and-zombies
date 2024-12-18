@@ -3,7 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import WatermelonProjectile from "../projectiles/WatermelonProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { soundManager } from "../game/SoundManager.svelte";
 
@@ -62,7 +62,7 @@ export default class Watermelon extends BasePlant {
     gameTime: number,
     zombies: Zombie[]
   ): WatermelonProjectile | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
 
     // Find target zombie
     const targetZombie = this.findTarget(plantedPlant, zombies);

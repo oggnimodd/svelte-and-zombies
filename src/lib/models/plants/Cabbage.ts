@@ -3,7 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import CabbageProjectile from "../projectiles/CabbageProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 
 export const CabbageStats: PlantStats = {
@@ -48,7 +48,7 @@ export default class Cabbage extends BasePlant {
     gameTime: number,
     zombies: Zombie[]
   ): CabbageProjectile | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
 
     const targetZombie = this.findTarget(plantedPlant, zombies);
     if (!targetZombie) return null;

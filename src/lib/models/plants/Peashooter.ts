@@ -2,7 +2,7 @@ import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import Projectile from "../projectiles/Projectile.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import PeaProjectile from "../projectiles/PeaProjectile";
 
@@ -23,7 +23,7 @@ export default class Peashooter extends BasePlant {
   }
 
   shoot(plantedPlant: PlantedPlant, gameTime: number): Projectile | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
 
     const projectileXOffset = CELL_WIDTH / 2;
     const projectileYOffset =

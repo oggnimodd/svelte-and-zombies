@@ -1,4 +1,4 @@
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import EventEmitter from "../EventEmitter";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import { gameTime } from "../game/GameTime.svelte";

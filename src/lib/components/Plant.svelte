@@ -12,11 +12,6 @@
 
   const { plantedPlant }: PlantProps = $props();
 
-  const healthPercentage = $derived(
-    (plantedPlant.currentHealth / plantedPlant.plant.health) * 100
-  );
-  const isUnderAttack = $derived(healthPercentage < 100);
-
   const plantImage = $derived.by(() => {
     return getPlantImage(plantedPlant.plant.id);
   });
@@ -50,6 +45,7 @@
 <div
   class="relative flex h-full w-full items-center justify-center"
   style="z-index: {getPlantZIndex(plantedPlant.cell.row)}"
+  class:hit={plantedPlant.plant.isHit}
 >
   {#if plantedPlant.plant.id === "chilli" || plantedPlant.plant.id === "cherry"}
     <img
@@ -191,5 +187,21 @@
 
   .squash-jumping-right {
     animation: squashJumpRight 1.1s ease-in-out forwards;
+  }
+
+  .hit {
+    animation: blink 0.5s infinite;
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.65;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 </style>

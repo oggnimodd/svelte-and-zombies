@@ -279,7 +279,7 @@ export default class ZombieManager {
           zombie.lastAttackTime = 0;
           zombie.stopEatingSound();
         } else if (zombie.attack(attackedPlant, currentTime)) {
-          if (attackedPlant.currentHealth <= 0) {
+          if (attackedPlant.plant.health <= 0) {
             this.plantManager.remove(attackedPlant.plantedId);
             zombie.isAttacking = false;
             zombie.attackingPlantId = null;
@@ -295,7 +295,7 @@ export default class ZombieManager {
           zombie.isAttacking = true;
           zombie.attackingPlantId = collidedPlant.plantedId;
           if (zombie.attack(collidedPlant, currentTime)) {
-            if (collidedPlant.currentHealth <= 0) {
+            if (collidedPlant.plant.health <= 0) {
               this.plantManager.remove(collidedPlant.plantedId);
               zombie.isAttacking = false;
               zombie.attackingPlantId = null;

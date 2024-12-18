@@ -1,4 +1,4 @@
-import { type PlantStats } from "./Plant";
+import { type PlantStats } from "./Plant.svelte";
 import Watermelon from "./Watermelon";
 
 export const WinterMelonStats: PlantStats = {

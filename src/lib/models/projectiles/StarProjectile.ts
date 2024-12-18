@@ -1,5 +1,5 @@
 import { CELL_WIDTH, NUM_COLS } from "$lib/constants/sizes";
-import type BasePlant from "../plants/Plant";
+import type BasePlant from "../plants/Plant.svelte";
 import Projectile from "./Projectile.svelte";
 import type { ProjectileStats } from "./ProjectileTypes";
 

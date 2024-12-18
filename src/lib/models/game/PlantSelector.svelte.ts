@@ -1,5 +1,5 @@
 import { SvelteMap } from "svelte/reactivity";
-import { type PlantStats } from "../plants/Plant";
+import { type PlantStats } from "../plants/Plant.svelte";
 import { gameTime } from "./GameTime.svelte";
 
 export interface HoverCell {

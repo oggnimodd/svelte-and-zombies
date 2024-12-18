@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { PlantStats } from "$lib/models/plants/Plant";
+  import type { PlantStats } from "$lib/models/plants/Plant.svelte";
   import { gameLoop } from "$lib/reactivity/gameLoop.svelte";
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import { getPlantImage } from "../utils/getPlantImage";

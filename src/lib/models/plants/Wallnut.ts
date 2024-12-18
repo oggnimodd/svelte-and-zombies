@@ -1,4 +1,4 @@
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 
 export const WallnutStats: PlantStats = {
   id: "wallnut",

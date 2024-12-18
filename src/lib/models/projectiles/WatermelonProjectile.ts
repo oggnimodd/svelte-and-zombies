@@ -4,7 +4,7 @@ import {
   YARD_BOUNDARY_OFFSET,
   YARD_WIDTH,
 } from "../../constants/sizes";
-import type BasePlant from "../plants/Plant";
+import type BasePlant from "../plants/Plant.svelte";
 import type { ProjectileStats } from "./ProjectileTypes";
 import { soundManager } from "../game/SoundManager.svelte";
 

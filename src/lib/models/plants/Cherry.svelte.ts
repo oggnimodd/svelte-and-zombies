@@ -1,4 +1,4 @@
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";

@@ -1,4 +1,4 @@
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import uuid from "short-uuid";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
@@ -48,7 +48,7 @@ export default class Kernelpult extends BasePlant {
     gameTime: number,
     zombies: Zombie[]
   ): KernelProjectile | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
 
     const targetZombie = this.findTarget(plantedPlant, zombies);
     if (!targetZombie) return null;

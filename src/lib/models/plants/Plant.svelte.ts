@@ -15,12 +15,15 @@ export default class BasePlant {
   id: string;
   name: string;
   price: number;
-  health: number;
+  health: number = $state(0);
   damage: number;
   shootCooldown: number;
   range: number;
   lastShotTime: number = 0;
   buyCooldown: number = 0;
+  isHit: boolean = $state(false);
+  hitEndTime: number = 0;
+  private hitEffectDuration: number = 500;
 
   constructor(stats: PlantStats) {
     this.id = stats.id;
@@ -39,5 +42,20 @@ export default class BasePlant {
 
   resetLastShotTime(gameTime: number) {
     this.lastShotTime = gameTime;
+  }
+
+  takeHit(damage: number, gameTime: number) {
+    this.health -= damage;
+    this.hitEndTime = Math.max(
+      gameTime + this.hitEffectDuration,
+      this.hitEndTime
+    );
+    this.isHit = true;
+  }
+
+  getStatus() {
+    return {
+      isHit: this.isHit,
+    };
   }
 }

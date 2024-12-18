@@ -3,7 +3,7 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import PeaProjectile from "../projectiles/PeaProjectile";
 import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
-import BasePlant, { type PlantStats } from "./Plant";
+import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import type Projectile from "../projectiles/Projectile.svelte";
 
@@ -28,7 +28,7 @@ export default class Repeater extends BasePlant {
   }
 
   shoot(plantedPlant: PlantedPlant, gameTime: number): Projectile[] | null {
-    if (plantedPlant.currentHealth <= 0) return null;
+    if (plantedPlant.plant.health <= 0) return null;
 
     const projectiles: Projectile[] = [];
     const projectileXOffset = CELL_WIDTH / 2;

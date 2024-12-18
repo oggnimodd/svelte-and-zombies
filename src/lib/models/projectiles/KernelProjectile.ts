@@ -5,7 +5,7 @@ import {
   YARD_WIDTH,
 } from "../../constants/sizes";
 import type { ProjectileStats } from "./ProjectileTypes";
-import type BasePlant from "../plants/Plant";
+import type BasePlant from "../plants/Plant.svelte";
 import { soundManager } from "../game/SoundManager.svelte";
 
 interface KernelProjectileProps {
