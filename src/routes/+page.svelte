@@ -9,7 +9,6 @@
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
   import VictoryModal from "$lib/components/VictoryModal.svelte";
   import LoseModal from "$lib/components/LoseModal.svelte";
-  import { onMount } from "svelte";
 
   let isPreloading = $state(false);
 
@@ -30,13 +29,13 @@
 {#if isPreloading}
   <LoadingScreen {startGame} />
 {:else if gameLoop.isRunning}
-  <div class="h-screen w-full overflow-hidden bg-black text-white">
+  <div class="background h-screen w-full overflow-hidden text-white">
     <PauseModal />
     <div
-      style="height:4rem;"
+      style="height:5rem;"
       class="relative z-50 flex w-full items-center gap-x-2"
     >
-      <div class="mt-2 w-[90%] px-2">
+      <div class="w-[90%] rounded-lg border-2 border-black/60 bg-[#94451C] p-2">
         <PlantList>
           {#each plantSelector.plants as plant}
             <div style="width: {numPlants}%">
@@ -55,7 +54,7 @@
       </div>
     </div>
     <div
-      style="height: calc(100% - 4rem);"
+      style="height: calc(100% - 5rem);"
       class="flex w-full flex-col items-center justify-center"
     >
       <Yard />
@@ -76,3 +75,9 @@
     </button>
   </div>
 {/if}
+
+<style>
+  .background {
+    background-color: #141d0a;
+  }
+</style>

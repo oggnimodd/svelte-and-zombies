@@ -41,7 +41,7 @@
 
 <button
   onmousedown={handleClick}
-  class="group relative flex w-full select-none flex-col items-center justify-center rounded-lg border border-blue-500/20 bg-blue-500/10 p-1 text-white"
+  class="group relative flex w-full select-none flex-col items-center justify-center overflow-hidden rounded-lg border border-black/80 bg-gradient-to-b from-[#D0F9E8] to-[#C2E2A7] py-1 text-black"
   class:opacity-50={!isSunEnough}
   class:grayscale={isOnCooldown}
 >
@@ -49,9 +49,9 @@
     <div
       class="absolute inset-0 z-10 flex items-center justify-center rounded-lg"
     >
-      <div class="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
+      <div class="absolute inset-0 bg-black/60"></div>
       <div
-        class="absolute bottom-0 left-0 right-0 h-1 rounded-b bg-green-500 transition-all duration-300 ease-linear"
+        class="absolute bottom-0 left-0 right-0 h-1 bg-blue-500 transition-all duration-300 ease-linear"
         style="width: {cooldownPercentage}%"
       ></div>
       <span class="absolute z-20 text-lg font-bold text-white">
@@ -65,8 +65,8 @@
     alt={name}
     class="pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105"
   />
-  <div class="flex items-center">
-    <img src="/sun.png" alt="sun" class="h-2 w-2" />
+
+  <div class="flex items-center gap-0.5 px-1">
     <p class="text-xs font-bold">{price}</p>
   </div>
 </button>
