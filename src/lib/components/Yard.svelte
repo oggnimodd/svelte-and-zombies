@@ -42,8 +42,8 @@
 </script>
 
 <!-- For debugging -->
-<div class="fixed right-2 top-2 rounded bg-black/50 p-2 text-white">
-  FPS: {gameLoop.fps.toFixed(1)}
+<div class="fixed bottom-2 left-2 rounded bg-black/50 p-2 text-white">
+  {gameLoop.fps.toFixed(1)}
 </div>
 
 <!-- Total sun:  -->

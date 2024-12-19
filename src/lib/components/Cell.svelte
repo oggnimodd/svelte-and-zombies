@@ -120,7 +120,11 @@
 >
   <!-- If shoveling and there is a plant planted -->
   {#if plantSelector.isShoveling && plantedPlantAtThisCell && isHoveredOver}
-    <div class="bg-red-500 text-white">Remove</div>
+    <div
+      class="relative z-[2000] flex h-full w-full items-center justify-center"
+    >
+      <img src="/shovel.png" alt="Shovel" class="w-full opacity-50" />
+    </div>
   {/if}
 
   <!-- If hovered and there is no plant planted -->

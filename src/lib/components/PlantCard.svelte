@@ -41,26 +41,32 @@
 
 <button
   onmousedown={handleClick}
-  class="group relative flex aspect-square select-none flex-col items-center justify-center p-4 text-white"
+  class="group relative flex w-full select-none flex-col items-center justify-center rounded-lg border border-blue-500/20 bg-blue-500/10 p-1 text-white"
   class:opacity-50={!isSunEnough}
   class:grayscale={isOnCooldown}
 >
   {#if isOnCooldown}
-    <div class="absolute inset-0 z-10 flex items-center justify-center">
-      <div class="absolute inset-0 rounded bg-black bg-opacity-50"></div>
+    <div
+      class="absolute inset-0 z-10 flex items-center justify-center rounded-lg"
+    >
+      <div class="absolute inset-0 rounded-lg bg-black bg-opacity-50"></div>
       <div
         class="absolute bottom-0 left-0 right-0 h-1 rounded-b bg-green-500 transition-all duration-300 ease-linear"
         style="width: {cooldownPercentage}%"
       ></div>
-      <span class="absolute z-20 text-xs font-bold text-white">
+      <span class="absolute z-20 text-lg font-bold text-white">
         {Math.ceil(remainingCooldown / 1000)}
       </span>
     </div>
   {/if}
+
   <img
     src={getPlantImage(id)}
     alt={name}
-    class="pointer-events-none w-full select-none transition-transform group-hover:scale-105"
+    class="pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105"
   />
-  <p class="text-xs">{price}</p>
+  <div class="flex items-center">
+    <img src="/sun.png" alt="sun" class="h-2 w-2" />
+    <p class="text-xs font-bold">{price}</p>
+  </div>
 </button>
