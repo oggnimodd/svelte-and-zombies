@@ -16,7 +16,7 @@
   import Sun from "./Sun.svelte";
   import { browser } from "$app/environment";
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
-  import PlantCursor from "./PlantCursor.svelte";
+  import PlantCursor from "./ImageCursor.svelte";
   import isMobile from "is-mobile";
   import LawnMower from "./LawnMower.svelte";
   import Explosion from "./Explosion.svelte";

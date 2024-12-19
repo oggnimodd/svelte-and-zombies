@@ -14,7 +14,10 @@
 
   let x = $state(0);
   let y = $state(0);
-  let isVisible = $derived(plantSelector.selectedPlant !== null);
+
+  let isVisible = $derived(
+    plantSelector.selectedPlant !== null || plantSelector.isShoveling
+  );
 
   const handleMouseMove = (event: MouseEvent) => {
     x = event.clientX;
@@ -40,10 +43,18 @@
       CELL_WIDTH / 2}px;width: {CELL_WIDTH}px;"
     class="pointer-events-none fixed z-[1000]"
   >
-    <img
-      src={plantImage}
-      alt={plantSelector.selectedPlant + "-ghost"}
-      class="pointer-events-none w-full cursor-none"
-    />
+    {#if plantSelector.isShoveling}
+      <img
+        src="/shovel.png"
+        alt="Shovel"
+        class="pointer-events-none w-full cursor-none"
+      />
+    {:else}
+      <img
+        src={plantImage}
+        alt={plantSelector.selectedPlant + "-ghost"}
+        class="pointer-events-none w-full cursor-none"
+      />
+    {/if}
   </div>
 {/if}
