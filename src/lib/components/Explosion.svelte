@@ -5,7 +5,7 @@
     YARD_WIDTH,
   } from "$lib/constants/sizes";
   interface ExplosionProps {
-    type: "circular" | "row";
+    type: "circular" | "row" | "charred";
     x: number;
     y: number;
     duration: number;
@@ -68,6 +68,28 @@
   </div>
 {/if}
 
+<!-- Charred zombie effect -->
+{#if type === "charred"}
+  <div
+    class="charred-effect"
+    style="
+    transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{x},{y},0,1);
+    z-index: 5000;
+    animation-duration: {duration}ms;
+    width: {CELL_WIDTH / 1.5}px;
+    height: {CELL_WIDTH / 1.5}px;
+  "
+  >
+    <div class="relative w-auto" style="width: {CELL_WIDTH / 1.3}px;">
+      <img
+        src="/effects/charred-zombie.png"
+        alt="charred"
+        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
+      />
+    </div>
+  </div>
+{/if}
+
 <style>
   .circular-explosion {
     position: absolute;
@@ -93,5 +115,9 @@
   .row-explosion-image {
     background-repeat: repeat-x;
     background-position: 0 0;
+  }
+
+  .charred-effect {
+    position: absolute;
   }
 </style>

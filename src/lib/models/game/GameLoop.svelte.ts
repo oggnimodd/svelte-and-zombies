@@ -28,6 +28,7 @@ import LawnMowerManager from "./LawnMowerManager.svelte";
 import Squash from "../plants/Squash.svelte";
 import Chomper from "../plants/Chomper.svelte";
 import ExplosionManager, {
+  type CharredEffectParams,
   type CircularExplosionParams,
   type RowExplosionParams,
 } from "./ExplosionManager.svelte";
@@ -77,6 +78,10 @@ export class GameLoop {
 
     EventEmitter.on("addRowExplosion", (params: RowExplosionParams) => {
       this.explosionManager.addRowExplosion(params);
+    });
+
+    EventEmitter.on("addCharredEffect", (params: CharredEffectParams) => {
+      this.explosionManager.addCharredEffect(params);
     });
   }
 

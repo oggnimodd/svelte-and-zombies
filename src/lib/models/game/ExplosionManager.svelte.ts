@@ -2,7 +2,7 @@ import { CELL_WIDTH } from "$lib/constants/sizes";
 import uuid from "short-uuid";
 import { gameTime } from "./GameTime.svelte";
 
-export type ExplosionType = "circular" | "row";
+export type ExplosionType = "circular" | "row" | "charred";
 
 export interface Explosion {
   id: string;
@@ -21,6 +21,12 @@ export interface CircularExplosionParams {
 
 export interface RowExplosionParams {
   row: number;
+  duration?: number;
+}
+
+export interface CharredEffectParams {
+  x: number;
+  y: number;
   duration?: number;
 }
 
@@ -53,6 +59,17 @@ export default class ExplosionManager {
       x: 0, // Start from the left side of the yard
       y,
       duration: params.duration ?? 500,
+      startTime: gameTime.get(),
+    });
+  }
+
+  addCharredEffect(params: CharredEffectParams) {
+    this.explosions.push({
+      id: uuid.generate(),
+      type: "charred",
+      x: params.x,
+      y: params.y,
+      duration: params.duration ?? 1200,
       startTime: gameTime.get(),
     });
   }

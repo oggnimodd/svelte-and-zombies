@@ -3,7 +3,10 @@ import type { PlantedPlant } from "../game/PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { soundManager } from "../game/SoundManager.svelte";
-import type { RowExplosionParams } from "../game/ExplosionManager.svelte";
+import type {
+  RowExplosionParams,
+  CharredEffectParams,
+} from "../game/ExplosionManager.svelte";
 
 export const ChilliStats: PlantStats = {
   id: "chilli",
@@ -36,7 +39,6 @@ export default class Chilli extends BasePlant {
     // Check if inflation time is complete
     if (this.isExploding && !this.isExploded) {
       const elapsedTime = gameTime - this.explosionStartTime;
-
       if (elapsedTime >= this.INFLATE_DURATION) {
         // Emit event to display explosion
         EventEmitter.emit("addRowExplosion", {
@@ -48,15 +50,20 @@ export default class Chilli extends BasePlant {
           (zombie) => zombie.row === plantedPlant.cell.row
         );
 
-        // Damage all zombies in the row
+        // Damage all zombies in the row and add charred effect
         rowZombies.forEach((zombie) => {
           zombie.health -= this.damage;
+
+          // Add charred effect at zombie's position
+          EventEmitter.emit("addCharredEffect", {
+            x: zombie.x,
+            y: zombie.y,
+          } satisfies CharredEffectParams);
         });
 
         // Mark as exploded
         this.isExploding = false;
         this.isExploded = true;
-
         soundManager.playSound("explosion");
 
         // Emit the chilli exploded event so the plant manager can remove the plant

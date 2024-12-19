@@ -4,7 +4,10 @@ import type Zombie from "../zombies/Zombie.svelte";
 import EventEmitter from "../EventEmitter";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { soundManager } from "../game/SoundManager.svelte";
-import type { CircularExplosionParams } from "../game/ExplosionManager.svelte";
+import type {
+  CircularExplosionParams,
+  CharredEffectParams,
+} from "../game/ExplosionManager.svelte";
 import { gameTime } from "../game/GameTime.svelte";
 
 export const PotatoStats: PlantStats = {
@@ -73,6 +76,12 @@ export default class Potato extends BasePlant {
         // Explode!
         zombiesInRange.forEach((zombie) => {
           zombie.health -= this.EXPLOSION_DAMAGE;
+
+          // Add charred effect at zombie's position
+          EventEmitter.emit("addCharredEffect", {
+            x: zombie.x,
+            y: zombie.y,
+          } satisfies CharredEffectParams);
         });
 
         this.isExploded = true;
