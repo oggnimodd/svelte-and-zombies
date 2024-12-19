@@ -70,6 +70,7 @@ export default class Zombie {
 
   stun(duration: number) {
     this.stunEndTime = Math.max(gameTime.get() + duration, this.stunEndTime);
+    this.isStunned = true;
   }
 
   takeHit(damage: number) {
