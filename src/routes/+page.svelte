@@ -9,6 +9,7 @@
   import VictoryModal from "$lib/components/VictoryModal.svelte";
   import LoseModal from "$lib/components/LoseModal.svelte";
   import SunCounter from "$lib/components/SunCounter.svelte";
+  import PauseModal from "$lib/components/PauseModal.svelte";
 
   let isPreloading = $state(false);
 
