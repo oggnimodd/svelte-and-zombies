@@ -34,7 +34,7 @@
     >
       <SunCounter totalSun={gameLoop.sunManager.totalSun} />
       <div
-        class="w-fit max-w-[90%] overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] py-2"
+        class="w-fit max-w-[90%] overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] py-2 scrollbar-thin scrollbar-track-[#94451C] scrollbar-thumb-white/60"
       >
         <PlantList>
           {#each plantSelector.plants as plant}
