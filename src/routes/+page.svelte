@@ -3,7 +3,6 @@
   import PlantList from "$lib/components/PlantList.svelte";
   import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
   import Yard from "$lib/components/Yard.svelte";
-  import PauseModal from "$lib/components/PauseModal.svelte";
   import LoadingScreen from "$lib/components/LoadingScreen.svelte";
   import { gameLoop } from "$lib/reactivity/gameLoop.svelte";
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
@@ -18,10 +17,6 @@
     soundManager.playBackgroundMusic();
     gameLoop.start();
   };
-
-  const numPlants = $derived.by(() => {
-    return plantSelector.plants.length;
-  });
 </script>
 
 <VictoryModal />
@@ -37,10 +32,12 @@
       class="relative z-50 flex w-full items-center gap-x-2"
     >
       <SunCounter totalSun={gameLoop.sunManager.totalSun} />
-      <div class="w-[90%] rounded-lg border-2 border-black/60 bg-[#94451C] p-2">
+      <div
+        class="w-fit max-w-[90%] overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] py-2"
+      >
         <PlantList>
           {#each plantSelector.plants as plant}
-            <div style="width: {numPlants}%">
+            <div class="first:pl-2 last:pr-2">
               <PlantCard {...plant} />
             </div>
           {/each}
