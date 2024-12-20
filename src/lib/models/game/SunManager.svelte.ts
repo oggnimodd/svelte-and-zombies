@@ -9,6 +9,7 @@ export interface FallingSun {
   targetY: number;
   value: number;
   spawnTime: number;
+  isFallingFromSky?: boolean;
 }
 
 // TODO: change this to 100
@@ -18,6 +19,7 @@ export default class SunManager {
   totalSun: number = $state(INITIAL_TOTAL_SUN);
   // Displayed suns
   suns: FallingSun[] = $state([]);
+  sunCounterDivRef: HTMLDivElement | null = $state(null);
 
   // These properties are for the sun spawned from the top of the yard
   private readonly spawnInterval = 10000; // 10 seconds
@@ -67,6 +69,7 @@ export default class SunManager {
       targetY,
       value: this.sunValue,
       spawnTime: gameTime.get(),
+      isFallingFromSky: true,
     });
   }
 

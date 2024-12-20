@@ -9,6 +9,7 @@
   import { soundManager } from "$lib/models/game/SoundManager.svelte";
   import VictoryModal from "$lib/components/VictoryModal.svelte";
   import LoseModal from "$lib/components/LoseModal.svelte";
+  import SunCounter from "$lib/components/SunCounter.svelte";
 
   let isPreloading = $state(false);
 
@@ -35,6 +36,7 @@
       style="height:5rem;"
       class="relative z-50 flex w-full items-center gap-x-2"
     >
+      <SunCounter totalSun={gameLoop.sunManager.totalSun} />
       <div class="w-[90%] rounded-lg border-2 border-black/60 bg-[#94451C] p-2">
         <PlantList>
           {#each plantSelector.plants as plant}
