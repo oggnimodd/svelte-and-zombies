@@ -17,7 +17,9 @@
 
 <div
   bind:this={element}
-  class="projectile z-50 {shouldRotate(projectile.type) ? 'rotating' : ''}"
+  class="projectile pointer-events-none z-50 {shouldRotate(projectile.type)
+    ? 'rotating'
+    : ''}"
   style="z-index: {getProjectileZIndex(projectile.row)}; 
          width: {projectile.width}px; 
          height: {projectile.height}px; 
