@@ -26,6 +26,7 @@ import { soundManager } from "./SoundManager.svelte";
 import Squash from "../plants/Squash.svelte";
 import Chomper from "../plants/Chomper.svelte";
 import Potato from "../plants/Potato.svelte";
+import TwinSunflower from "../plants/TwinSunflower";
 
 interface PlantedPlantCell {
   row: number;
@@ -102,6 +103,8 @@ export default class PlantManager {
         return new Squash();
       case "chomper":
         return new Chomper();
+      case "twin-sunflower":
+        return new TwinSunflower();
       default:
         return new Sunflower();
     }

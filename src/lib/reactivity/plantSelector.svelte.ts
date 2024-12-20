@@ -18,6 +18,7 @@ import { SunflowerStats } from "$lib/models/plants/Sunflower";
 import { TallnutStats } from "$lib/models/plants/Tallnut";
 import { ThreepeaterStats } from "$lib/models/plants/Threepeater";
 import { TorchwoodStats } from "$lib/models/plants/Torchwood";
+import { TwinSunflowerStats } from "$lib/models/plants/TwinSunflower";
 import { WallnutStats } from "$lib/models/plants/Wallnut";
 import { WatermelonStats } from "$lib/models/plants/Watermelon";
 import { WinterMelonStats } from "$lib/models/plants/WinterMelon";
@@ -45,4 +46,5 @@ export const plantSelector = new PlantSelector([
   ChomperStats,
   SplitPeaStats,
   StarfruitStats,
+  TwinSunflowerStats,
 ]);

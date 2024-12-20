@@ -33,6 +33,7 @@ import ExplosionManager, {
   type RowExplosionParams,
 } from "./ExplosionManager.svelte";
 import Potato from "../plants/Potato.svelte";
+import TwinSunflower from "../plants/TwinSunflower";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -310,6 +311,9 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof Sunflower) {
         const sunflower = plantedPlant.plant as Sunflower;
         sunflower.update(plantedPlant, gameTime);
+      } else if (plantedPlant.plant instanceof TwinSunflower) {
+        const twinSunflower = plantedPlant.plant as TwinSunflower;
+        twinSunflower.update(plantedPlant, gameTime);
       }
     }
 
