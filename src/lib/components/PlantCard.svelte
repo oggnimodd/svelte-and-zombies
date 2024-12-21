@@ -66,7 +66,7 @@
     class="pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105"
   />
 
-  <div class="flex items-center gap-0.5 px-4">
+  <div class="flex w-10 items-center justify-center gap-0.5 sm:w-12">
     <p class="text-xs font-bold">{price}</p>
   </div>
 </button>
