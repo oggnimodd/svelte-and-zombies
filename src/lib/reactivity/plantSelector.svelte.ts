@@ -1,4 +1,5 @@
 import PlantSelector from "$lib/models/game/PlantSelector.svelte";
+import { BloomerangStats } from "$lib/models/plants/Bloomerang";
 import { CabbageStats } from "$lib/models/plants/Cabbage";
 import { CherryStats } from "$lib/models/plants/Cherry.svelte";
 import { ChilliStats } from "$lib/models/plants/Chilli";
@@ -47,4 +48,5 @@ export const plantSelector = new PlantSelector([
   SplitPeaStats,
   StarfruitStats,
   TwinSunflowerStats,
+  BloomerangStats,
 ]);

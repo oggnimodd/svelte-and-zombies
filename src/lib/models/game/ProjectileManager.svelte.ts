@@ -14,6 +14,8 @@ import { SvelteMap } from "svelte/reactivity";
 import { soundManager } from "./SoundManager.svelte";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BucketHeadZombie from "../zombies/BucketHeadZombie.svelte";
+import BoomerangProjectile from "../projectiles/BoomerangProjectile";
+import Bloomerang from "../plants/Bloomerang";
 
 export default class ProjectileManager {
   // Use Map for efficient projectile management
@@ -136,6 +138,15 @@ export default class ProjectileManager {
     // Move and filter projectiles
     for (const projectile of this.projectiles.values()) {
       projectile.move(deltaTime);
+
+      // Handle boomerang returns
+      if (projectile instanceof BoomerangProjectile) {
+        if (projectile.hasReturnedToSource()) {
+          this.handleBoomerangReturn(projectile);
+          continue; // Skip to the next projectile
+        }
+      }
+
       this.checkTorchwoodInteraction(projectile, plants);
 
       // Check if projectile is within game bounds
@@ -175,6 +186,9 @@ export default class ProjectileManager {
         this.handleProjectileHit(projectile, zombie, zombies);
 
         switch (projectile.type) {
+          case ProjectileTypes.BOOMERANG.type:
+            // We need to break here to prevent playing the hit sound for boomerang projectile multiple times, this should be handle by the handleProjectileHit method
+            break;
           case ProjectileTypes.CABBAGE.type:
             soundManager.playSound("splat");
             break;
@@ -199,6 +213,18 @@ export default class ProjectileManager {
     zombie: Zombie,
     zombies: Zombie[]
   ) {
+    if (projectile instanceof BoomerangProjectile) {
+      // First we check if we should apply the damage or not
+      const shouldApplyDamage = projectile.shouldApplyDamage(zombie);
+      if (shouldApplyDamage) {
+        zombie.takeHit(projectile.damage);
+        soundManager.playSound("hit");
+      }
+      // For boomerang projectile we apply the hit but don't remove the projectile
+      return;
+    }
+
+    // For other projectile types we apply the damage, apply effects, and remove the projectile
     zombie.takeHit(projectile.damage);
 
     if (projectile.stats.freezeDuration) {
@@ -265,6 +291,19 @@ export default class ProjectileManager {
           zombie.freeze(projectile.stats.freezeDuration);
         }
       }
+    }
+  }
+
+  // Handle boomerang projectile return
+  private handleBoomerangReturn(projectile: BoomerangProjectile) {
+    this.projectiles.delete(projectile.id); // Remove from projectiles
+
+    // Reset the active boomerang of the source plant
+    if (
+      projectile.sourcePlant instanceof Bloomerang &&
+      projectile.sourcePlant.setActiveBoomerang
+    ) {
+      projectile.sourcePlant.setActiveBoomerang(null);
     }
   }
 

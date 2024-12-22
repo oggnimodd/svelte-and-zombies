@@ -73,6 +73,13 @@ export const ProjectileTypes = {
     height: getDimension(0.3),
     image: "/projectiles/star.png",
   },
+  BOOMERANG: {
+    type: "boomerang",
+    speed: 2.5,
+    width: getDimension(0.3),
+    height: getDimension(0.3),
+    image: "/projectiles/boomerang.png",
+  },
 } as const;
 
 export type ProjectileType = keyof typeof ProjectileTypes;

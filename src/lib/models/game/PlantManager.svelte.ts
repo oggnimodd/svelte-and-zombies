@@ -27,6 +27,7 @@ import Squash from "../plants/Squash.svelte";
 import Chomper from "../plants/Chomper.svelte";
 import Potato from "../plants/Potato.svelte";
 import TwinSunflower from "../plants/TwinSunflower";
+import Bloomerang from "../plants/Bloomerang";
 
 interface PlantedPlantCell {
   row: number;
@@ -105,6 +106,8 @@ export default class PlantManager {
         return new Chomper();
       case "twin-sunflower":
         return new TwinSunflower();
+      case "bloomerang":
+        return new Bloomerang();
       default:
         return new Sunflower();
     }

@@ -34,6 +34,7 @@ import ExplosionManager, {
 } from "./ExplosionManager.svelte";
 import Potato from "../plants/Potato.svelte";
 import TwinSunflower from "../plants/TwinSunflower";
+import Bloomerang from "../plants/Bloomerang";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -314,6 +315,16 @@ export class GameLoop {
       } else if (plantedPlant.plant instanceof TwinSunflower) {
         const twinSunflower = plantedPlant.plant as TwinSunflower;
         twinSunflower.update(plantedPlant, gameTime);
+      } else if (plantedPlant.plant instanceof Bloomerang) {
+        const boomerangPlant = plantedPlant.plant as Bloomerang;
+        const zombiesInRow = this.zombieManager.zombies.filter(
+          (zombie) => zombie.row === plantedPlant.cell.row
+        );
+
+        if (zombiesInRow.length > 0 && boomerangPlant.canShoot(gameTime)) {
+          const projectile = boomerangPlant.shoot(plantedPlant, gameTime);
+          allProjectiles.push(projectile);
+        }
       }
     }
 

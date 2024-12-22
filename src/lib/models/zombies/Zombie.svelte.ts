@@ -1,3 +1,4 @@
+import uuid from "short-uuid";
 import { CELL_WIDTH } from "../../constants/sizes";
 import { gameTime } from "../game/GameTime.svelte";
 import type { PlantedPlant } from "../game/PlantManager.svelte";
@@ -20,6 +21,7 @@ export interface ZombieConfig {
 }
 
 export default class Zombie {
+  id: string;
   name: string;
   health: number = $state(0);
   damage: number;
@@ -47,6 +49,7 @@ export default class Zombie {
   private hitEffectDuration: number = 80; // Duration of the hit effect
 
   constructor(config: ZombieConfig) {
+    this.id = uuid.generate();
     this.name = config.name;
     this.health = config.health;
     this.damage = config.damage;
