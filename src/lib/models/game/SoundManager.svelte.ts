@@ -22,7 +22,9 @@ type GameSoundEffect =
   | "victory"
   | "lose"
   | "screaming"
-  | "splash";
+  | "splash"
+  | "zombie-flag"
+  | "siren";
 
 interface SoundConfig {
   src: string;
@@ -52,6 +54,8 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   "bucket-hit": { src: "/sounds/bucket-hit.mp3", volume: 0.3 },
   hmm: { src: "/sounds/hmm.mp3", volume: 0.6 },
   screaming: { src: "/sounds/screaming.mp3", volume: 1 },
+  "zombie-flag": { src: "/sounds/zombie-flag.mp3", volume: 0.6 },
+  siren: { src: "/sounds/siren.mp3", volume: 0.8 },
 };
 
 export default class SoundManager {
@@ -79,6 +83,8 @@ export default class SoundManager {
     victory: 100,
     lose: 100,
     screaming: 100,
+    "zombie-flag": 100,
+    siren: 100,
   };
   isMuted: boolean = $state(LocalStorageManager.get("sound-muted") ?? false);
   private eatingSounds: Map<string, Howl> = new Map();

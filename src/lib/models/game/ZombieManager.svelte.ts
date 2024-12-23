@@ -22,6 +22,7 @@ import type { PlantedPlant } from "./PlantManager.svelte";
 import FootballZombie from "../zombies/FootballZombie.svelte";
 import FlagZombie from "../zombies/FlagZombie.svelte";
 import { gameTime } from "./GameTime.svelte";
+import { soundManager } from "./SoundManager.svelte";
 
 interface WaveConfig {
   zombieCount: number;
@@ -230,6 +231,15 @@ export default class ZombieManager {
     this.zombiesSpawnedInWave = 0;
     this.spawnInterval = this.waveConfigs[this.currentWave].spawnInterval;
     this.timeSinceLastSpawn = 0;
+
+    // Play zombie-flag sound when a wave starts
+    soundManager.playSound("zombie-flag");
+
+    // Play "sirene" sound on final wave start
+    if (this.currentWave === this.waveConfigs.length - 1) {
+      soundManager.playSound("siren");
+    }
+
     EventEmitter.emit("waveStarted", this.currentWave);
   }
 
