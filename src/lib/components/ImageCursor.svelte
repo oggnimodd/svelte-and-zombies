@@ -41,19 +41,19 @@
   <div
     style="left: {x - CELL_WIDTH / 2}px;top: {y -
       CELL_WIDTH / 2}px;width: {CELL_WIDTH}px;"
-    class="pointer-events-none fixed z-[1000]"
+    class="pointer-events-none fixed z-[1000] select-none"
   >
     {#if plantSelector.isShoveling}
       <img
         src="/shovel.png"
         alt="Shovel"
-        class="pointer-events-none w-full cursor-none"
+        class="pointer-events-none w-full cursor-none select-none"
       />
     {:else}
       <img
         src={plantImage}
         alt={plantSelector.selectedPlant + "-ghost"}
-        class="pointer-events-none w-full cursor-none"
+        class="pointer-events-none w-full cursor-none select-none"
       />
     {/if}
   </div>
