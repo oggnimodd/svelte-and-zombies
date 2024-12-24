@@ -73,7 +73,7 @@
 {:else}
   <!-- TODO: add main menu screen -->
   <div
-    class="flex flex min-h-screen w-full flex-col items-center justify-center bg-black text-white"
+    class="flex flex min-h-screen w-full flex-col items-center justify-center gap-y-2 bg-black text-white"
   >
     <button
       class="rounded bg-green-500 p-2 text-white"
@@ -83,6 +83,8 @@
     >
       Start Game
     </button>
+
+    <a class="rounded bg-green-500 p-2 text-white" href="/almanac"> Almanac </a>
   </div>
 {/if}
 
