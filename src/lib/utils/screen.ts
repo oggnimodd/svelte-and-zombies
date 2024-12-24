@@ -3,7 +3,11 @@ export async function lockOrientationToLandscape() {
   if (screen.orientation) {
     // Check if currently in portrait mode
     if (screen.orientation.type.includes("portrait")) {
-      await screen.orientation.lock("landscape-primary");
+      try {
+        await screen.orientation.lock("landscape-primary");
+      } catch (err) {
+        console.error("Failed to lock orientation:", err);
+      }
     }
   }
 }

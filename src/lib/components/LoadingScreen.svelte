@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
   import preloadList from "$lib/preload-list.json";
+  import { delay } from "$lib/utils/delay";
+  import isMobile from "is-mobile";
 
   interface LoadingScreenProps {
     startGame: () => void;
@@ -61,6 +63,8 @@
 
     // Wait for all assets to load
     await Promise.all([...imagePromises, ...soundPromises]);
+
+    await delay(2000); // Delay for 2 seconds after loading is complete
     isLoadingComplete = true;
   }
 
@@ -84,5 +88,20 @@
       class="h-full bg-green-500 transition-all duration-300 ease-in-out"
       style="width: {loadingProgress}%"
     ></div>
+  </div>
+
+  <div class="mt-4 text-center">
+    {#if isMobile()}
+      <p class="text-lg">
+        <b>For the best gaming experience:</b>
+        <br />
+        Please turn your phone sideways (landscape mode) 📱
+      </p>
+    {:else}
+      <p class="text-lg">
+        <b>Tip</b>: Use your browser's zoom (+ or -) to find your perfect view
+        🔍
+      </p>
+    {/if}
   </div>
 </div>
