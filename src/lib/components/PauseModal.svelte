@@ -2,7 +2,6 @@
   import { browser } from "$app/environment";
   import { onMount, onDestroy } from "svelte";
   import { gameLoop } from "../reactivity/gameLoop.svelte";
-
   let isVisible = $state(false);
   let isBlurred = $state(false); // Track blur state
 
@@ -74,21 +73,30 @@
     class="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50"
   >
     <div
-      class="transform rounded-lg border-2 border-green-600 bg-gradient-to-br from-green-800 to-green-900 p-8 shadow-xl transition-all"
+      class="relative max-w-lg transform rounded-lg border-2 border-lime-400/30 bg-gradient-to-br from-green-900/90 to-green-700/90 p-8 shadow-xl backdrop-blur-sm transition-all"
     >
-      <h2 class="mb-6 text-center text-3xl font-bold text-green-100">
-        Game Paused
+      <div class="absolute inset-0 -z-10 overflow-hidden">
+        <!-- Decorative Background Elements -->
+        <div
+          class="absolute -left-16 -top-16 h-32 w-32 rotate-45 rounded-full bg-lime-400/10 blur-3xl"
+        ></div>
+        <div
+          class="absolute -bottom-16 -right-16 h-32 w-32 rotate-45 rounded-full bg-lime-400/10 blur-3xl"
+        ></div>
+      </div>
+      <h2 class="mb-6 text-center text-3xl font-bold text-lime-400">
+        🌱 Game Paused 🌱
       </h2>
       <div class="flex flex-col gap-4">
         <button
           onclick={resumeGame}
-          class="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-green-500 hover:shadow-lg"
+          class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-8 py-3 font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0 active:shadow-md"
         >
           Resume Game
         </button>
         <button
           onclick={exitGame}
-          class="rounded-lg bg-red-600 px-8 py-3 font-semibold text-white shadow-md transition-colors duration-200 hover:bg-red-500 hover:shadow-lg"
+          class="transform rounded-lg border-2 border-red-600 bg-gradient-to-r from-red-700 to-red-500 px-8 py-3 font-semibold text-white shadow-md transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-red-500/20 active:translate-y-0 active:shadow-md"
         >
           Exit to Main Menu
         </button>
