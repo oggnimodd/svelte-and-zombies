@@ -10,10 +10,16 @@
   import LoseModal from "$lib/components/LoseModal.svelte";
   import SunCounter from "$lib/components/SunCounter.svelte";
   import PauseModal from "$lib/components/PauseModal.svelte";
+  import { lockOrientationToLandscape } from "$lib/utils/screen";
+  import isMobile from "is-mobile";
 
   let isPreloading = $state(false);
 
-  const startGame = () => {
+  const startGame = async () => {
+    if (isMobile()) {
+      await lockOrientationToLandscape();
+    }
+
     isPreloading = false;
     soundManager.playBackgroundMusic();
     gameLoop.start();
