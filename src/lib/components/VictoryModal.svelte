@@ -24,6 +24,10 @@
 </script>
 
 {#if isVisible}
+  <div
+    class="fixed inset-0 z-[9998] flex items-center justify-center bg-black"
+  ></div>
+
   {#if showConfetti}
     <div
       class="pointer-events-none fixed left-0 top-[-50px] z-[9998] flex h-screen w-screen justify-center overflow-hidden"

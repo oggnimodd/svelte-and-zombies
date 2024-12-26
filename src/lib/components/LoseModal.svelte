@@ -23,6 +23,9 @@
 
 {#if isVisible}
   <div
+    class="fixed inset-0 z-[9998] flex items-center justify-center bg-black"
+  ></div>
+  <div
     class="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-50"
   >
     <div
