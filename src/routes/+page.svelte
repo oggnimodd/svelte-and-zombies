@@ -16,6 +16,7 @@
   } from "$lib/utils/screen";
   import isMobile from "is-mobile";
   import MainMenu from "$lib/components/MainMenu.svelte";
+  import cn from "$lib/utils/cn";
 
   let isPreloading = $state(false);
 
@@ -55,9 +56,13 @@
           {/each}
         </PlantList>
       </div>
-      <div class="flex h-full w-[10%] items-center">
+      <!-- Shovel button -->
+      <div style="height:5rem;" class="flex h-full w-[10%] items-center">
         <button
-          class="flex aspect-square h-10 w-10 items-center justify-center"
+          class={cn(
+            "flex aspect-square h-[80%] items-center justify-center rounded-lg border-2 border-transparent p-2 transition-all duration-200 ease-in-out",
+            plantSelector.isShoveling && "scale-105 border-lime-400 shadow-lg"
+          )}
           onclick={() => plantSelector.toggleShovel()}
         >
           <img src="/shovel.png" alt="Shovel" class="w-full" />

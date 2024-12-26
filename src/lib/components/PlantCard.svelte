@@ -3,6 +3,7 @@
   import { gameLoop } from "$lib/reactivity/gameLoop.svelte";
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import { getPlantImage } from "../utils/getPlantImage";
+  import cn from "../utils/cn";
 
   const { name, id, price, buyCooldown }: PlantStats = $props();
 
@@ -13,21 +14,20 @@
     });
   });
 
-  // Add cooldown state
   const remainingCooldown = $derived.by(() => {
     return plantSelector.getRemainingCooldown(id);
   });
 
   const cooldownPercentage = $derived.by(() => {
     if (!buyCooldown) return 0;
-
     return 100 - (remainingCooldown / buyCooldown) * 100;
   });
 
   const isOnCooldown = $derived.by(() => remainingCooldown > 0);
 
+  const isSelected = $derived.by(() => plantSelector.selectedPlant === id);
+
   const onSelectPlant = (plantId: string) => {
-    // Check if we have enough sun and plant is not on cooldown
     if (!isSunEnough || isOnCooldown) {
       return;
     }
@@ -41,9 +41,13 @@
 
 <button
   onmousedown={handleClick}
-  class="group relative flex w-full select-none flex-col items-center justify-center overflow-hidden rounded-lg border border-black/80 bg-gradient-to-b from-[#D0F9E8] to-[#C2E2A7] py-1 text-black"
-  class:opacity-50={!isSunEnough}
-  class:grayscale={isOnCooldown}
+  class={cn(
+    "group relative flex w-full select-none flex-col items-center justify-center overflow-hidden rounded-lg border border-black/80 bg-gradient-to-b from-[#D0F9E8] to-[#C2E2A7] py-1 text-black transition-all duration-200 ease-in-out",
+    !isSunEnough && "opacity-50",
+    isOnCooldown && "grayscale",
+    isSelected &&
+      "scale-105 border-lime-400 bg-gradient-to-b from-lime-200 to-lime-400 shadow-lg"
+  )}
 >
   {#if isOnCooldown}
     <div
@@ -59,13 +63,11 @@
       </span>
     </div>
   {/if}
-
   <img
     src={getPlantImage(id)}
     alt={name}
     class="pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105"
   />
-
   <div class="flex w-10 items-center justify-center gap-0.5 sm:w-12">
     <p class="text-xs font-bold">{price}</p>
   </div>
