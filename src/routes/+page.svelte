@@ -38,7 +38,9 @@
 {#if isPreloading}
   <LoadingScreen {startGame} />
 {:else if gameLoop.isRunning}
-  <div class="background h-screen w-full overflow-hidden text-white">
+  <div
+    class="h-screen w-full overflow-hidden bg-gradient-to-br from-green-900 to-green-700 text-white"
+  >
     <PauseModal />
     <div
       style="height:5rem;"
@@ -83,9 +85,3 @@
     }}
   />
 {/if}
-
-<style>
-  .background {
-    background-color: #141d0a;
-  }
-</style>

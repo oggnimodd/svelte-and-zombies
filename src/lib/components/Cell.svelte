@@ -153,10 +153,10 @@
 
 <style>
   .dark-bg {
-    background-color: #62803b;
+    @apply bg-lime-300/30;
   }
 
   .light-bg {
-    background-color: #7b9345;
+    @apply bg-lime-300/60;
   }
 </style>
