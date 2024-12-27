@@ -100,6 +100,7 @@ export class GameLoop {
     this.deltaTime = 0;
     this.fps = 0;
     this.isPaused = false;
+    this.zombieManager.zombies.forEach((zombie) => zombie.stopEatingSound());
     this.zombieManager.reset();
     this.projectileManager.reset();
     this.plantManager.reset();
@@ -107,7 +108,6 @@ export class GameLoop {
     this.lawnMowerManager.reset();
     plantSelector.reset();
     soundManager.stopBackgroundMusic();
-    this.zombieManager.zombies.forEach((zombie) => zombie.stopEatingSound());
     this.explosionManager.reset();
 
     this.isDelayingWin = false; // Reset the win delay flag
