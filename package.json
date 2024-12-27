@@ -42,6 +42,7 @@
     "vite": "^5.4.11"
   },
   "dependencies": {
+    "@tabler/icons-svelte": "^3.26.0",
     "clsx": "^2.1.1",
     "howler": "^2.2.4",
     "is-mobile": "^5.0.0",
