@@ -27,9 +27,9 @@
   </h2>
 
   <!-- Stats -->
-  <div class="space-y-4">
+  <div class="space-y-2">
     <!-- Health Bar -->
-    <div class="rounded-lg border border-red-400/20 bg-black/20 p-3">
+    <div class="rounded-lg border border-red-400/20 bg-black/20 p-2.5">
       <span class="mb-1 block text-sm text-red-400">Health</span>
       <div class="flex items-center gap-2 font-bold text-yellow-400">
         {zombie.health}
@@ -37,7 +37,7 @@
     </div>
 
     <!-- Damage -->
-    <div class="rounded-lg border border-red-400/20 bg-black/20 p-3">
+    <div class="rounded-lg border border-red-400/20 bg-black/20 p-2.5">
       <span class="mb-1 block text-sm text-red-400">Damage</span>
       <div class="flex items-center gap-2 font-bold text-yellow-400">
         {zombie.damage}
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Speed -->
-    <div class="rounded-lg border border-red-400/20 bg-black/20 p-3">
+    <div class="rounded-lg border border-red-400/20 bg-black/20 p-2.5">
       <span class="mb-1 block text-sm text-red-400">Speed</span>
       <div class="flex items-center gap-2 font-bold text-yellow-400">
         {zombie.speed}

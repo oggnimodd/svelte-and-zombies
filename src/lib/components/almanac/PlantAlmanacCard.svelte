@@ -29,9 +29,9 @@ backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-2 hover
   </h2>
 
   <!-- Stats -->
-  <div class="space-y-4">
+  <div class="space-y-2">
     <!-- Health Bar -->
-    <div class="rounded-lg border border-lime-400/20 bg-black/20 p-3">
+    <div class="rounded-lg border border-lime-400/20 bg-black/20 p-2.5">
       <span class="mb-1 block text-sm text-lime-400">Health</span>
       <div class="flex items-center gap-2 font-bold text-yellow-400">
         {plant.health}
@@ -39,7 +39,7 @@ backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-2 hover
     </div>
 
     <!-- Sun Cost -->
-    <div class="rounded-lg border border-lime-400/20 bg-black/20 p-3">
+    <div class="rounded-lg border border-lime-400/20 bg-black/20 p-2.5">
       <span class="mb-1 block text-sm text-lime-400">Sun Cost</span>
       <div class="flex items-center gap-2 font-bold text-yellow-400">
         {plant.price}
@@ -53,7 +53,7 @@ backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-2 hover
 
     <!-- Damage (if the plant can shoot) -->
     {#if plant.damage}
-      <div class="rounded-lg border border-lime-400/20 bg-black/20 p-3">
+      <div class="rounded-lg border border-lime-400/20 bg-black/20 p-2.5">
         <span class="mb-1 block text-sm text-lime-400">Damage</span>
         <div class="flex items-center gap-2 font-bold text-yellow-400">
           {plant.damage}
