@@ -1,5 +1,5 @@
 <script lang="ts">
-  import AlmanacCard from "$lib/components/almanac/AlmanacCard.svelte";
+  import AlmanacCard from "$lib/components/almanac/PlantAlmanacCard.svelte";
   import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
   const plants = plantSelector.plants;
 </script>
@@ -15,7 +15,7 @@
       <h1
         class="text-2xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-4xl"
       >
-        Plant Almanac
+        Plants Almanac
       </h1>
 
       <a

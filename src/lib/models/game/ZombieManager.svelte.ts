@@ -24,17 +24,19 @@ import FlagZombie from "../zombies/FlagZombie.svelte";
 import { gameTime } from "./GameTime.svelte";
 import { soundManager } from "./SoundManager.svelte";
 
+export type ZombieTypes =
+  | typeof NormalZombie
+  | typeof ConeHeadZombie
+  | typeof BucketHeadZombie
+  | typeof FootballZombie
+  | typeof FlagZombie;
+
 interface WaveConfig {
   zombieCount: number;
   spawnInterval: number;
   maxSimultaneousSpawnCount?: number;
   zombieTypes: Array<{
-    type:
-      | typeof NormalZombie
-      | typeof ConeHeadZombie
-      | typeof BucketHeadZombie
-      | typeof FootballZombie
-      | typeof FlagZombie;
+    type: ZombieTypes;
     weight: number;
   }>;
 }
@@ -366,3 +368,11 @@ export default class ZombieManager {
     return this.waveConfigs.length;
   }
 }
+
+export const zombieTypes: Array<ZombieTypes> = [
+  NormalZombie,
+  ConeHeadZombie,
+  BucketHeadZombie,
+  FootballZombie,
+  FlagZombie,
+];

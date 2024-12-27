@@ -40,12 +40,19 @@
         Start Game
       </button>
 
-      <!-- Almanac Link -->
+      <!-- Almanac Links -->
       <a
-        href="/almanac"
+        href="/almanac/plants"
         class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
-        Almanac
+        Plants Almanac
+      </a>
+
+      <a
+        href="/almanac/zombies"
+        class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+      >
+        Zombies Almanac
       </a>
     </div>
   </div>
