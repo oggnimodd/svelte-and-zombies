@@ -28,9 +28,9 @@
   <div class="relative z-10 flex flex-col items-center space-y-8">
     <!-- Title -->
     <h1
-      class="text-center text-4xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-6xl"
+      class="text-center text-4xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-4xl"
     >
-      Svelte vs Zombies
+      Svelte Plants vs Zombies
     </h1>
 
     <!-- Buttons -->
