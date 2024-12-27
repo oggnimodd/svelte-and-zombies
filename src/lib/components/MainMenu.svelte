@@ -1,4 +1,9 @@
 <script lang="ts">
+  import IconPlant from "@tabler/icons-svelte/icons/plant";
+  import IconMan from "@tabler/icons-svelte/icons/man";
+  import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
+  import IconPlayerPlay from "@tabler/icons-svelte/icons/player-play";
+
   interface MainMenuProps {
     startGame: () => void;
   }
@@ -32,26 +37,27 @@
     <div class="flex flex-col gap-4">
       <!-- Start Game Button -->
       <button
-        class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
-        onclick={() => {
-          startGame();
-        }}
+        class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+        onclick={startGame}
       >
+        <IconPlayerPlay class="h-6 w-6" />
         Start Game
       </button>
 
       <!-- Almanac Links -->
       <a
         href="/almanac/plants"
-        class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+        class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
+        <IconPlant class="h-6 w-6" />
         Plants Almanac
       </a>
 
       <a
         href="/almanac/zombies"
-        class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+        class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
+        <IconMan class="h-6 w-6" />
         Zombies Almanac
       </a>
 
@@ -60,8 +66,9 @@
         href="https://github.com/oggnimodd/svelte-plants-vs-zombies"
         target="_blank"
         rel="noreferrer noopener"
-        class="transform rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+        class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
+        <IconBrandGithub class="h-6 w-6" />
         Github
       </a>
     </div>
