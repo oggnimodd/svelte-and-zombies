@@ -1,1 +1,1 @@
-# Svelte Plants vs Zombies
+# Svelte vs Zombies

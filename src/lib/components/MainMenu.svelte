@@ -30,7 +30,7 @@
     <h1
       class="text-center text-4xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-4xl"
     >
-      Svelte Plants vs Zombies
+      Svelte vs Zombies
     </h1>
 
     <!-- Buttons -->
