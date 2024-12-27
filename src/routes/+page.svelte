@@ -62,8 +62,9 @@
       <div style="height:5rem;" class="flex h-full w-[10%] items-center">
         <button
           class={cn(
-            "flex aspect-square h-[80%] items-center justify-center rounded-lg border-2 border-transparent p-2 transition-all duration-200 ease-in-out",
-            plantSelector.isShoveling && "scale-105 border-lime-400 shadow-lg"
+            "flex aspect-square h-[80%] items-center justify-center rounded-lg border-2 border-transparent bg-lime-300/10 p-2 shadow-lg transition-all duration-200 ease-in-out",
+            plantSelector.isShoveling &&
+              "scale-105 border-lime-400 bg-lime-300/60"
           )}
           onclick={() => plantSelector.toggleShovel()}
         >
