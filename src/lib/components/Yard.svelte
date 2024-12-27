@@ -42,14 +42,12 @@
 </script>
 
 <!-- For debugging -->
-<div class="fixed bottom-2 left-2 rounded bg-black/50 p-2 text-white">
+<div class="fixed bottom-2 left-2 rounded text-white">
   {gameLoop.fps.toFixed(1)}
 </div>
 
 <!-- Total sun:  -->
-<div class="fixed bottom-2 right-2 rounded bg-black/50 p-2 text-white">
-  Total Sun: {gameLoop.sunManager.total}
-
+<div class="fixed bottom-2 right-2 rounded text-white">
   <!-- Button for muting/unmuting sound -->
   <button
     class="bg-red-500 p-2 text-white"
