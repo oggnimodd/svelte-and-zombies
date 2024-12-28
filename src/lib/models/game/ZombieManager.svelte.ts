@@ -362,6 +362,9 @@ export default class ZombieManager {
     this.quadTree.clear();
     this.isFirstWaveStarted = false;
     this.firstWaveDelay = 8000;
+
+    soundManager.stopSound("zombie-flag");
+    soundManager.stopSound("siren");
   }
 
   getTotalWave() {
