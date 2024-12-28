@@ -15,6 +15,7 @@ export const StarfruitStats: PlantStats = {
   shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 8000,
+  description: "Shoots stars in five different directions around itself.",
 };
 
 // TODO: Improve performance

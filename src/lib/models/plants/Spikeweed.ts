@@ -13,6 +13,7 @@ export const SpikeweedStats: PlantStats = {
   damage: 20,
   shootCooldown: 1000,
   buyCooldown: 5000,
+  description: "Ground plant that damages zombies walking over it.",
 };
 
 export default class Spikeweed extends BasePlant {

@@ -16,6 +16,7 @@ export const CherryStats: PlantStats = {
   health: 100,
   damage: 1800,
   buyCooldown: 5000,
+  description: "Explodes in a large area, damaging all nearby zombies.",
 };
 
 export default class Cherry extends BasePlant {

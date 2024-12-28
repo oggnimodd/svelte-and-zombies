@@ -16,6 +16,7 @@ export const SplitPeaStats: PlantStats = {
   shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
+  description: "Shoots peas both forward and backward along its lane.",
 };
 
 export default class SplitPea extends BasePlant {

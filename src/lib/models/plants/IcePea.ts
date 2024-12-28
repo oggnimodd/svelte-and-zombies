@@ -15,6 +15,7 @@ export const IcePeaStats: PlantStats = {
   shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
+  description: "Shoots frozen peas that slow down zombies on hit.",
 };
 
 export default class IcePea extends BasePlant {

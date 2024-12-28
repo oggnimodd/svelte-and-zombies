@@ -16,6 +16,7 @@ export const WatermelonStats: PlantStats = {
   shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 6000,
+  description: "Throws heavy melons that deal splash damage to nearby zombies.",
 };
 
 export default class Watermelon extends BasePlant {

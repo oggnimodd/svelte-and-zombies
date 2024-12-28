@@ -16,6 +16,8 @@ export const RepeaterStats: PlantStats = {
   shootCooldown: 2000, // Reduced cooldown compared to Peashooter
   range: Infinity,
   buyCooldown: 5000,
+  description:
+    "Shoots two peas in a straight line. Double the firepower of a regular peashooter.",
 };
 
 export default class Repeater extends BasePlant {

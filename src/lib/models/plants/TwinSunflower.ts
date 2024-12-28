@@ -10,6 +10,7 @@ export const TwinSunflowerStats: PlantStats = {
   price: 150,
   health: 100,
   buyCooldown: 8000,
+  description: "Produces twice as much sun as a regular sunflower.",
 };
 
 export default class TwinSunflower extends BasePlant {

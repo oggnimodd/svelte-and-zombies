@@ -15,6 +15,8 @@ export const CabbageStats: PlantStats = {
   shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 5000,
+  description:
+    "Lobs cabbages in an arc that can pass over obstacles and shields.",
 };
 
 export default class Cabbage extends BasePlant {

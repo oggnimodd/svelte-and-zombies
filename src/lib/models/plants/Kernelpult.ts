@@ -15,6 +15,8 @@ export const KernelpultStats: PlantStats = {
   shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
+  description:
+    "Launches kernels and occasionally butter that can stun zombies.",
 };
 
 export default class Kernelpult extends BasePlant {

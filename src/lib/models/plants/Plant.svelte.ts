@@ -9,6 +9,7 @@ export interface PlantStats {
   // Buy cooldown
   buyCooldown?: number;
   range?: number;
+  description?: string;
 }
 
 export default class BasePlant {

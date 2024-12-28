@@ -16,6 +16,8 @@ export const FirePeaStats: PlantStats = {
   shootCooldown: 2000, // Reduced cooldown compared to Peashooter
   range: Infinity,
   buyCooldown: 6000,
+  description:
+    "Shoots flaming peas that deal extra damage and can burn zombies.",
 };
 
 export default class FirePea extends BasePlant {

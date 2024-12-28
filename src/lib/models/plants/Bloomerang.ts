@@ -14,6 +14,8 @@ export const BloomerangStats: PlantStats = {
   shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
+  description:
+    "Throws boomerangs that hit zombies on both the outward and return path.",
 };
 
 export default class Bloomerang extends BasePlant {

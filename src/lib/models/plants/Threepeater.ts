@@ -16,6 +16,8 @@ export const ThreepeaterStats: PlantStats = {
   shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 8000,
+  description:
+    "Shoots peas in three directions - straight, up, and down. Covers multiple lanes.",
 };
 
 export default class Threepeater extends BasePlant {

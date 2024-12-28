@@ -11,6 +11,8 @@ export const ChomperStats: PlantStats = {
   health: 100,
   damage: 1000,
   buyCooldown: 5000,
+  description:
+    "Devours zombies whole, but needs time to chew before eating again.",
 };
 
 export default class Chomper extends BasePlant {

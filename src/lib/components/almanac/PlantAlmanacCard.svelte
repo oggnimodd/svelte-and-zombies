@@ -60,5 +60,13 @@ backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-2 hover
         </div>
       </div>
     {/if}
+    {#if plant.description}
+      <div class="rounded-lg border border-lime-400/20 bg-black/20 p-2.5">
+        <span class="mb-1 block text-sm text-lime-400">Description</span>
+        <div class="font-bold text-yellow-400">
+          {plant.description}
+        </div>
+      </div>
+    {/if}
   </div>
 </div>

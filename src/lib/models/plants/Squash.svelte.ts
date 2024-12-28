@@ -12,6 +12,7 @@ export const SquashStats: PlantStats = {
   health: 100,
   damage: 1800,
   buyCooldown: 7000,
+  description: "Jumps and crushes nearby zombies with high damage.",
 };
 
 export default class Squash extends BasePlant {

@@ -15,6 +15,8 @@ export const PeashooterStats: PlantStats = {
   shootCooldown: 3000,
   range: Infinity,
   buyCooldown: 5000,
+  description:
+    "Shoots peas in a straight line. Basic attacking plant that provides steady damage output.",
 };
 
 export default class Peashooter extends BasePlant {

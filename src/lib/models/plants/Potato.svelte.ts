@@ -17,6 +17,7 @@ export const PotatoStats: PlantStats = {
   health: 100,
   damage: 1000,
   buyCooldown: 4000,
+  description: "Plants an armed mine that explodes when zombies step on it.",
 };
 
 export default class Potato extends BasePlant {

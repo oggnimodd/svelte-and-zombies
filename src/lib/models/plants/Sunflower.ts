@@ -9,6 +9,8 @@ export const SunflowerStats: PlantStats = {
   price: 50,
   health: 50,
   buyCooldown: 2000,
+  description:
+    "Creates sun used for planting. Your basic resource generator that's essential for building defenses.",
 };
 
 export default class Sunflower extends BasePlant {

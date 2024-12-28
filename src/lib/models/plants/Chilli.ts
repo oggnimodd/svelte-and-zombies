@@ -15,6 +15,7 @@ export const ChilliStats: PlantStats = {
   health: 100,
   damage: 1800,
   buyCooldown: 5000,
+  description: "Creates a line of fire that burns all zombies in its row.",
 };
 
 export default class Chilli extends BasePlant {

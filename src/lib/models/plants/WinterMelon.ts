@@ -10,6 +10,8 @@ export const WinterMelonStats: PlantStats = {
   shootCooldown: 2000,
   range: Infinity,
   buyCooldown: 7000,
+  description:
+    "Throws frozen melons that deal splash damage and slow down groups of zombies.",
 };
 
 export default class WinterMelon extends Watermelon {
