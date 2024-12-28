@@ -40,6 +40,7 @@ export default class Zombie {
   height: number = CELL_WIDTH / 1.5;
   attackingPlantId: string | null = $state(null);
   image: string;
+  description: string;
 
   private baseSpeed: number;
   private freezeEndTime: number = 0;
@@ -61,6 +62,7 @@ export default class Zombie {
     this.baseSpeed = config.speed;
     this.image = config.image;
     this.imageWidth = config.imageWidth ?? CELL_WIDTH / 1.1;
+    this.description = config.description ?? "";
   }
 
   freeze(duration: number) {
