@@ -9,6 +9,7 @@ export default class NormalZombie extends Zombie {
       speed: 0.5,
       row: zombieConfig.row || 0,
       image: "normal-zombie.png",
+      description: "A basic, slow-moving zombie.",
       ...zombieConfig,
     });
   }

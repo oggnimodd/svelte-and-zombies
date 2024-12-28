@@ -51,5 +51,15 @@
         {zombie.speed}
       </div>
     </div>
+
+    <!-- Description -->
+    {#if zombie.description}
+      <div class="mt-4 rounded-lg border border-red-400/20 bg-black/20 p-2.5">
+        <span class="mb-1 block text-sm text-red-400">Description</span>
+        <div class="flex items-center gap-2 font-bold text-yellow-400">
+          {zombie.description}
+        </div>
+      </div>
+    {/if}
   </div>
 </div>

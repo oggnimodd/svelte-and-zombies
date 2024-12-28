@@ -11,6 +11,8 @@ export default class FlagZombie extends Zombie {
       row: zombieConfig.row || 0,
       image: "flag-zombie.png",
       imageWidth: CELL_WIDTH * 1.2,
+      description:
+        "A zombie carrying a flag, usually appearing at the start of a wave.",
       ...zombieConfig,
     });
   }

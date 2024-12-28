@@ -18,6 +18,7 @@ export interface ZombieConfig {
   width?: number;
   height?: number;
   image: string;
+  description?: string;
 }
 
 export default class Zombie {

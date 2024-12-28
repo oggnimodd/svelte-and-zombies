@@ -9,6 +9,7 @@ export default class ConeHeadZombie extends Zombie {
       speed: 0.5,
       row: zombieConfig.row || 0,
       image: "cone-head-zombie.png",
+      description: "A zombie with a cone on its head, it has higher health.",
       ...zombieConfig,
     });
   }

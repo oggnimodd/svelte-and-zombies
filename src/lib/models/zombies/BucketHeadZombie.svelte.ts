@@ -9,6 +9,7 @@ export default class BucketHeadZombie extends Zombie {
       speed: 0.5,
       row: zombieConfig.row || 0,
       image: "bucket-head-zombie.png",
+      description: "A zombie with a bucket on its head, it has higher health.",
       ...zombieConfig,
     });
   }
