@@ -47,7 +47,9 @@
   {gameLoop.fps.toFixed(1)}
 </div>
 
-<div class="fixed bottom-4 right-4 z-[9000] flex items-center gap-x-3">
+<div
+  class="fixed bottom-1 right-1 z-[9000] flex items-center gap-x-2 lg:bottom-4 lg:right-4 lg:gap-x-3"
+>
   <WaveProgress
     currentWave={gameLoop.zombieManager.currentWave + 1}
     totalWaves={gameLoop.zombieManager.getTotalWave()}

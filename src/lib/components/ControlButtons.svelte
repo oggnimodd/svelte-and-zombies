@@ -23,26 +23,26 @@
   <!-- Mute Button -->
   <button
     onclick={toggleMute}
-    class="rounded-full border border-white/20 bg-white/10 p-2 transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-white/20"
+    class="rounded-full border border-white/20 bg-white/10 p-0.5 transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-white/20 md:p-2"
     aria-label={soundManager.isMuted ? "Unmute" : "Mute"}
   >
     {#if soundManager.isMuted}
-      <IconVolumeOff class="h-4 w-4 text-white" />
+      <IconVolumeOff class="h-2 w-2 text-white md:h-4 md:w-4" />
     {:else}
-      <IconVolume class="h-4 w-4 text-white" />
+      <IconVolume class="h-2 w-2 text-white md:h-4 md:w-4" />
     {/if}
   </button>
 
   <!-- Pause Button -->
   <button
     onclick={togglePause}
-    class="rounded-full border border-white/20 bg-white/10 p-2 transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-white/20"
+    class="rounded-full border border-white/20 bg-white/10 p-0.5 transition-all duration-200 ease-in-out hover:border-white/40 hover:bg-white/20 md:p-2"
     aria-label={gameLoop.isPaused ? "Resume" : "Pause"}
   >
     {#if gameLoop.isPaused}
-      <IconPlayerPlay class="h-4 w-4 text-white" />
+      <IconPlayerPlay class="h-2 w-2 text-white md:h-4 md:w-4" />
     {:else}
-      <IconPlayerPause class="h-4 w-4 text-white" />
+      <IconPlayerPause class="h-2 w-2 text-white md:h-4 md:w-4" />
     {/if}
   </button>
 </div>

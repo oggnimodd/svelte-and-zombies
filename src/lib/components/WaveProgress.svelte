@@ -29,7 +29,7 @@
 </script>
 
 <div class="w-64">
-  <div class="relative h-5 w-full">
+  <div class="relative h-4 w-full lg:h-5">
     <!-- Main Progress Bar -->
     <div
       class="absolute inset-0 overflow-hidden rounded-xl border-2 border-lime-400/30 bg-green-900/50 backdrop-blur-sm"
