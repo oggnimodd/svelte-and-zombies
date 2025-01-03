@@ -15,11 +15,12 @@
   import { plantSelector } from "../reactivity/plantSelector.svelte";
   import Sun from "./Sun.svelte";
   import { browser } from "$app/environment";
-  import { soundManager } from "$lib/models/game/SoundManager.svelte";
   import PlantCursor from "./ImageCursor.svelte";
   import isMobile from "is-mobile";
   import LawnMower from "./LawnMower.svelte";
   import Explosion from "./Explosion.svelte";
+  import WaveProgress from "$lib/components/WaveProgress.svelte";
+  import ControlButtons from "$lib/components/ControlButtons.svelte";
 
   const handleEscape = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
@@ -46,26 +47,13 @@
   {gameLoop.fps.toFixed(1)}
 </div>
 
-<!-- Total sun:  -->
-<div class="fixed bottom-2 right-2 rounded text-white">
-  <!-- Button for muting/unmuting sound -->
-  <button
-    class="bg-red-500 p-2 text-white"
-    on:click={() => soundManager.toggleMute()}
-  >
-    {#if soundManager.isMuted}
-      Unmute
-    {:else}
-      Mute
-    {/if}
-  </button>
+<div class="fixed bottom-4 right-4 z-[9000] flex items-center gap-x-3">
+  <WaveProgress
+    currentWave={gameLoop.zombieManager.currentWave + 1}
+    totalWaves={gameLoop.zombieManager.getTotalWave()}
+  />
 
-  <!-- Wave progress bar -->
-  <div class="h-2 w-full">
-    <span
-      >{gameLoop.zombieManager.currentWave + 1} / {gameLoop.zombieManager.getTotalWave()}</span
-    >
-  </div>
+  <ControlButtons />
 </div>
 
 <!-- If not mobile -->

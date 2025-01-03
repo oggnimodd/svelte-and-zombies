@@ -66,6 +66,13 @@
       window.removeEventListener("pagehide", handlePageHide);
     }
   });
+
+  $effect(() => {
+    if (gameLoop.isPaused) {
+      isVisible = true;
+      isBlurred = true;
+    }
+  });
 </script>
 
 {#if isVisible && gameLoop.isRunning}
