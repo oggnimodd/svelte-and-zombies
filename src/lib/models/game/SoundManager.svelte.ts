@@ -86,7 +86,9 @@ export default class SoundManager {
     "zombie-flag": 100,
     siren: 100,
   };
-  isMuted: boolean = $state(LocalStorageManager.get("sound-muted") ?? false);
+  isMuted = $state(
+    LocalStorageManager.get("sound-muted", { defaultValue: false })
+  );
   private eatingSounds: Map<string, Howl> = new Map();
 
   constructor() {

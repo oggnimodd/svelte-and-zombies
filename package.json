@@ -48,7 +48,8 @@
     "is-mobile": "^5.0.0",
     "short-uuid": "^5.2.0",
     "svelte-confetti": "^2.2.0",
-    "tailwind-merge": "^2.5.5"
+    "tailwind-merge": "^2.5.5",
+    "zod": "^3.24.1"
   },
   "lint-staged": {
     "**/*.{js,ts,jsx,tsx,json,svelte}": [
