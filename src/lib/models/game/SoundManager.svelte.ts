@@ -116,6 +116,9 @@ export default class SoundManager {
   }
 
   playBackgroundMusic() {
+    // Stop any existing background music before starting a new one
+    this.bgMusic.stop();
+
     if (!this.isMuted) {
       this.bgMusic.duration(0);
       this.bgMusic.play();
