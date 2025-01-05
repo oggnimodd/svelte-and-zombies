@@ -8,7 +8,7 @@ const schemas = {
 
 const defaults = {
   "sound-muted": false,
-  "sound-volume": 0.5,
+  "sound-volume": 0.8,
 } as const;
 
 type LocalStorageKey = keyof typeof schemas;

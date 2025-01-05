@@ -101,8 +101,10 @@ export default class SoundManager {
           this.createHowl(config),
         ])
     );
-    const savedVolume = LocalStorageManager.get("sound-volume");
-    this.setVolume(savedVolume || 0.8);
+    const savedVolume = LocalStorageManager.get("sound-volume", {
+      defaultValue: 0.8,
+    });
+    this.setVolume(savedVolume);
   }
 
   private createHowl(config: SoundConfig): Howl {
