@@ -3,6 +3,7 @@
   import IconMan from "@tabler/icons-svelte/icons/man";
   import IconBrandGithub from "@tabler/icons-svelte/icons/brand-github";
   import IconPlayerPlay from "@tabler/icons-svelte/icons/player-play";
+  import IconSettings from "@tabler/icons-svelte/icons/settings";
 
   interface MainMenuProps {
     startGame: () => void;
@@ -59,6 +60,14 @@
       >
         <IconMan class="h-6 w-6" />
         Zombies Almanac
+      </a>
+
+      <a
+        href="/settings"
+        class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
+      >
+        <IconSettings class="h-6 w-6" />
+        Settings
       </a>
 
       <!-- Github Link -->
