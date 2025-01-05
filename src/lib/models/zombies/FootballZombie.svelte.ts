@@ -5,7 +5,7 @@ export default class FootballZombie extends Zombie {
   constructor(zombieConfig: Partial<ZombieConfig>) {
     super({
       name: "Football Zombie",
-      health: 500,
+      health: 800,
       damage: 15,
       speed: 1,
       row: zombieConfig.row || 0,

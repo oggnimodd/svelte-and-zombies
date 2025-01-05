@@ -4,7 +4,7 @@ export default class BucketHeadZombie extends Zombie {
   constructor(zombieConfig: Partial<ZombieConfig>) {
     super({
       name: "Bucket Head Zombie",
-      health: 300,
+      health: 600,
       damage: 8,
       speed: 0.5,
       row: zombieConfig.row || 0,
