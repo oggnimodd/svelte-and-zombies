@@ -34,8 +34,8 @@
   <button
     onmousedown={handleClick}
     class={cn(
-      "group relative flex w-full select-none flex-col items-center justify-center overflow-hidden rounded-lg border border-black/80 bg-gradient-to-b from-[#D0F9E8] to-[#C2E2A7] py-1 text-black transition-all duration-200 ease-in-out",
-      isSelected && !onDelete && "opacity-50 grayscale"
+      "group relative flex w-full select-none flex-col items-center justify-center overflow-hidden rounded-lg border border-black/80 bg-gradient-to-b from-[#D0F9E8] to-[#C2E2A7] py-1 text-black transition-all duration-200 ease-in-out hover:scale-105 hover:border-lime-400 hover:bg-gradient-to-b hover:from-lime-200 hover:to-lime-400 hover:shadow-lg",
+      isSelected && !onDelete && "opacity-50 grayscale hover:scale-100"
     )}
   >
     <img
