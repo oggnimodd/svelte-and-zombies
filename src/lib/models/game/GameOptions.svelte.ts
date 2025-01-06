@@ -1,5 +1,6 @@
 import { plantSelector } from "$lib/reactivity/plantSelector.svelte";
 import type { PlantStats } from "../plants/Plant.svelte";
+import { soundManager } from "./SoundManager.svelte";
 
 export interface GameOptions {
   usablePlants: PlantStats[];
@@ -43,10 +44,12 @@ export class GameOptionsManager {
     const index = this.options.usablePlants.findIndex((p) => p.id === plant.id);
     if (index === -1) {
       this.options.usablePlants = [...this.options.usablePlants, plant];
+      soundManager.playSound("dig");
     } else {
       this.options.usablePlants = this.options.usablePlants.filter(
         (p) => p.id !== plant.id
       );
+      soundManager.playSound("shovel");
     }
   }
 
