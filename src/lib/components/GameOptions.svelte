@@ -194,6 +194,7 @@
       <label class="block text-white">
         <span class="mb-1 block text-lg font-medium">Initial Sun Amount:</span>
         <input
+          placeholder="Enter a number"
           type="number"
           bind:value={sunAmountInput}
           oninput={handleSunAmountChange}
@@ -220,7 +221,7 @@
 
     {#if errorMessage}
       <div
-        class="rounded-lg border border-red-600 bg-red-500/20 p-3 text-center text-red-200"
+        class="rounded-lg border border-red-600 bg-white/50 p-3 text-center text-red-800"
       >
         {errorMessage}
       </div>
