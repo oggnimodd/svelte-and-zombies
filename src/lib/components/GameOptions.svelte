@@ -7,7 +7,6 @@
   import Checkbox from "$lib/components/ui/Checkbox.svelte";
   import { onMount } from "svelte";
   import IconBook from "@tabler/icons-svelte/icons/book-2";
-  import IconArrowLeft from "@tabler/icons-svelte/icons/arrow-left";
 
   export interface GameOptionsProps {
     startGame: () => void;
@@ -43,7 +42,27 @@
     startGame();
   }
 
+  const handleLawnMowersChange = (useLawnMowers: boolean) => {
+    // For the ui
+    gameLoop.gameOptions.toggleLawnMowers();
+
+    // For the actual game logic
+    if (useLawnMowers) {
+      // If user wants to use lawnmowers, initialize the lawn mowers
+      gameLoop.lawnMowerManager.reset();
+    } else {
+      // If user doesn't want to use lawnmowers, clear the lawn mowers
+      gameLoop.lawnMowerManager.clearLawnMowers();
+    }
+  };
+
   onMount(() => {
+    // Auto sync game options with the sun manager
+    gameLoop.sunManager.setTotalSun(
+      gameLoop.gameOptions.options.initialSunAmount
+    );
+
+    // Auto clear the options on the very first render to clean up previous state
     gameLoop.gameOptions.reset();
   });
 </script>
@@ -142,7 +161,7 @@
       <Checkbox
         label="Use Lawnmowers"
         checked={gameLoop.gameOptions.options.useLawnMowers}
-        onChange={() => gameLoop.gameOptions.toggleLawnMowers()}
+        onChange={handleLawnMowersChange}
       />
     </div>
 

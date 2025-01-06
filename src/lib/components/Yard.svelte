@@ -87,16 +87,19 @@
     {/each}
   </div>
 
-  <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
-    {#each gameLoop.lawnMowerManager.getLawnMowers() as lawnMower (lawnMower.row)}
-      <LawnMower
-        x={lawnMower.x}
-        y={lawnMower.y}
-        width={lawnMower.width}
-        height={lawnMower.height}
-      />
-    {/each}
-  </div>
+  <!-- Only display the lawn mowers if the user wants to use them -->
+  {#if gameLoop.gameOptions.options.useLawnMowers}
+    <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
+      {#each gameLoop.lawnMowerManager.getLawnMowers() as lawnMower (lawnMower.row)}
+        <LawnMower
+          x={lawnMower.x}
+          y={lawnMower.y}
+          width={lawnMower.width}
+          height={lawnMower.height}
+        />
+      {/each}
+    </div>
+  {/if}
 
   <div class="pointer-events-none absolute left-0 top-0 h-full w-full">
     {#each gameLoop.projectileManager.projectiles.values() as projectile (projectile.id)}

@@ -110,4 +110,8 @@ export default class LawnMowerManager {
   getLawnMowers() {
     return this.lawnMowers;
   }
+
+  clearLawnMowers() {
+    this.lawnMowers = [];
+  }
 }
