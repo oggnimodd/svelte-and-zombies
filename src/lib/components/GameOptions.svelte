@@ -22,7 +22,12 @@
   function handleSunAmountChange(event: Event) {
     const value = parseInt((event.target as HTMLInputElement).value);
     if (gameLoop.gameOptions.validateSunAmount(value)) {
+      // For the ui
       gameLoop.gameOptions.setInitialSunAmount(value);
+
+      // For the actual game
+      gameLoop.sunManager.setTotalSun(value);
+
       errorMessage = "";
     } else {
       errorMessage = `Sun amount must be between ${GameOptionsManager.MIN_SUN} and ${GameOptionsManager.MAX_SUN}`;
