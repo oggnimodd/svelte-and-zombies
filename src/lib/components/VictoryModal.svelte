@@ -40,6 +40,12 @@
         duration={5000}
         amount={200}
         fallDistance="100vh"
+        size={40}
+        colorArray={[
+          "url(https://svelte.dev/favicon.png)",
+          "url(/plants/sunflower.png)",
+          "url(/plants/peashooter.png)",
+        ]}
       />
     </div>
   {/if}
