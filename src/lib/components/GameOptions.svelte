@@ -18,15 +18,57 @@
   let sunAmountInput = $state(gameLoop.gameOptions.options.initialSunAmount);
   let errorMessage = $state("");
 
+  function handleKeyPress(event: KeyboardEvent) {
+    // Only allow numbers
+    if (
+      !/[0-9]/.test(event.key) &&
+      event.key !== "Backspace" &&
+      event.key !== "Delete" &&
+      event.key !== "ArrowLeft" &&
+      event.key !== "ArrowRight"
+    ) {
+      event.preventDefault();
+    }
+  }
+
+  function handlePaste(event: ClipboardEvent) {
+    event.preventDefault();
+    const pastedText = event.clipboardData?.getData("text");
+    if (pastedText) {
+      const numbersOnly = pastedText.replace(/[^0-9]/g, "");
+      if (numbersOnly) {
+        const value = parseInt(numbersOnly);
+        if (
+          value >= GameOptionsManager.MIN_SUN &&
+          value <= GameOptionsManager.MAX_SUN
+        ) {
+          sunAmountInput = value;
+          gameLoop.gameOptions.setInitialSunAmount(value);
+          gameLoop.sunManager.setTotalSun(value);
+          errorMessage = "";
+        } else {
+          errorMessage = `Sun amount must be between ${GameOptionsManager.MIN_SUN} and ${GameOptionsManager.MAX_SUN}`;
+        }
+      }
+    }
+  }
+
   function handleSunAmountChange(event: Event) {
-    const value = parseInt((event.target as HTMLInputElement).value);
+    const input = event.target as HTMLInputElement;
+    // Remove any non-numeric characters
+    input.value = input.value.replace(/[^0-9]/g, "");
+
+    // Limit the length
+    if (input.value.length > 5) {
+      input.value = input.value.slice(0, 5);
+    }
+
+    const value = parseInt(input.value || "0");
+
     if (gameLoop.gameOptions.validateSunAmount(value)) {
-      // For the ui
       gameLoop.gameOptions.setInitialSunAmount(value);
-
-      // For the actual game
       gameLoop.sunManager.setTotalSun(value);
-
+      sunAmountInput = value;
       errorMessage = "";
     } else {
       errorMessage = `Sun amount must be between ${GameOptionsManager.MIN_SUN} and ${GameOptionsManager.MAX_SUN}`;
@@ -94,27 +136,36 @@
       <h2 class="mb-2 text-xl font-semibold text-white">
         Selected Plants ({gameLoop.gameOptions.options.usablePlants.length})
       </h2>
-      <div
-        class="w-full overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] px-3 py-2 scrollbar-thin scrollbar-track-[#94451C] scrollbar-thumb-white/60"
-      >
-        <PlantList mode="preview">
-          {#each gameLoop.gameOptions.options.usablePlants as plant}
-            <PlantCardPreview
-              {...plant}
-              onDelete={() =>
-                gameLoop.gameOptions.togglePlantSelection(plant.id)}
-            />
-          {/each}
-        </PlantList>
-      </div>
-      <div class="mt-2 flex justify-end">
-        <button
-          onclick={() => gameLoop.gameOptions.deselectAllPlants()}
-          class="rounded-lg bg-red-500 px-4 py-2 text-white transition-all hover:bg-red-600"
+      {#if gameLoop.gameOptions.options.usablePlants.length === 0}
+        <div
+          class="w-full rounded-lg border-2 border-black/60 bg-[#94451C] p-3 text-center text-white/70"
         >
-          Deselect All
-        </button>
-      </div>
+          No plant selected. Please choose at least {GameOptionsManager.MIN_PLANTS}
+          plants to start the game.
+        </div>
+      {:else}
+        <div
+          class="w-full overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] px-3 py-2 scrollbar-thin scrollbar-track-[#94451C] scrollbar-thumb-white/60"
+        >
+          <PlantList mode="preview">
+            {#each gameLoop.gameOptions.options.usablePlants as plant}
+              <PlantCardPreview
+                {...plant}
+                onDelete={() =>
+                  gameLoop.gameOptions.togglePlantSelection(plant.id)}
+              />
+            {/each}
+          </PlantList>
+        </div>
+        <div class="mt-2 flex justify-end">
+          <button
+            onclick={() => gameLoop.gameOptions.deselectAllPlants()}
+            class="rounded-lg bg-red-500 px-4 py-2 text-white transition-all hover:bg-red-600"
+          >
+            Deselect All
+          </button>
+        </div>
+      {/if}
     </div>
 
     <!-- Available Plants -->
@@ -141,7 +192,6 @@
       </div>
     </div>
 
-    <!-- Sun Amount Input -->
     <div class="mb-6">
       <label class="block text-white">
         <span class="mb-1 block text-lg font-medium">Initial Sun Amount:</span>
@@ -149,8 +199,13 @@
           type="number"
           bind:value={sunAmountInput}
           oninput={handleSunAmountChange}
+          onkeypress={handleKeyPress}
+          onpaste={handlePaste}
           min={GameOptionsManager.MIN_SUN}
           max={GameOptionsManager.MAX_SUN}
+          maxlength="5"
+          pattern="[0-9]*"
+          inputmode="numeric"
           class="w-full rounded-lg border-2 border-black/60 bg-[#94451C]/80 px-4 py-2 text-white placeholder-white/60 focus:border-lime-400 focus:outline-none"
         />
       </label>
@@ -167,7 +222,7 @@
 
     {#if errorMessage}
       <div
-        class="mb-4 rounded-lg border border-red-600 bg-red-500/20 p-3 text-center text-red-200"
+        class="rounded-lg border border-red-600 bg-red-500/20 p-3 text-center text-red-200"
       >
         {errorMessage}
       </div>
@@ -175,8 +230,9 @@
 
     <button
       onclick={handleStart}
-      disabled={!gameLoop.gameOptions.validatePlantSelection()}
-      class="w-full rounded-lg bg-lime-500 py-3 text-lg font-bold text-white transition-all hover:bg-lime-600 disabled:cursor-not-allowed disabled:opacity-50"
+      disabled={!gameLoop.gameOptions.validatePlantSelection() ||
+        Boolean(errorMessage)}
+      class="mt-4 w-full rounded-lg bg-lime-500 py-3 text-lg font-bold text-white transition-all hover:bg-lime-600 disabled:cursor-not-allowed disabled:opacity-50"
     >
       Start Game
     </button>
