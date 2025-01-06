@@ -17,8 +17,15 @@
   import isMobile from "is-mobile";
   import MainMenu from "$lib/components/MainMenu.svelte";
   import cn from "$lib/utils/cn";
+  import GameOptions from "$lib/components/GameOptions.svelte";
 
   let isPreloading = $state(false);
+  let showOptions = $state(false);
+
+  const handleOptionsComplete = () => {
+    showOptions = false;
+    isPreloading = true;
+  };
 
   const startGame = async () => {
     if (isMobile()) {
@@ -26,6 +33,7 @@
       await lockOrientationToLandscape();
     }
 
+    showOptions = false;
     isPreloading = false;
     soundManager.playBackgroundMusic();
     gameLoop.start();
@@ -35,7 +43,14 @@
 <VictoryModal />
 <LoseModal />
 
-{#if isPreloading}
+{#if showOptions}
+  <GameOptions
+    cancelGame={() => {
+      showOptions = false;
+    }}
+    startGame={handleOptionsComplete}
+  />
+{:else if isPreloading}
   <LoadingScreen {startGame} />
 {:else if gameLoop.isRunning}
   <div
@@ -51,7 +66,7 @@
         class="w-fit max-w-[90%] overflow-x-auto rounded-lg border-2 border-black/60 bg-[#94451C] py-2 scrollbar-thin scrollbar-track-[#94451C] scrollbar-thumb-white/60"
       >
         <PlantList>
-          {#each plantSelector.plants as plant}
+          {#each gameLoop.gameOptions.options.usablePlants as plant}
             <div class="first:pl-2 last:pr-2">
               <PlantCard {...plant} />
             </div>
@@ -80,9 +95,5 @@
     </div>
   </div>
 {:else}
-  <MainMenu
-    startGame={() => {
-      isPreloading = true;
-    }}
-  />
+  <MainMenu startGame={() => (showOptions = true)} />
 {/if}

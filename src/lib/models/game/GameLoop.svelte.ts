@@ -35,6 +35,7 @@ import ExplosionManager, {
 import Potato from "../plants/Potato.svelte";
 import TwinSunflower from "../plants/TwinSunflower";
 import Bloomerang from "../plants/Bloomerang";
+import { GameOptionsManager } from "./GameOptions.svelte";
 
 export class GameLoop {
   lastFrameTime: number = 0;
@@ -49,6 +50,7 @@ export class GameLoop {
   sunManager: SunManager;
   lawnMowerManager: LawnMowerManager;
   explosionManager: ExplosionManager;
+  gameOptions: GameOptionsManager;
 
   private isDelayingWin: boolean = false; // Flag to indicate delay before announcing win
   private winDelayAccumulator: number = 0; // Accumulator for the delay
@@ -61,6 +63,7 @@ export class GameLoop {
     this.sunManager = new SunManager();
     this.lawnMowerManager = new LawnMowerManager();
     this.explosionManager = new ExplosionManager();
+    this.gameOptions = new GameOptionsManager();
 
     EventEmitter.on("produceSun", ({ x, y }) => {
       this.sunManager.spawnSunFromFlower(x, y);
@@ -112,6 +115,8 @@ export class GameLoop {
 
     this.isDelayingWin = false; // Reset the win delay flag
     this.winDelayAccumulator = 0; // Reset the delay accumulator
+
+    this.gameOptions.reset();
   }
 
   pause() {
