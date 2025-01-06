@@ -110,7 +110,7 @@
 </script>
 
 <div
-  class="flex w-full flex-col items-center justify-center bg-gradient-to-br from-green-900 to-green-700 px-4 py-10"
+  class="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-green-900 to-green-700 px-4 py-10"
 >
   <div
     class="w-full max-w-3xl rounded-lg bg-[#94451C]/90 p-6 shadow-2xl backdrop-blur-sm"
