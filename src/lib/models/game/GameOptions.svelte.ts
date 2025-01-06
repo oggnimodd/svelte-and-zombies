@@ -58,6 +58,7 @@ export class GameOptionsManager {
       ...this.options,
       usablePlants: plantSelector.plants,
     };
+    soundManager.playSound("dig");
   }
 
   deselectAllPlants() {
@@ -65,6 +66,7 @@ export class GameOptionsManager {
       ...this.options,
       usablePlants: [],
     };
+    soundManager.playSound("shovel");
   }
 
   setInitialSunAmount(amount: number) {
