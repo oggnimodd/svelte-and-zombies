@@ -9,7 +9,7 @@ export interface GameOptions {
 
 const initialGameOptions: GameOptions = {
   usablePlants: [],
-  initialSunAmount: 100,
+  initialSunAmount: 500,
   useLawnMowers: true,
 };
 
