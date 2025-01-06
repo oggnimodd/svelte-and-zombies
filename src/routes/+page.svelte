@@ -35,8 +35,12 @@
 
     showOptions = false;
     isPreloading = false;
-    soundManager.playBackgroundMusic();
     gameLoop.start();
+  };
+
+  const displayOptions = () => {
+    soundManager.playBackgroundMusic();
+    showOptions = true;
   };
 </script>
 
@@ -95,5 +99,5 @@
     </div>
   </div>
 {:else}
-  <MainMenu startGame={() => (showOptions = true)} />
+  <MainMenu startGame={displayOptions} />
 {/if}
