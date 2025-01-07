@@ -20,9 +20,9 @@
   let deltaY = $state("0px");
 
   function collect() {
-    soundManager.playSound("pop");
     if (collected || gameLoop.isPaused) return;
     collected = true;
+    soundManager.playSound("pop");
 
     if (element && gameLoop.sunManager.sunCounterDivRef) {
       const counterRect =
