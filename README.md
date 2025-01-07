@@ -39,10 +39,6 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 - **Howler.js** For sound management
 - **Vite:** Used as the build tool and development server.
 
-## Disclaimer
-
-This project is a fan-made recreation of the original Plants vs. Zombies game. It is not affiliated with, endorsed by, or in any way officially connected with PopCap Games or Electronic Arts, the creators and owners of the Plants vs. Zombies franchise. This project is intended as a demonstration of Svelte 5 capabilities for educational and entertainment purposes.
-
 ## Getting Started
 
 To run the project locally:
@@ -64,3 +60,26 @@ To run the project locally:
     bun run dev
     ```
 5.  Open your browser and go to `http://localhost:5173`.
+
+## Attribution and License
+
+### Code License
+
+The code for this project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+### Game assets
+
+The majority of the plants and zombies images are sourced from [Plants vs. Zombies Wiki](https://plantsvszombies.fandom.com/wiki/). These assets are used here for educational and demonstration purposes only.
+
+### Music Attribution
+
+Background music provided by [Uppbeat](https://uppbeat.io):
+
+"Quest of Legends" by [Vocalista](https://uppbeat.io/browse/artist/vocalista)
+
+Source: https://uppbeat.io/t/vocalista/quest-of-legends
+License code: PFIMAM8XJTTCRSQR
+
+## Disclaimer
+
+This project is a fan-made recreation of the original Plants vs. Zombies game. It is not affiliated with, endorsed by, or in any way officially connected with PopCap Games or Electronic Arts, the creators and owners of the Plants vs. Zombies franchise. This project is intended as a demonstration of Svelte 5 capabilities.
