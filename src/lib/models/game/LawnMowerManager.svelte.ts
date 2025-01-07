@@ -28,23 +28,46 @@ export default class LawnMowerManager {
       const lawnMower = this.lawnMowers[i];
       if (lawnMower.isActivated) {
         lawnMower.move(deltaTime);
+
+        // Remove any zombies that might have snuck through during activation
+        zombies = this.removeZombiesInLawnMowerRange(lawnMower, zombies);
+
+        // Handle normal collisions as the lawnmower moves
         zombies = this.handleCollisions(lawnMower, zombies);
+
         if (lawnMower.isOutOfBounds()) {
-          this.lawnMowers.splice(i, 1); // Remove the lawn mower from the list
+          this.lawnMowers.splice(i, 1);
         }
       } else {
-        const firstZombie = zombies
-          .filter((zombie) => zombie.row === lawnMower.row)
-          .find((zombie) => zombie.x <= 0);
+        // Only check for zombies at the left boundary to activate the lawnmower
+        const zombiesAtBoundary = zombies.filter(
+          (zombie) => zombie.row === lawnMower.row && zombie.x <= 0
+        );
 
-        if (firstZombie) {
-          // Removed the first zombie directly from the zombies array, if we are trying to remove it inside the collision handler, we will get a race condition
-          zombies.splice(zombies.indexOf(firstZombie), 1);
+        if (zombiesAtBoundary.length > 0) {
+          // Remove the zombies that triggered the lawnmower
+          zombies = zombies.filter(
+            (zombie) => !zombiesAtBoundary.includes(zombie)
+          );
           lawnMower.activate();
         }
       }
     }
+
     return zombies;
+  }
+
+  private removeZombiesInLawnMowerRange(
+    lawnMower: LawnMower,
+    zombies: Zombie[]
+  ): Zombie[] {
+    const zombiesInRange = zombies.filter(
+      (zombie) =>
+        zombie.row === lawnMower.row &&
+        zombie.x <= lawnMower.x + lawnMower.width
+    );
+
+    return zombies.filter((zombie) => !zombiesInRange.includes(zombie));
   }
 
   private updateQuadTree(zombies: Zombie[]) {
