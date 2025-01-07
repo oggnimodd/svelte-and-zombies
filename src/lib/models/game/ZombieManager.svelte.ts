@@ -1,3 +1,4 @@
+import WallnutZombie from "../zombies/WallnutZombie.svelte";
 import type PlantManager from "./PlantManager.svelte";
 import type Zombie from "../zombies/Zombie.svelte";
 import {
@@ -29,7 +30,8 @@ export type ZombieTypes =
   | typeof ConeHeadZombie
   | typeof BucketHeadZombie
   | typeof FootballZombie
-  | typeof FlagZombie;
+  | typeof FlagZombie
+  | typeof WallnutZombie;
 
 interface WaveConfig {
   zombieCount: number;
@@ -92,6 +94,7 @@ export default class ZombieManager {
         { type: ConeHeadZombie, weight: 5 },
         { type: BucketHeadZombie, weight: 10 },
         { type: FootballZombie, weight: 7 },
+        { type: WallnutZombie, weight: 1 },
       ],
       maxSimultaneousSpawnCount: 5,
     },
@@ -378,4 +381,5 @@ export const zombieTypes: Array<ZombieTypes> = [
   BucketHeadZombie,
   FootballZombie,
   FlagZombie,
+  WallnutZombie,
 ];
