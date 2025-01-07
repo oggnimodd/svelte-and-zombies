@@ -10,7 +10,6 @@
   };
 
   const { name, id, price, onDelete }: PlantCardPreviewProps = $props();
-
   const isSelected = $derived.by(() =>
     gameLoop.gameOptions.options.usablePlants.some((p) => p.id === id)
   );
@@ -18,10 +17,14 @@
   const handleClick = () => {
     gameLoop.gameOptions.togglePlantSelection(id);
   };
+
+  let imageLoaded = $state(false);
+  const handleImageLoad = () => {
+    imageLoaded = true;
+  };
 </script>
 
 <div class="group relative">
-  <!-- Delete Button on the top right corner -->
   {#if onDelete}
     <button
       class="absolute -right-2 -top-2 z-10 rounded-full bg-red-500 p-1 opacity-0 transition-all duration-200 ease-in-out group-hover:opacity-100 hover:bg-red-600"
@@ -30,7 +33,6 @@
       <IconTrash class="h-4 w-4 text-white" />
     </button>
   {/if}
-
   <button
     onmousedown={handleClick}
     class={cn(
@@ -38,13 +40,36 @@
       isSelected && !onDelete && "opacity-50 grayscale hover:scale-100"
     )}
   >
-    <img
-      src={getPlantImage(id)}
-      alt={name}
-      class="pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105"
-    />
-    <div class="flex w-10 items-center justify-center gap-0.5 sm:w-12">
-      <p class="text-xs font-bold">{price}</p>
+    <div class="relative h-10 w-10">
+      {#if !imageLoaded}
+        <div
+          class="absolute inset-0 animate-pulse rounded-full bg-lime-200 blur-sm"
+        ></div>
+      {/if}
+      <img
+        src={getPlantImage(id)}
+        alt={name}
+        onload={handleImageLoad}
+        class={cn(
+          "pointer-events-none h-10 w-10 select-none object-contain transition-transform group-hover:scale-105",
+          !imageLoaded && "opacity-0",
+          imageLoaded && "opacity-100 transition-opacity duration-300"
+        )}
+      />
+    </div>
+    <div class="relative flex w-10 items-center justify-center gap-0.5 sm:w-12">
+      {#if !imageLoaded}
+        <div class="absolute inset-0 animate-pulse bg-lime-200 blur-sm"></div>
+      {/if}
+      <p
+        class={cn(
+          "text-xs font-bold",
+          !imageLoaded && "opacity-0",
+          imageLoaded && "opacity-100 transition-opacity duration-300"
+        )}
+      >
+        {price}
+      </p>
     </div>
   </button>
 </div>
