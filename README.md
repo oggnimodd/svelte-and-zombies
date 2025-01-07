@@ -4,7 +4,7 @@
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub Repo](https://img.shields.io/github/stars/oggnimodd/svelte-vs-zombies?style=social)](https://github.com/oggnimodd/svelte-vs-zombies)
 
-Plants vs. Zombies rebuilt in Svelte 5 using only DOM, no canvas or WebGL.
+A fan-made recreation of the beloved [Plants vs. Zombies](https://www.ea.com/ea-studios/popcap/plants-vs-zombies) game, rebuilt in Svelte 5 using only DOM, no canvas or WebGL.
 
 ## Demonstration
 
