@@ -356,6 +356,13 @@ export default class ZombieManager {
   }
 
   reset() {
+    // Stop all zombie eating sounds
+    this.zombies.forEach((zombie) => {
+      zombie.isAttacking = false;
+      zombie.attackingPlantId = null;
+      zombie.stopEatingSound();
+    });
+
     this.zombies = [];
     this.currentWave = 0;
     this.isWaveActive = false;
