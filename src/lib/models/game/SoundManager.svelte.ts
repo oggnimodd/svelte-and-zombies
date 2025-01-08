@@ -58,7 +58,7 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   hmm: { src: "/sounds/hmm.mp3", volume: 0.6 },
   screaming: { src: "/sounds/screaming.mp3", volume: 1 },
   "zombie-flag": { src: "/sounds/zombie-flag.mp3", volume: 0.6 },
-  siren: { src: "/sounds/siren.mp3", volume: 0.8 },
+  siren: { src: "/sounds/siren.mp3", volume: 1 },
   shoot: { src: "/sounds/shoot.mp3", volume: 0.3 },
   swing: { src: "/sounds/swing.mp3", volume: 0.5 },
   "machine-gun": { src: "/sounds/machine-gun.mp3", volume: 0.5 },
