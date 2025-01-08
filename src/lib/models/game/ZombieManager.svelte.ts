@@ -98,6 +98,18 @@ export default class ZombieManager {
       ],
       maxSimultaneousSpawnCount: 5,
     },
+    {
+      zombieCount: 50,
+      spawnInterval: 2400,
+      zombieTypes: [
+        { type: NormalZombie, weight: 1 },
+        { type: ConeHeadZombie, weight: 1 },
+        { type: BucketHeadZombie, weight: 7 },
+        { type: FootballZombie, weight: 10 },
+        { type: WallnutZombie, weight: 4 },
+      ],
+      maxSimultaneousSpawnCount: 6,
+    },
   ];
 
   constructor(plantManager: PlantManager) {
