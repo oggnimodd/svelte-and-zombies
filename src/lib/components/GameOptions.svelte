@@ -54,8 +54,12 @@
 
   function handleSunAmountChange(event: Event) {
     const input = event.target as HTMLInputElement;
+
     // Remove any non-numeric characters
     input.value = input.value.replace(/[^0-9]/g, "");
+
+    // Remove leading zeros
+    input.value = input.value.replace(/^0+/, "") || "0";
 
     // Limit the length
     if (input.value.length > 5) {

@@ -15,7 +15,7 @@ const initialGameOptions: GameOptions = {
 };
 
 export class GameOptionsManager {
-  public static readonly MIN_PLANTS = 2;
+  public static readonly MIN_PLANTS = 1;
   public static readonly MIN_SUN = 50;
   public static readonly MAX_SUN = 99999;
 
