@@ -6,6 +6,7 @@ import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import PeaProjectile from "../projectiles/PeaProjectile";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const SplitPeaStats: PlantStats = {
   id: "splitpea",
@@ -61,6 +62,7 @@ export default class SplitPea extends BasePlant {
     projectiles.push(leftProjectile);
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("shoot");
     return projectiles;
   }
 }

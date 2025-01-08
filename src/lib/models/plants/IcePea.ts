@@ -5,6 +5,7 @@ import type { ProjectileStats } from "../projectiles/ProjectileTypes";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const IcePeaStats: PlantStats = {
   id: "ice-pea",
@@ -43,6 +44,8 @@ export default class IcePea extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+
+    soundManager.playSound("shoot");
     return projectile;
   }
 }

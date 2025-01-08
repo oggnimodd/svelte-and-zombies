@@ -6,6 +6,7 @@ import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH, NUM_ROWS } from "../../constants/sizes";
 import ThreepeaterProjectile from "../projectiles/ThreepeaterProjectile";
 import PeaProjectile from "../projectiles/PeaProjectile";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const ThreepeaterStats: PlantStats = {
   id: "threepeater",
@@ -72,6 +73,7 @@ export default class Threepeater extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("shoot");
     return projectiles;
   }
 }

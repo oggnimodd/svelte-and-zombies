@@ -6,6 +6,7 @@ import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import type Projectile from "../projectiles/Projectile.svelte";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const FirePeaStats: PlantStats = {
   id: "firepea",
@@ -63,6 +64,7 @@ export default class FirePea extends BasePlant {
     projectiles.push(secondProjectile);
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("shoot");
     return projectiles;
   }
 }
