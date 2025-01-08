@@ -4,6 +4,7 @@ import BoomerangProjectile from "../projectiles/BoomerangProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import uuid from "short-uuid";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const BloomerangStats: PlantStats = {
   id: "bloomerang",
@@ -49,6 +50,7 @@ export default class Bloomerang extends BasePlant {
 
     this.setActiveBoomerang(projectile.id);
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("swing");
     return projectile;
   }
 

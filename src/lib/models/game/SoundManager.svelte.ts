@@ -25,6 +25,7 @@ type GameSoundEffect =
   | "splash"
   | "zombie-flag"
   | "shoot"
+  | "swing"
   | "siren";
 
 interface SoundConfig {
@@ -58,6 +59,7 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   "zombie-flag": { src: "/sounds/zombie-flag.mp3", volume: 0.6 },
   siren: { src: "/sounds/siren.mp3", volume: 0.8 },
   shoot: { src: "/sounds/shoot.mp3", volume: 0.3 },
+  swing: { src: "/sounds/swing.mp3", volume: 0.5 },
 };
 
 export default class SoundManager {
@@ -93,6 +95,7 @@ export default class SoundManager {
     siren: 100,
     "eating-loop": 50,
     shoot: 200,
+    swing: 200,
   };
   isMuted = $state(
     LocalStorageManager.get("sound-muted", { defaultValue: false })
