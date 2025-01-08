@@ -26,10 +26,10 @@
   </div>
 
   <!-- Main Menu Content -->
-  <div class="relative z-10 flex flex-col items-center space-y-8">
+  <div class="relative z-10 flex flex-col items-center space-y-8 py-10">
     <!-- Title -->
     <h1
-      class="text-center text-4xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-4xl"
+      class="font-creepster text-center text-4xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] sm:text-4xl md:text-6xl"
     >
       Svelte vs Zombies
     </h1>

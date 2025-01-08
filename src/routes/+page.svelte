@@ -18,6 +18,7 @@
   import MainMenu from "$lib/components/MainMenu.svelte";
   import cn from "$lib/utils/cn";
   import GameOptions from "$lib/components/GameOptions.svelte";
+  import WaveStartedModal from "$lib/components/WaveStartedModal.svelte";
 
   let isPreloading = $state(false);
   let showOptions = $state(false);
@@ -48,6 +49,7 @@
 
 <VictoryModal />
 <LoseModal />
+<WaveStartedModal />
 
 {#if showOptions}
   <GameOptions
