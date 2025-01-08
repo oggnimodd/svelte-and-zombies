@@ -61,8 +61,12 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
 export default class SoundManager {
   private readonly sounds: Map<GameSoundEffect, Howl> = new Map();
   readonly bgMusic: Howl;
-  private soundCooldowns: Map<GameSoundEffect, number> = new Map();
-  private readonly cooldownDurations: Record<GameSoundEffect, number> = {
+  private soundCooldowns: Map<GameSoundEffect | "eating-loop", number> =
+    new Map();
+  private readonly cooldownDurations: Record<
+    GameSoundEffect | "eating-loop",
+    number
+  > = {
     "pea-shoot": 50,
     explosion: 200,
     splash: 100,
@@ -85,6 +89,7 @@ export default class SoundManager {
     screaming: 100,
     "zombie-flag": 100,
     siren: 100,
+    "eating-loop": 50,
   };
   isMuted = $state(
     LocalStorageManager.get("sound-muted", { defaultValue: false })
@@ -116,9 +121,7 @@ export default class SoundManager {
   }
 
   playBackgroundMusic() {
-    // Stop any existing background music before starting a new one
     this.bgMusic.stop();
-
     if (!this.isMuted) {
       this.bgMusic.duration(0);
       this.bgMusic.play();
@@ -131,7 +134,6 @@ export default class SoundManager {
 
   playSound(soundName: GameSoundEffect) {
     const sound = this.sounds.get(soundName);
-    // Sound cooldowns will always be based on real-time (performance.now() instead of gameTime), regardless of whether the game is paused or the game time is manipulated
     const currentTime = performance.now();
     const lastPlayTime = this.soundCooldowns.get(soundName) || 0;
     const cooldownDuration = this.cooldownDurations[soundName];
@@ -160,17 +162,11 @@ export default class SoundManager {
 
     if (this.isMuted) {
       this.bgMusic.pause();
-      // Mute regular sounds
       this.sounds.forEach((sound) => sound.mute(true));
-      // Mute eating sounds
       this.eatingSounds.forEach((sound) => sound.mute(true));
     } else {
       this.bgMusic.play();
-
-      // Unmute regular sounds
       this.sounds.forEach((sound) => sound.mute(false));
-
-      // Unmute eating sounds
       this.eatingSounds.forEach((sound) => sound.mute(false));
     }
   }
@@ -209,16 +205,27 @@ export default class SoundManager {
     this.clearCooldowns();
   }
 
-  playEatingSound(): string {
+  playEatingSound() {
+    const currentTime = performance.now();
+    const lastPlayTime = this.soundCooldowns.get("eating-loop") || 0;
+    const cooldownDuration = this.cooldownDurations["eating-loop"];
+
+    if (currentTime - lastPlayTime < cooldownDuration) {
+      return null;
+    }
+
     const sound = new Howl({
       src: [SOUND_CONFIGS.eating.src],
       volume: SOUND_CONFIGS.eating.volume,
       loop: true,
       mute: this.isMuted,
     });
+
     const soundId = uuid.generate();
     this.eatingSounds.set(soundId, sound);
     sound.play();
+    this.soundCooldowns.set("eating-loop", currentTime);
+
     return soundId;
   }
 
