@@ -6,6 +6,7 @@ import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import type Projectile from "../projectiles/Projectile.svelte";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const GatlingPeaStats: PlantStats = {
   id: "gatling-pea",
@@ -61,6 +62,7 @@ export default class GatlingPea extends BasePlant {
     }
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("machine-gun");
     return projectiles;
   }
 }

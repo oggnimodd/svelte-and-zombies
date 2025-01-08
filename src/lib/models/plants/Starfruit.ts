@@ -5,6 +5,7 @@ import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
 import StarProjectile from "../projectiles/StarProjectile";
 import type Projectile from "../projectiles/Projectile.svelte";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const StarfruitStats: PlantStats = {
   id: "starfruit",
@@ -60,6 +61,7 @@ export default class Starfruit extends BasePlant {
     );
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("shoot");
     return projectiles;
   }
 }
