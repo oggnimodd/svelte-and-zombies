@@ -5,6 +5,7 @@ import CabbageProjectile from "../projectiles/CabbageProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import BasePlant, { type PlantStats } from "./Plant.svelte";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const CabbageStats: PlantStats = {
   id: "cabbage",
@@ -74,6 +75,7 @@ export default class Cabbage extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("swing");
     return projectile;
   }
 }

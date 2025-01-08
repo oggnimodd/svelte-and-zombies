@@ -5,6 +5,7 @@ import type Zombie from "../zombies/Zombie.svelte";
 import KernelProjectile from "../projectiles/KernelProjectile";
 import { ProjectileTypes } from "../projectiles/ProjectileTypes";
 import { CELL_WIDTH } from "../../constants/sizes";
+import { soundManager } from "../game/SoundManager.svelte";
 
 export const KernelpultStats: PlantStats = {
   id: "kernelpult",
@@ -73,6 +74,7 @@ export default class Kernelpult extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("swing");
     return projectile;
   }
 }

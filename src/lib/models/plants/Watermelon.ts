@@ -89,6 +89,7 @@ export default class Watermelon extends BasePlant {
     });
 
     this.resetLastShotTime(gameTime);
+    soundManager.playSound("swing");
 
     return projectile;
   }
