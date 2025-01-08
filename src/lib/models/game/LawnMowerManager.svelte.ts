@@ -44,6 +44,14 @@ export default class LawnMowerManager {
           (zombie) => zombie.row === lawnMower.row && zombie.x <= 0
         );
 
+        // Before we remove the zombies, we need to stop their eating sounds
+        zombiesAtBoundary.forEach((zombie) => {
+          zombie.isAttacking = false;
+          zombie.attackingPlantId = null;
+          zombie.lastAttackTime = 0;
+          zombie.stopEatingSound();
+        });
+
         if (zombiesAtBoundary.length > 0) {
           // Remove the zombies that triggered the lawnmower
           zombies = zombies.filter(
@@ -66,6 +74,14 @@ export default class LawnMowerManager {
         zombie.row === lawnMower.row &&
         zombie.x <= lawnMower.x + lawnMower.width
     );
+
+    // Before we remove the zombies, we need to stop their eating sounds
+    zombiesInRange.forEach((zombie) => {
+      zombie.isAttacking = false;
+      zombie.attackingPlantId = null;
+      zombie.lastAttackTime = 0;
+      zombie.stopEatingSound();
+    });
 
     return zombies.filter((zombie) => !zombiesInRange.includes(zombie));
   }
