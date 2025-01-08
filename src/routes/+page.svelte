@@ -39,7 +39,9 @@
   };
 
   const displayOptions = () => {
-    soundManager.playBackgroundMusic();
+    if (!soundManager.bgMusic.playing()) {
+      soundManager.playBackgroundMusic();
+    }
     showOptions = true;
   };
 </script>

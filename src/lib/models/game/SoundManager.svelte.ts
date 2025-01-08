@@ -60,7 +60,7 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
 
 export default class SoundManager {
   private readonly sounds: Map<GameSoundEffect, Howl> = new Map();
-  private readonly bgMusic: Howl;
+  readonly bgMusic: Howl;
   private soundCooldowns: Map<GameSoundEffect, number> = new Map();
   private readonly cooldownDurations: Record<GameSoundEffect, number> = {
     "pea-shoot": 50,
@@ -160,8 +160,18 @@ export default class SoundManager {
 
     if (this.isMuted) {
       this.bgMusic.pause();
+      // Mute regular sounds
+      this.sounds.forEach((sound) => sound.mute(true));
+      // Mute eating sounds
+      this.eatingSounds.forEach((sound) => sound.mute(true));
     } else {
       this.bgMusic.play();
+
+      // Unmute regular sounds
+      this.sounds.forEach((sound) => sound.mute(false));
+
+      // Unmute eating sounds
+      this.eatingSounds.forEach((sound) => sound.mute(false));
     }
   }
 
@@ -217,6 +227,7 @@ export default class SoundManager {
     if (sound) {
       sound.stop();
       this.eatingSounds.delete(soundId);
+      sound.unload();
     }
   }
 }
