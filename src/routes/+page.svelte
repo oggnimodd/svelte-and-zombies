@@ -23,11 +23,25 @@
   let isPreloading = $state(false);
   let showOptions = $state(false);
 
-  const handleOptionsComplete = () => {
+  // Order of operations: click start game on the main menu -> show preloading screen -> show options screen -> start game
+  const onStartGameButtonClick = () => {
+    if (!soundManager.bgMusic.playing()) {
+      soundManager.playBackgroundMusic();
+    }
     showOptions = false;
     isPreloading = true;
   };
 
+  const onPreloadComplete = () => {
+    isPreloading = false;
+    showOptions = true;
+  };
+
+  const cancelOptions = () => {
+    showOptions = false;
+  };
+
+  // The actual game start trigger
   const startGame = async () => {
     if (isMobile()) {
       await enterFullscreen();
@@ -38,28 +52,16 @@
     isPreloading = false;
     gameLoop.start();
   };
-
-  const displayOptions = () => {
-    if (!soundManager.bgMusic.playing()) {
-      soundManager.playBackgroundMusic();
-    }
-    showOptions = true;
-  };
 </script>
 
 <VictoryModal />
 <LoseModal />
 <WaveStartedModal />
 
-{#if showOptions}
-  <GameOptions
-    cancelGame={() => {
-      showOptions = false;
-    }}
-    startGame={handleOptionsComplete}
-  />
-{:else if isPreloading}
-  <LoadingScreen {startGame} />
+{#if isPreloading}
+  <LoadingScreen next={onPreloadComplete} />
+{:else if showOptions}
+  <GameOptions cancel={cancelOptions} next={startGame} />
 {:else if gameLoop.isRunning}
   <div
     class="h-screen w-full overflow-hidden bg-gradient-to-br from-green-900 to-green-700 text-white"
@@ -103,5 +105,5 @@
     </div>
   </div>
 {:else}
-  <MainMenu startGame={displayOptions} />
+  <MainMenu next={onStartGameButtonClick} />
 {/if}

@@ -6,10 +6,10 @@
   import isMobile from "is-mobile";
 
   interface LoadingScreenProps {
-    startGame: () => void;
+    next: () => void;
   }
 
-  const { startGame }: LoadingScreenProps = $props();
+  const { next }: LoadingScreenProps = $props();
 
   let loadingProgress = $state(0);
   let isLoadingComplete = $state(false);
@@ -74,7 +74,7 @@
 
   $effect(() => {
     if (isLoadingComplete) {
-      startGame();
+      next();
     }
   });
 </script>

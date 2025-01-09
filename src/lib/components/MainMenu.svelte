@@ -6,10 +6,10 @@
   import IconSettings from "@tabler/icons-svelte/icons/settings";
 
   interface MainMenuProps {
-    startGame: () => void;
+    next: () => void;
   }
 
-  const { startGame }: MainMenuProps = $props();
+  const { next }: MainMenuProps = $props();
 </script>
 
 <div
@@ -41,7 +41,7 @@
       <!-- Start Game Button -->
       <button
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
-        onclick={startGame}
+        onclick={next}
       >
         <IconPlayerPlay class="h-6 w-6" stroke={3.5} />
         Start Game

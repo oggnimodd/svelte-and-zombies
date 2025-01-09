@@ -8,11 +8,11 @@
   import { onMount } from "svelte";
 
   export interface GameOptionsProps {
-    startGame: () => void;
-    cancelGame: () => void;
+    next: () => void;
+    cancel: () => void;
   }
 
-  const { startGame, cancelGame }: GameOptionsProps = $props();
+  const { next, cancel }: GameOptionsProps = $props();
 
   let sunAmountInput = $state(gameLoop.gameOptions.options.initialSunAmount);
   let errorMessage = $state("");
@@ -84,7 +84,7 @@
       return;
     }
     // Start game logic here
-    startGame();
+    next();
   }
 
   const handleLawnMowersChange = (useLawnMowers: boolean) => {
@@ -126,7 +126,7 @@
         Game Options
       </h1>
       <button
-        onclick={() => cancelGame()}
+        onclick={() => cancel()}
         class="group flex transform items-center gap-2 rounded-lg border-2 border-lime-400/30 bg-lime-400/10 px-4 py-2 text-lime-400 transition-all hover:border-lime-400/50 hover:bg-lime-400/20 hover:shadow-lg hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
         <span class="font-bold">Main Menu</span>
