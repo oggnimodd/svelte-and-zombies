@@ -1,5 +1,16 @@
-import adapter from "@sveltejs/adapter-vercel";
+import adapterAuto from "@sveltejs/adapter-auto";
+import adapterVercel from "@sveltejs/adapter-vercel";
+import adapterNetlify from "@sveltejs/adapter-netlify";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+
+const adapter = () => {
+  if (process.env.VERCEL) {
+    return adapterVercel();
+  } else if (process.env.NETLIFY) {
+    return adapterNetlify();
+  }
+  return adapterAuto();
+};
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
