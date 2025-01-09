@@ -73,7 +73,7 @@ The **code** for this project is licensed under the [GNU General Public License 
 
 ### Game assets
 
-The plants, zombies, and projectiles images are sourced from [Plants vs. Zombies Wiki](https://plantsvszombies.fandom.com/wiki/). These assets are used here for educational and demonstration purposes only.
+The plants, zombies, and projectiles images are sourced from [Plants vs. Zombies Wiki](https://plantsvszombies.fandom.com/wiki/). All visual assets and related intellectual property remain the property of PopCap Games and Electronic Arts, the creators of Plants vs. Zombies These assets are used here for educational and demonstration purposes only.
 
 ### Music Attribution
 
