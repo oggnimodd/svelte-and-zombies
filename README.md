@@ -69,11 +69,11 @@ To run the project locally:
 
 ### Code License
 
-The code for this project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html).
+The **code** for this project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ### Game assets
 
-The majority of the plants and zombies images are sourced from [Plants vs. Zombies Wiki](https://plantsvszombies.fandom.com/wiki/). These assets are used here for educational and demonstration purposes only.
+The plants, zombies, and projectiles images are sourced from [Plants vs. Zombies Wiki](https://plantsvszombies.fandom.com/wiki/). These assets are used here for educational and demonstration purposes only.
 
 ### Music Attribution
 
