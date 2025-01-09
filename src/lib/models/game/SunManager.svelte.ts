@@ -31,7 +31,6 @@ export default class SunManager {
   }
 
   setTotalSun(totalSun: number) {
-    console.log("Here");
     this.totalSun = totalSun;
   }
 
