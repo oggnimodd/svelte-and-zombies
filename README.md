@@ -8,7 +8,10 @@ A fan-made recreation of the beloved [Plants vs. Zombies](https://www.ea.com/ea-
 
 ## Demonstration
 
-You can play the game here : https://svelte-vs-zombies.vercel.app
+You can play the game here:
+
+- [https://svelte-vs-zombies.vercel.app](https://svelte-vs-zombies.vercel.app) (**Vercel** - Primary Link)
+- [https://svelte-vs-zombies.netlify.app](https://svelte-vs-zombies.netlify.app) (**Netlify** - Alternative Link)
 
 ## About This Project
 
