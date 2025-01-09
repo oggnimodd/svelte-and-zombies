@@ -69,7 +69,7 @@ To run the project locally:
 
 ### Code License
 
-The **code** for this project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html).
+The **code part** for this project is licensed under the [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ### Game assets
 
