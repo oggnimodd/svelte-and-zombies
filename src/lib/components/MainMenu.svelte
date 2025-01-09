@@ -29,19 +29,21 @@
   <div class="relative z-10 flex flex-col items-center space-y-8 py-10">
     <!-- Title -->
     <h1
-      class="font-creepster text-center text-5xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] md:text-6xl"
+      class="text-center font-creepster text-5xl font-extrabold text-lime-400 drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)] md:text-6xl"
     >
       Svelte vs Zombies
     </h1>
 
     <!-- Buttons -->
-    <div class="flex flex-col gap-4">
+    <div
+      class="flex flex-col gap-4 [&>a]:font-creepster [&>a]:text-xl md:[&>a]:text-2xl [&>button]:font-creepster [&>button]:text-xl md:[&>button]:text-2xl"
+    >
       <!-- Start Game Button -->
       <button
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
         onclick={startGame}
       >
-        <IconPlayerPlay class="h-6 w-6" />
+        <IconPlayerPlay class="h-6 w-6" stroke={3.5} />
         Start Game
       </button>
 
@@ -50,7 +52,7 @@
         href="/almanac/plants"
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
-        <IconPlant class="h-6 w-6" />
+        <IconPlant class="h-6 w-6" stroke={3.5} />
         Plants Almanac
       </a>
 
@@ -58,7 +60,7 @@
         href="/almanac/zombies"
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
-        <IconMan class="h-6 w-6" />
+        <IconMan class="h-6 w-6" stroke={3.5} />
         Zombies Almanac
       </a>
 
@@ -66,7 +68,7 @@
         href="/settings"
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
-        <IconSettings class="h-6 w-6" />
+        <IconSettings class="h-6 w-6" stroke={3.5} />
         Settings
       </a>
 
@@ -77,7 +79,7 @@
         rel="noreferrer noopener"
         class="flex transform items-center justify-center gap-2 rounded-lg border-2 border-lime-400 bg-gradient-to-r from-green-600 to-lime-500 px-6 py-3 text-center font-bold uppercase text-white shadow-lg transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-lime-400/20 active:translate-y-0.5 active:shadow-md"
       >
-        <IconBrandGithub class="h-6 w-6" />
+        <IconBrandGithub class="h-6 w-6" stroke={3.5} />
         Github
       </a>
     </div>
