@@ -33,6 +33,7 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 - **Explosions & Effects:** Visual effects such as explosions, charred zombies, and plant hit animations.
 - **Plant Damage and Interactions:** Plants can be damaged, have health, and have effects when hit by projectiles.
 - **Projectile system:** Projectiles are implemented with animations using CSS transformations. Includes pea, fire pea, cabbage, melon, kernel, star, and boomerang projectiles.
+- **Game Customization:** Players can select their preferred plants, set initial sun amount, and toggle lawnmowers before starting each game.
 
 ## Tech Stack
 
