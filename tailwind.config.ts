@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         creepster: ["Creepster", "serif"],
+        default: ["Poppins", "serif"],
       },
       animation: {
         "fade-in-up": "fadeInUp 1s ease-out forwards",
