@@ -256,6 +256,7 @@ export default class ZombieManager {
     if (this.currentWave === this.waveConfigs.length - 1) {
       soundManager.playSound("siren");
     }
+    soundManager.playSound("bell");
 
     EventEmitter.emit("waveStarted", this.currentWave);
   }

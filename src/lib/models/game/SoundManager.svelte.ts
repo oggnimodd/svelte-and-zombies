@@ -27,6 +27,7 @@ type GameSoundEffect =
   | "shoot"
   | "swing"
   | "machine-gun"
+  | "bell"
   | "siren";
 
 interface SoundConfig {
@@ -62,6 +63,7 @@ const SOUND_CONFIGS: Record<GameSoundEffect | "bg-music", SoundConfig> = {
   shoot: { src: "/sounds/shoot.mp3", volume: 0.3 },
   swing: { src: "/sounds/swing.mp3", volume: 0.5 },
   "machine-gun": { src: "/sounds/machine-gun.mp3", volume: 0.5 },
+  bell: { src: "/sounds/bell.mp3", volume: 0.6 },
 };
 
 export default class SoundManager {
@@ -99,6 +101,7 @@ export default class SoundManager {
     shoot: 200,
     swing: 200,
     "machine-gun": 300,
+    bell: 100,
   };
   isMuted = $state(
     LocalStorageManager.get("sound-muted", { defaultValue: false })
