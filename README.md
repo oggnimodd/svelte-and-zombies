@@ -57,8 +57,6 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 
 ## Screenshots
 
-## Screenshots
-
 |                  Main Menu                  |                Game Options                 |
 | :-----------------------------------------: | :-----------------------------------------: |
 |       ![Main Menu](sc/main-menu.png)        |    ![Game Options](sc/game-options.png)     |
@@ -70,6 +68,8 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 | ![Gameplay Screenshot 4](sc/gameplay-4.png) |  ![Plants Almanac](sc/plants-almanac.png)   |
 |             **Zombies Almanac**             |                                             |
 | ![Zombies Almanac](sc/zombies-almanac.png)  |                                             |
+
+## Tech Stack
 
 - **SvelteKit with Svelte 5:** The primary framework for building the UI and managing the game's state.
 - **TypeScript:** Used for type safety and better code organization.
