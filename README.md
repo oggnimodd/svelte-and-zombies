@@ -44,10 +44,10 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 |  ![Loading Screen](sc/loading-screen.png)   | ![Gameplay Screenshot 1](sc/gameplay-1.png) |
 |                **Gameplay**                 |                **Gameplay**                 |
 | ![Gameplay Screenshot 2](sc/gameplay-2.png) | ![Gameplay Screenshot 3](sc/gameplay-3.png) |
-|                **Gameplay**                 |             **Plants Almanac**              |
-| ![Gameplay Screenshot 4](sc/gameplay-4.png) |  ![Plants Almanac](sc/plants-almanac.png)   |
-|             **Zombies Almanac**             |                                             |
-| ![Zombies Almanac](sc/zombies-almanac.png)  |                                             |
+|                **Gameplay**                 |                **Gameplay**                 |
+| ![Gameplay Screenshot 4](sc/gameplay-4.png) | ![Gameplay Screenshot 5](sc/gameplay-5.png) |
+|             **Plants Almanac**              |             **Zombies Almanac**             |
+|  ![Plants Almanac](sc/plants-almanac.png)   | ![Zombies Almanac](sc/zombies-almanac.png)  |
 
 ## Tech Stack
 
