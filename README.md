@@ -1,8 +1,8 @@
-# Svelte vs. Zombies
+# Svelte and Zombies
 
 [![Svelte 5](https://img.shields.io/badge/Svelte-5-ff3e00?logo=svelte)](https://svelte.dev)
 [![License: GPL-3.0](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![GitHub Repo](https://img.shields.io/github/stars/oggnimodd/svelte-vs-zombies?style=social)](https://github.com/oggnimodd/svelte-vs-zombies)
+[![GitHub Repo](https://img.shields.io/github/stars/oggnimodd/svelte-and-zombies?style=social)](https://github.com/oggnimodd/svelte-and-zombies)
 
 A fan-made recreation of the beloved [Plants vs. Zombies](https://www.ea.com/ea-studios/popcap/plants-vs-zombies) game, rebuilt in Svelte 5 using only DOM, no canvas or WebGL.
 
@@ -10,8 +10,8 @@ A fan-made recreation of the beloved [Plants vs. Zombies](https://www.ea.com/ea-
 
 You can play the game here:
 
-- [https://svelte-vs-zombies.vercel.app](https://svelte-vs-zombies.vercel.app) (**Vercel** - Primary Link)
-- [https://svelte-vs-zombies.netlify.app](https://svelte-vs-zombies.netlify.app) (**Netlify** - Alternative Link)
+- [https://svelte-and-zombies.vercel.app](https://svelte-and-zombies.vercel.app) (**Vercel** - Primary Link)
+- [https://svelte-and-zombies.netlify.app](https://svelte-and-zombies.netlify.app) (**Netlify** - Alternative Link)
 
 ## About This Project
 
@@ -49,11 +49,11 @@ To run the project locally:
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/oggnimodd/svelte-vs-zombies.git
+    git clone https://github.com/oggnimodd/svelte-and-zombies.git
     ```
 2.  Navigate to the project directory:
     ```bash
-    cd svelte-vs-zombies
+    cd svelte-and-zombies
     ```
 3.  Install dependencies:
     ```bash
