@@ -76,8 +76,8 @@ export const ProjectileTypes = {
   BOOMERANG: {
     type: "boomerang",
     speed: 2.5,
-    width: getDimension(0.3),
-    height: getDimension(0.3),
+    width: getDimension(0.5),
+    height: getDimension(0.5),
     image: "/projectiles/boomerang.png",
   },
 } as const;
