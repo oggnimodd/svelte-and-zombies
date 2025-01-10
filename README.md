@@ -59,11 +59,15 @@ To run the project locally:
     ```bash
     bun install
     ```
-4.  Start the development server:
+4.  Generate the preload list:
+    ```bash
+    bun scripts/generatePreloadList.ts
+    ```
+5.  Start the development server:
     ```bash
     bun run dev
     ```
-5.  Open your browser and go to `http://localhost:5173`.
+6.  Open your browser and go to `http://localhost:5173`.
 
 ## Attribution and License
 
