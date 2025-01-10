@@ -10,7 +10,7 @@ export default class FootballZombie extends Zombie {
       speed: 1,
       row: zombieConfig.row || 0,
       image: "football-zombie.png",
-      imageWidth: CELL_WIDTH * 1.2,
+      imageWidth: CELL_WIDTH * 1.4,
       description:
         "A fast zombie wearing football gear, it has very high health.",
       ...zombieConfig,
