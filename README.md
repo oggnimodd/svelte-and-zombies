@@ -13,7 +13,7 @@ You can play the game here:
 - [https://svelte-and-zombies.vercel.app](https://svelte-and-zombies.vercel.app) (**Vercel** - Primary Link)
 - [https://svelte-and-zombies.netlify.app](https://svelte-and-zombies.netlify.app) (**Netlify** - Alternative Link)
 
-Demo video:
+[Demo video](https://res.cloudinary.com/dojzwv5b1/video/upload/v1736518304/demo_xlm5rc.mp4):
 
 <video src="https://res.cloudinary.com/dojzwv5b1/video/upload/v1736518304/demo_xlm5rc.mp4" controls width="720"></video>
 
