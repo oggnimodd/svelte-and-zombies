@@ -76,8 +76,8 @@
     transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,{x},{y},0,1);
     z-index: 5000;
     animation-duration: {duration}ms;
-    width: {CELL_WIDTH / 1.2}px;
-    height: {CELL_WIDTH / 1.2}px;
+    width: {CELL_WIDTH / 0.9}px;
+    height: {CELL_WIDTH / 0.9}px;
   "
   >
     <div class="relative w-auto" style="width: {CELL_WIDTH / 1.3}px;">
