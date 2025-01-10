@@ -73,7 +73,7 @@
   style={`--delta-x: ${deltaX}; --delta-y: ${deltaY}; width: ${CELL_WIDTH}px; height: ${CELL_WIDTH}px; transform: matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,${x},${y},0,1);`}
 >
   <div class="sun-image flex h-full w-full items-center justify-center">
-    <img class="w-[3rem]" src="/sun.png" alt="sun" />
+    <img class="w-[1.5rem] md:w-[3rem]" src="/sun.png" alt="sun" />
   </div>
 </button>
 
