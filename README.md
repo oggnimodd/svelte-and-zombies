@@ -35,7 +35,41 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 - **Projectile system:** Projectiles are implemented with animations using CSS transformations. Includes pea, fire pea, cabbage, melon, kernel, star, and boomerang projectiles.
 - **Game Customization:** Players can select their preferred plants, set initial sun amount, and toggle lawnmowers before starting each game.
 
-## Tech Stack
+## Screenshots
+
+## Key Features Implemented
+
+- **Faithful Recreation:** Captures the core gameplay loop of Plants vs. Zombies, including planting, zombie waves, sun collection, and strategic lawn defense.
+- **HTML-Based Rendering:** Every game object is rendered using pure HTML elements, styled with CSS, and animated using Svelte's transitions and reactivity. No canvas or WebGL involved.
+- **Reactive Game State:** Utilizes Svelte's reactivity system for managing game state, plant cooldowns, zombie movement, and projectile interactions.
+- **Plant Variety:** Includes a selection of iconic plants, each with unique abilities and stats (Peashooter, Repeater, Sunflower, Wallnut, etc.).
+- **Diverse Zombies:** Features a range of zombies with different health, speed, and damage characteristics (Normal Zombie, Conehead Zombie, Buckethead Zombie, etc.).
+- **Strategic Gameplay:** Players strategically place plants in lanes to defend against waves of advancing zombies, managing sun resources and plant cooldowns.
+- **Sound Effects:** Integrated sound effects for various game actions, enhancing the user experience (using Howler.js).
+- **User Interface:** Implemented a responsive UI that adapts to different screen sizes, including mobile devices. Supports fullscreen mode on mobile.
+- **Game States:** Includes a main menu, loading screen, and pause, win, and lose modals.
+- **Almanac:** A basic almanac to view the plants and zombies.
+- **Lawnmowers:** Functional lawnmowers to stop zombies that breach your defenses.
+- **Explosions & Effects:** Visual effects such as explosions, charred zombies, and plant hit animations.
+- **Plant Damage and Interactions:** Plants can be damaged, have health, and have effects when hit by projectiles.
+- **Projectile system:** Projectiles are implemented with animations using CSS transformations. Includes pea, fire pea, cabbage, melon, kernel, star, and boomerang projectiles.
+- **Game Customization:** Players can select their preferred plants, set initial sun amount, and toggle lawnmowers before starting each game.
+
+## Screenshots
+
+## Screenshots
+
+|                  Main Menu                  |                Game Options                 |
+| :-----------------------------------------: | :-----------------------------------------: |
+|       ![Main Menu](sc/main-menu.png)        |    ![Game Options](sc/game-options.png)     |
+|             **Loading Screen**              |                **Gameplay**                 |
+|  ![Loading Screen](sc/loading-screen.png)   | ![Gameplay Screenshot 1](sc/gameplay-1.png) |
+|                **Gameplay**                 |                **Gameplay**                 |
+| ![Gameplay Screenshot 2](sc/gameplay-2.png) | ![Gameplay Screenshot 3](sc/gameplay-3.png) |
+|                **Gameplay**                 |             **Plants Almanac**              |
+| ![Gameplay Screenshot 4](sc/gameplay-4.png) |  ![Plants Almanac](sc/plants-almanac.png)   |
+|             **Zombies Almanac**             |                                             |
+| ![Zombies Almanac](sc/zombies-almanac.png)  |                                             |
 
 - **SvelteKit with Svelte 5:** The primary framework for building the UI and managing the game's state.
 - **TypeScript:** Used for type safety and better code organization.
