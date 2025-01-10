@@ -53,7 +53,7 @@ This project was developed as a submission for the [Svelte Hack 2024](https://ha
 |             **Plants Almanac**              |             **Zombies Almanac**             |
 |  ![Plants Almanac](sc/plants-almanac.png)   | ![Zombies Almanac](sc/zombies-almanac.png)  |
 |             **Gameplay Mobile**             |                                             |
-|  ![Plants Almanac](sc/gameplay-mobile.png)  |                                             |
+|  ![Plants Almanac](sc/gameplay-mobile.jpg)  |                                             |
 
 ## Tech Stack
 
