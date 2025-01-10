@@ -13,6 +13,10 @@ You can play the game here:
 - [https://svelte-and-zombies.vercel.app](https://svelte-and-zombies.vercel.app) (**Vercel** - Primary Link)
 - [https://svelte-and-zombies.netlify.app](https://svelte-and-zombies.netlify.app) (**Netlify** - Alternative Link)
 
+Demo video:
+
+<video src="https://asset.cloudinary.com/dojzwv5b1/97605008f575d1738e183baa5bdbeedd" controls width="720"></video>
+
 ## About This Project
 
 This project was developed as a submission for the [Svelte Hack 2024](https://hack.sveltesociety.dev/2024), showcasing the capabilities of Svelte 5 in building complex and engaging game-like applications without relying on traditional canvas or WebGL rendering. Instead, every UI element, plant, zombie, and projectile is rendered using standard HTML and CSS, leveraging the power of Svelte's 5.
