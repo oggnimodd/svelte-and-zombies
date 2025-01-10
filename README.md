@@ -15,7 +15,7 @@ You can play the game here:
 
 Demo video:
 
-<video src="https://asset.cloudinary.com/dojzwv5b1/97605008f575d1738e183baa5bdbeedd" controls width="720"></video>
+<video src="https://res.cloudinary.com/dojzwv5b1/video/upload/v1736518304/demo_xlm5rc.mp4" controls width="720"></video>
 
 ## About This Project
 
